@@ -87,7 +87,7 @@ export default function DealsCard() {
                 {products.map((product) => (
                     <Card
                         key={product.id}
-                        className="flex gap-3 flex-col h-full ease-in duration-300 transition-all group border border-[#e6e6e6]"
+                        className="bg-red-300 flex gap-3 flex-col h-full ease-in duration-300 transition-all group border border-[#e6e6e6]"
                         onMouseEnter={() => {
                             const timer = setTimeout(() => {
                                 prefetchProduct(product.slug);
@@ -178,7 +178,7 @@ export default function DealsCard() {
 
 
                             {/* Rating */}
-                            <div className="">
+                            <div className="min-h-[28px]">
                                 {Number(product.reviews_count) > 0 && (
                                     <div className="flex items-center gap-1">
                                         <HugeiconsIcon
