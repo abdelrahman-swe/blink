@@ -15,7 +15,7 @@ interface FooterProps {
 export default function Footer({ locale: lang }: FooterProps) {
   const { footer: footerDict } = useDictionary();
   const { footer } = footerDict || {};
-  const { brand, quickLinks, shopWithUs, customerServices, needHelp, copyright, privacyPolicy, termsConditions, returnRefund } = footer || {};
+  const { brand, quickLinks, shopWithUs, customerServices, needHelp, copyright, privacyPolicy, termsConditions, returnRefund, ConnectWithUs } = footer || {};
   const { isAuthenticated } = useUserStore();
 
   const handleLinkClick = (e: React.MouseEvent, src: string) => {
@@ -78,9 +78,10 @@ export default function Footer({ locale: lang }: FooterProps) {
 
         <div className="flex flex-col md:grid grid-cols-12 gap-10 mt-5">
           <div className="col-span-12 md:col-span-6 lg:col-span-5 gap-5">
-            <div className="w-full">
-              {/* <h3 className="font-semibold text-lg mb-2 text-center md:text-left rtl:text-right">{ConnectWithUs.description}</h3> */}
-              <div className="mt-4 flex flex-wrap justify-center md:justify-start gap-5 rtl:gap-8">
+            <div className="w-full flex justify-center md:justify-start">
+              <div className="w-fit flex flex-col items-center">
+                <h3 className="font-semibold text-lg mb-2 text-center">{ConnectWithUs.description}</h3>
+                <div className="mt-4 flex flex-wrap justify-center gap-5 rtl:gap-8">
                 {socialIcons.map(({ icon, alt }) => (
                   <Button
                     size="icon-sm"
@@ -93,6 +94,7 @@ export default function Footer({ locale: lang }: FooterProps) {
                     <HugeiconsIcon icon={icon} size={26} color="#000000" strokeWidth={1.5} />
                   </Button>
                 ))}
+                </div>
               </div>
             </div>
           </div>
