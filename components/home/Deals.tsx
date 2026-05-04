@@ -81,7 +81,7 @@ export default function DealsCard() {
     if (products.length === 0) return null
 
     return (
-        <section id="daily-deals" className="xl:container mx-auto px-5 py-7 scroll-mt-28 mt-10">
+        <section id="daily-deals" className="xl:container mx-auto px-5 py-7 scroll-mt-28 mt-10 ">
             <TopHeader title={t?.dealsOfTheDay} link={`/${lang}/deals-of-deals`} />
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {products.map((product) => (
