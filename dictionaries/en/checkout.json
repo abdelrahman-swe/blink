@@ -1,0 +1,100 @@
+{
+    "checkout": {
+        "title": "Checkout",
+        "breadcrumb": {
+            "home": "Home",
+            "cart": "Cart",
+            "checkout": "Checkout"
+        },
+        "form": {
+            "accountDetails": "Account Details",
+            "deliveryAddress": "Delivery Address",
+            "paymentMethod": "Payment Method",
+            "fullName": "Full Name",
+            "email": "Email",
+            "phone": "Phone Number",
+            "address": "Address",
+            "governorate": "Governorate",
+            "city": "City",
+            "notes": "Order Notes (Optional)",
+            "notesPlaceholder": "Additional information",
+            "termsPrefix": "I agree to the",
+            "termsLink": "Terms and Conditions",
+            "termsMiddle": "and",
+            "privacyLink": "Privacy Policy",
+            "addressPlaceholder": "Street, building, floor, etc.",
+            "governoratePlaceholder": "Choose governate",
+            "cityPlaceholder": "Choose city",
+            "emailPlaceholder": "Enter your email",
+            "phonePlaceholder": "Enter your phone number",
+            "fullNamePlaceholder": "Enter your full name",
+            "promoCodePlaceholder": "Enter Promo Code",
+            "selectAddressPlaceholder": "Choose an existing address",
+            "selectAddress": "Select Address",
+            "useExistingAddress": "Use an existing address",
+            "addNewAddress": "+ Add New Address",
+            "promoCodeRequired": "Please enter a promo code to apply.",
+            "fullNameRequired": "Full name is required",
+            "fullNameMin3": "Full name must be at least 3 characters",
+            "fullNameLettersOnly": "Full name must contain letters only",
+            "fullNameMax50": "Full name must not exceed 50 characters",
+            "requiredEmail": "Please enter a valid email address",
+            "requiredPhone": "Please enter a valid phone number",
+            "requiredAddress": "Please enter your address",
+            "requiredFullName": "Please enter your FullName",
+            "requiredGovernorate": "Please select your Governorate",
+            "requiredCity": "Please select your City",
+            "termsRequired": "You must accept the terms and conditions",
+            "phoneTooLong": "Phone number is too long (max 11 digits).",
+            "phoneMustStartWithZero": "11-digit numbers must start with 0.",
+            "phoneInvalidAfterZero": "After 0, the number must start with 1 and be [0–9].",
+            "phoneMustStartWithOne": "Phone number must start with 1 or 01 and use digits [0–9].",
+            "phoneTooShort": "Phone number is too short (10 digits required).",
+            "noSavedAddresses": "No saved addresses Found",
+            "paymentMethodRequired": "Please select a payment method",
+            "default": "Default"
+        },
+        "payment": {
+            "cashOnDelivery": "Cash on Delivery",
+            "payMob": "PayMob",
+            "loginToPlaceOrder": "Please login to place an order",
+            "loginToApplyCoupon": "Please login to apply a coupon"
+        },
+        "summary": {
+            "title": "Payment Summary",
+            "subtotal": "Subtotal",
+            "shippingFee": "Shipping Fee",
+            "free": "Free",
+            "cashOnDeliveryFee": "Cash On Delivery Fee",
+            "discount": "Discount",
+            "apply": "Apply",
+            "currency": "EGP",
+            "total": "Total"
+        },
+        "cart": {
+            "removeProduct": "Remove product",
+            "stockWarning": "There are only {{stock}} products in stock",
+            "removing": "Removing...",
+            "productRemoved": "\"{{name}}\" removed from cart",
+            "cartUpdated": "Cart updated with quantity: {{quantity}}",
+            "failedToUpdate": "Failed to update cart quantity",
+            "failedToRemove": "Failed to remove product from cart"
+        },
+        "emptyCart": {
+            "title": "Your cart is empty",
+            "description": "Looks like you haven't added anything to your cart yet",
+            "shopNow": "Start Shopping"
+        },
+        "placeOrder": "Place Order",
+        "loading": "Loading...",
+        "orderSuccess": "Your order has been placed successfully.",
+        "confirmingPayment": "Confirming your payment",
+        "paymentFailed": "Payment failed. Please try again.",
+        "paymentStatus": {
+            "paidTitle": "Payment Successful",
+            "paidMessage": "Thank you for purchasing. Your payment was successful.",
+            "failedTitle": "Payment Failed",
+            "failedMessage": "Something went wrong. We couldn’t process your payment."
+        }
+    }
+}

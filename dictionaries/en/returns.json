@@ -1,0 +1,42 @@
+{
+    "breadcrumb": {
+        "home": "Home",
+        "profile": "Profile",
+        "orders": "Orders",
+        "returnOrder": "Return Order"
+    },
+    "form": {
+        "selectTitle": "Select product(s) you want to return",
+        "productsCount": "({count} products)",
+        "productCount": "({count} product)",
+        "selectAll": "All products",
+        "submit": "Submit",
+        "submitting": "Submitting"
+    },
+    "errors": {
+        "somethingWentWrong": "Something went wrong. Please try again."
+    },
+    "reasons": {
+        "selectReasons": "Select return reasons",
+        "descriptionPlaceholder": "Describe why you want to return this product(s)"
+    },
+    "upload": {
+        "title": "Upload at least one image or video of the returned products",
+        "video": "Video",
+        "browseText": "Browse and chose the files you want to upload from your computer",
+        "maxSizeText": "Max 8 Files (Images 5MB, Videos 20MB)"
+    },
+    "success": {
+        "submittedMessage": "Your request has been submitted successfully."
+    },
+    "validation": {
+        "productRequired": "You must select at least one product",
+        "reasonRequired": "Please select reason of return",
+        "descMax": "Description cannot exceed 250 characters",
+        "imageRequired": "You must upload at least one image or video",
+        "maxFiles": "Maximum 8 files allowed",
+        "invalidFormat": "Only images (jpeg, png, jpg, webp) and videos (mp4, qt, mov, avi) are allowed",
+        "fileSizeLimit": "Images must be under 5MB and videos must be under 20MB",
+        "descMinOther": "Description for 'Other' reason must be at least 5 characters long"
+    }
+}

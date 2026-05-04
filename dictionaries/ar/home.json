@@ -1,0 +1,108 @@
+{
+  "navbar": {
+    "search": "ابحث عن المنتجات، العلامات التجارية والفئات...",
+    "searchButton": "بحث",
+    "language": "اللغة",
+    "favouritesText": "المفضلة",
+    "profileText": "الملف الشخصي",
+    "cartText": "عربة التسوق",
+    "logoutText": "تسجيل الخروج",
+    "loggingText": "تسجيل الخروج ...",
+    "loginText": "تسجيل الدخول",
+    "myOrders": "الطلبات",
+    "returns": "المرتجعات",
+    "settings": "الإعدادات",
+    "signUpText": "تسجيل جديد",
+    "homeText": "الرئيسية"
+  },
+  "pros": [
+    {
+      "title": "توصيل مجاني",
+      "desc": "توصيل مجاني للطلبات أعلاه 1200 جنيها",
+      "icon": "ShippingTruck01Icon"
+    },
+    {
+      "title": "خيارات دفع متعددة",
+      "desc": "العديد من خيارات الدفع الأمنة",
+      "icon": "CreditCardIcon"
+    },
+    {
+      "title": "دعم 24/7",
+      "desc": "ندعم عبر الإنترنت يوميًا",
+      "icon": "HeadphonesIcon"
+    },
+    {
+      "title": "منتجات جودة عالية",
+      "desc": "نضمن جودة المنتجات الخاصة بنا",
+      "icon": "Task01Icon"
+    }
+  ],
+  "header": {
+    "topBrands": "أشهر العلامات التجارية"
+  },
+  "filteration": {
+    "home": "الرئيسية",
+    "productsCount": "({count} منتجات تم العثور عليها)",
+    "productCount": "({count} منتج تم العثور عليه)",
+    "filter": "تصفية",
+    "price": "السعر (جنيه)",
+    "to": "إلى",
+    "min": "من",
+    "max": "إلى",
+    "category": "الفئة",
+    "notAvailable": "لا توجد فئات متاحة",
+    "brand": "العلامة التجارية",
+    "noBrandsAvailable": "لا توجد علامات تجارية متاحة",
+    "availability": "التوفر",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "apply": "تطبيق",
+    "reset": "إعادة تعيين"
+  },
+  "sorting": {
+    "sortBy": "الترتيب حسب",
+    "newArrivals": "وصل حديثاً",
+    "bestSelling": "الأكثر مبيعاً",
+    "topRated": "الأعلى تقييماً",
+    "priceHigh": "سعرا الأعلى ",
+    "priceLow": "  الأقل سعرا "
+  },
+  "emptyProducts": {
+    "noProductsFound": "لم يتم العثور على منتجات",
+    "noBrandsFound": "لم يتم العثور على علامات تجارية",
+    "backToHome": "العودة إلى الصفحة الرئيسية"
+  },
+  "topHeaders": {
+    "dealsOfTheDay": "عروض اليوم",
+    "newArrivals": " منتجات وصلت حديثاً",
+    "newArrivalsProducts": "منتجات وصلت حديثًا",
+    "bestSellingProducts": "المنتجات الأكثر مبيعاً",
+    "shopByBrand": "تسوق حسب العلامة التجارية",
+    "exploreMoreCategories": "استكشف المزيد من الفئات",
+    "viewAll": "عرض الكل",
+    "visitStore": "زيارة المتجر",
+    "productsFound": "منتجات وجدت",
+    "noDeals": "لم يتم العثور على عروض اليوم",
+    "noBrands": "لم يتم العثور على علامات تجارية",
+    "noCategories": "لم يتم العثور على فئات",
+    "noNewArrivals": "لم يتم العثور على منتجات وصل حديثاً",
+    "noBestSellingProducts": "لم يتم العثور على منتجات الأكثر مبيعاً"
+  },
+  "loginRequiredDialog": {
+    "title": "تسجيل الدخول مطلوب",
+    "message": "يجب تسجيل الدخول لتتمكن من المتابعة.",
+    "cancel": "إلغاء",
+    "login": "تسجيل الدخول"
+  },
+  "breadcrumb": {
+    "home": "الرئيسية",
+    "newArrivalsProducts": "منتجات وصلت حديثا",
+    "bestSellingProducts": " المنتجات الأكثر مبيعاً",
+    "dealsOfTheDay": "عروض اليوم"
+  },
+  "notFound": {
+    "title": "404 الصفحة غير موجودة",
+    "description": "عذرًا، الصفحة التي تبحث عنها غير موجودة .",
+    "backToHome": "العودة إلى الصفحة الرئيسية"
+  }
+}

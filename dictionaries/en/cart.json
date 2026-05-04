@@ -1,0 +1,44 @@
+{
+    "cart": {
+        "breadcrumb": {
+            "home": "Home",
+            "cart": "Cart"
+        },
+        "header": {
+            "all": "All",
+            "title": "Shopping Cart",
+            "subtitle": "items in your bag"
+        },
+        "actions": {
+            "emptyAll": "Empty Cart",
+            "removing": "Removing..."
+        },
+        "summary": {
+            "title": "Order Summary",
+            "subtotal": "Subtotal",
+            "shippingFee": "Shipping Fee",
+            "free": "Free",
+            "cashOnDeliveryFee": "Cash on Delivery Fee",
+            "discount": "Discount",
+            "apply": "Apply",
+            "currency": "EGP",
+            "total": "Total"
+        },
+        "proceedToCheckout": "Proceed to Checkout",
+        "loading": "Loading...",
+        "dialog": {
+            "title": "Empty the cart?",
+            "description": "Are you sure you want to empty the cart and delete all products?",
+            "cancel": "Cancel",
+            "delete": "Delete"
+        },
+        "emptyCart": {
+            "altText": "No products found in the cart",
+            "continueShopping": "Continue Shopping"
+        },
+         "stockWarning": "Only {count} pieces left in stock",
+         "card": {
+            "off": "{percentage}% off"
+        }
+    }
+}

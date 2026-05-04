@@ -1,0 +1,101 @@
+{
+    "checkout": {
+        "title": "الدفع",
+        "accountDetails": "تفاصيل الحساب",
+        "breadcrumb": {
+            "home": "الرئيسية",
+            "cart": "السلة",
+            "checkout": "الدفع"
+        },
+        "form": {
+            "accountDetails": "تفاصيل الحساب",
+            "deliveryAddress": "عنوان التوصيل",
+            "paymentMethod": "طريقة الدفع",
+            "fullName": "الاسم الكامل",
+            "email": "البريد الإلكتروني",
+            "phone": "رقم الهاتف",
+            "address": "العنوان",
+            "governorate": "المحافظة",
+            "city": "المدينة",
+            "notes": "ملاحظات الطلب (اختياري)",
+            "notesPlaceholder": "معلومات إضافية",
+            "termsPrefix": "أوافق على",
+            "termsLink": "الشروط والأحكام",
+            "termsMiddle": "و",
+            "privacyLink": "سياسة الخصوصية",
+            "addressPlaceholder": "الشارع، رقم المبنى، الطابق، إلخ.",
+            "governoratePlaceholder": "اختر المحافظة",
+            "cityPlaceholder": "اختر المدينة",
+            "emailPlaceholder": "أدخل بريدك الإلكتروني",
+            "phonePlaceholder": "أدخل رقم الهاتف",
+            "fullNamePlaceholder": "أدخل اسمك بالكامل",
+            "promoCodePlaceholder": "أدخل كود الخصم",
+            "selectAddressPlaceholder": "اختر عنوان موجود",
+            "selectAddress": "اختر عنوان",
+            "useExistingAddress": "استخدم عنوان موجود",
+            "addNewAddress": " إضافة عنوان جديد + ",
+            "promoCodeRequired": "يرجى إدخال كود الخصم للتطبيق.",
+            "fullNameRequired": "الاسم الكامل مطلوب",
+            "requiredEmail": "يرجى إدخال بريد إلكتروني ",
+            "requiredPhone": "يرجى إدخال رقم هاتف ",
+            "requiredAddress": "يرجى إدخال عنوانك",
+            "fullNameMin3": "الاسم الكامل يجب أن يكون 3 أحرف على الأقل",
+            "fullNameMax50": "الاسم الكامل يجب أن لا يزيد عن 50 حرف",
+            "fullNameLettersOnly": "الاسم الكامل يجب أن يحتوي على حروف فقط",
+            "requiredFullName": "يرجى إدخال اسمك بالكامل",
+            "requiredGovernorate": "يرجى اختيار المحافظة",
+            "requiredCity": "يرجى اختيار المدينة",
+            "termsRequired": "يجب الموافقة على الشروط والأحكام",
+            "phoneTooLong": "رقم الهاتف طويل جداً (الحد الأقصى 11 رقماً).",
+            "phoneMustStartWithZero": "الأرقام المكونة من 11 رقماً يجب أن تبدأ بـ 0.",
+            "phoneInvalidAfterZero": "بعد الـ 0، يجب أن يبدأ الرقم بـ 1 ويكون [0-9].",
+            "phoneMustStartWithOne": "يجب أن يبدأ رقم الهاتف بـ 1 أو 01 ويستخدم الأرقام [0-9].",
+            "phoneTooShort": "رقم الهاتف قصير جداً (مطلوب 10 أرقام).",
+            "noSavedAddresses": "لا توجد عناوين محفوظة",
+            "paymentMethodRequired": "يرجى اختيار طريقة الدفع",
+            "default": "الأساسى"
+        },
+        "payment": {
+            "cashOnDelivery": "الدفع عند الاستلام",
+            "payMob": "PayMob",
+            "loginToPlaceOrder": "يرجى تسجيل الدخول لتقديم الطلب",
+            "loginToApplyCoupon": "يرجى تسجيل الدخول لتطبيق الكوبون"
+        },
+        "summary": {
+            "title": "ملخص الدفع",
+            "subtotal": "المجموع الفرعي",
+            "shippingFee": "رسوم الشحن",
+            "free": "مجاني",
+            "cashOnDeliveryFee": "رسوم الدفع عند الاستلام",
+            "discount": "الخصم",
+            "apply": "تطبيق",
+            "currency": "ج.م",
+            "total": "المجموع"
+        },
+        "cart": {
+            "removeProduct": "إزالة المنتج",
+            "stockWarning": "يوجد فقط {{stock}} منتجات في المخزون",
+            "removing": "جاري الإزالة...",
+            "productRemoved": "تمت إزالة \"{{name}}\" من السلة",
+            "cartUpdated": "تم تحديث السلة بالكمية: {{quantity}}",
+            "failedToUpdate": "فشل تحديث كمية السلة",
+            "failedToRemove": "فشل إزالة المنتج من السلة"
+        },
+        "emptyCart": {
+            "title": "سلتك فارغة",
+            "description": "يبدو أنك لم تضف أي شيء إلى سلتك بعد",
+            "shopNow": "ابدأ التسوق"
+        },
+        "placeOrder": "تأكيد الطلب",
+        "loading": "جاري التحميل...",
+        "orderSuccess": "تم تأكيد طلبك بنجاح.",
+        "confirmingPayment": "جاري تأكيد دفعك",
+        "paymentFailed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
+        "paymentStatus": {
+            "paidTitle": "عملية الدفع ناجحة",
+            "paidMessage": "شكراً لك على شرائك. تمت عملية الدفع بنجاح.",
+            "failedTitle": "فشلت عملية الدفع",
+            "failedMessage": "حدث خطأ ما. لم نتمكن من معالجة عملية الدفع الخاصة بك."
+        }
+    }
+}

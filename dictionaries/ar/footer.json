@@ -1,0 +1,82 @@
+{
+  "footer": {
+    "brand": {
+      "description": "Blink هو وجهتك الذكية للتسوق. نوفر لك آلاف المنتجات مع توصيل سريع، وطرق دفع آمنة، وتجربة تسوق سلسة — كل ما تحتاجه في مكان واحد."
+    },
+    "quickLinks": {
+      "title": "الروابط السريعة",
+      "items": [
+        {
+          "label": "عروض اليوم",
+          "src": "/deals-of-deals"
+        },
+        {
+          "label": "المنتجات الأكثر مبيعاً ",
+          "src": "/best-selling"
+        },
+        {
+          "label": "منتجات وصلت حديثاً ",
+          "src": "/new-arrivals"
+        }
+      ]
+    },
+    "shopWithUs": {
+      "title": "تسوق معنا",
+      "items": [
+        {
+          "label": "الحساب",
+          "src": "/profile"
+        },
+        {
+          "label": "قائمة الرغبات",
+          "src": "/profile/favourite"
+        },
+        {
+          "label": "الطلبات",
+          "src": "/profile/orders"
+        }
+      ]
+    },
+    "customerServices": {
+      "title": "خدمة العملاء",
+      "items": [
+        {
+          "label": "الشروط والأحكام",
+          "src": "/terms-conditions"
+        },
+        {
+          "label": "سياسة الخصوصية",
+          "src": "/privacy-policy"
+        },
+        {
+          "label": "سياسة الاسترجاع",
+          "src": "/return-refund"
+        }
+      ]
+    },
+    "needHelp": {
+      "title": "تحتاج مساعدة؟",
+      "items": [
+        {
+          "label": "اتصل بنا",
+          "src": "/contact-us"
+        }
+      ]
+    },
+    "copyright": {
+      "description": "حقوق النشر © 2025 BLINK. جميع الحقوق محفوظة."
+    },
+    "ConnectWithUs": {
+      "description": "اتصل بنا"
+    },
+    "termsConditions": {
+      "description": "الشروط والأحكام"
+    },
+    "privacyPolicy": {
+      "description": "سياسة الخصوصية"
+    },
+    "returnRefund": {
+      "description": "سياسة الاسترجاع"
+    }
+  }
+}

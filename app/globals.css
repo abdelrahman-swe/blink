@@ -1,0 +1,306 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-family-sans: var(--font-sans), system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  font-family: "IBM Plex Sans Arabic", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --radius: 0.625rem;
+  --background: #ffffff;
+  /* --background: #f9f9f9; */
+  --foreground: #0d0d0d;
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --primary: #0d0d0d;
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: #e6e6e6;
+  --secondary-foreground: oklch(0.205 0 0);
+
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: #999999;
+
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: #E6E6E6;
+  --input: #e6e6e6;
+  --ring: oklch(0.708 0 0);
+
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Make all Swiper slides same height */
+.swiper {
+  height: 100% !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+  display: flex !important;
+}
+
+.swiper-wrapper {
+  align-items: stretch !important;
+  /* margin-bottom: 40px !important; */
+}
+
+/* Remove margin from header swiper only */
+header .swiper-wrapper {
+  margin-bottom: 0px !important;
+}
+
+/* Navigation arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(237, 236, 236) !important;
+  color: black !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 12px !important;
+  border-radius: 9999px !important;
+  box-shadow: 5px 2px 6px rgba(0, 0, 0, 0.241);
+  transition: all 0.3s ease !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 999999999 !important;
+  overflow: visible !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.swiper-button-prev {
+  left: 30px !important;
+}
+
+.swiper-button-next {
+  right: 30px !important;
+}
+
+@media (max-width: 768px) {
+  .swiper-button-prev {
+    left: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-button-next {
+    right: 20px !important;
+  }
+}
+
+/* Pagination bullets */
+.swiper-pagination-bullet {
+  background: #dedede !important;
+  background: #dedede !important;
+  opacity: 1 !important;
+  height: 15px !important;
+  width: 15px !important;
+  transition: all 0.3s ease;
+  transform: translateY(10%) !important;
+  transform: translateY(10%) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #0d0d0d !important;
+  width: 50px !important;
+  aspect-ratio: 24/8 !important;
+  height: 8px;
+  border-radius: 9px !important;
+}
+
+
+/* Only applies to a specific swiper, not all of them */
+.deals-swiper .swiper-pagination-bullet {
+  background: #dedede;
+  opacity: 1;
+  height: 15px;
+  width: 15px;
+  transition: all 0.3s ease;
+  transform: translateY(10%);
+}
+
+.deals-swiper .swiper-pagination-bullet-active {
+  background: #0d0d0d;
+  width: 50px;
+  aspect-ratio: 24/8;
+  height: 8px;
+  border-radius: 9px;
+}
+
+.swiper-pagination {
+  position: relative !important;
+}
+
+/* Remove arrows in all browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 30px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.8);
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-primary::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+  background: rgb(185, 185, 185);
+  border-radius: 10px;
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb:hover {
+  background: rgb(136, 136, 136);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}

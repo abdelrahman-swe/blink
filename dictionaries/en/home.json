@@ -1,0 +1,108 @@
+{
+  "navbar": {
+    "search": "Search products, brands and categories...",
+    "searchButton": "Search",
+    "language": "Language",
+    "favouritesText": "Favourites",
+    "profileText": "Profile",
+    "cartText": "Cart",
+    "logoutText": "Logout",
+    "loggingText": "Logging out ...",
+    "loginText": "Login",
+    "myOrders": "My Orders",
+    "returns": "Returns",
+    "settings": "Settings",
+    "signUpText": "Sign Up",
+    "homeText": "Home"
+  },
+  "pros": [
+    {
+      "title": "FREE SHIPPING",
+      "desc": "Free shipping for orders above 1,200 EGP",
+      "icon": "ShippingTruck01Icon"
+    },
+    {
+      "title": "FLEXIBLE PAYMENT",
+      "desc": "Multiple secure payment options",
+      "icon": "CreditCardIcon"
+    },
+    {
+      "title": "24x7 SUPPORT",
+      "desc": "We support online all days",
+      "icon": "HeadphonesIcon"
+    },
+    {
+      "title": "QUALITY PRODUCTS",
+      "desc": "We ensure the quality of our products",
+      "icon": "Task01Icon"
+    }
+  ],
+  "header": {
+    "topBrands": "Top Brands"
+  },
+  "filteration": {
+    "home": "Home",
+    "productsCount": "({count} products found)",
+    "productCount": "({count} product found)",
+    "filter": "Filter",
+    "price": "Price (EGP)",
+    "to": "to",
+    "min": "min",
+    "max": "max",
+    "category": "Category",
+    "notAvailable": "No categories available",
+    "brand": "Brand",
+    "noBrandsAvailable": "No brands available",
+    "availability": "Availability",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "apply": "Apply",
+    "reset": "Reset"
+  },
+  "sorting": {
+    "sortBy": "Sort By",
+    "newArrivals": "New Arrivals",
+    "bestSelling": "Best Selling",
+    "topRated": "Top Rated",
+    "priceHigh": "Price: High to Low",
+    "priceLow": "Price: Low to High"
+  },
+  "emptyProducts": {
+    "noProductsFound": "No products found",
+    "noBrandsFound": "No brands found",
+    "backToHome": "Back to Home"
+  },
+  "topHeaders": {
+    "dealsOfTheDay": "Deals Of The Day",
+    "newArrivals": "New Arrival Products",
+    "newArrivalsProducts": "New Arrivals Products",
+    "bestSellingProducts": "Best Selling Products",
+    "shopByBrand": "Shop By Brand",
+    "exploreMoreCategories": "Explore more categories",
+    "viewAll": "VIEW ALL",
+    "visitStore": "Visit Store",
+    "productsFound": "Products found",
+    "noDeals": "No Deals Of The Days Available Yet",
+    "noBrands": "No Brands Found Yet",
+    "noCategories": "No Categories Found Yet",
+    "noNewArrivals": "No New Arrivals Products Found Yet",
+    "noBestSellingProducts": "No Best Selling Products Found Yet"
+  },
+  "loginRequiredDialog": {
+    "title": "Login Required",
+    "message": "Need to Login to be able to continue.",
+    "cancel": "Cancel",
+    "login": "Login"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "newArrivalsProducts": "New Arrivals Products ",
+    "bestSellingProducts": "Best Selling Products",
+    "dealsOfTheDay": "Deals Of The Day"
+  },
+  "notFound": {
+    "title": "404 Page Not Found",
+    "description": "Sorry, the page you are looking for doesn't exist.",
+    "backToHome": "Back to Home"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "footer": {
+    "brand": {
+      "description": "Blink is your smart shopping destination. We bring you thousands of products, fast delivery, secure payments, and a smooth experience—everything you need in one place."
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "items": [
+        {
+          "label": "Deals Of The Day",
+          "src": "/deals-of-deals"
+        },
+        {
+          "label": "Best Selling Products",
+          "src": "/best-selling"
+        },
+        {
+          "label": "New Arrivals Products",
+          "src": "/new-arrivals"
+        }
+      ]
+    },
+    "shopWithUs": {
+      "title": "Shop With Us",
+      "items": [
+        {
+          "label": "Account",
+          "src": "/profile"
+        },
+        {
+          "label": "Wishlist",
+          "src": "/profile/favourite"
+        },
+        {
+          "label": "Orders",
+          "src": "/profile/orders"
+        }
+      ]
+    },
+    "customerServices": {
+      "title": "Customer Services",
+      "items": [
+        {
+          "label": "Terms & Conditions",
+          "src": "/terms-conditions"
+        },
+        {
+          "label": "Privacy Policy",
+          "src": "/privacy-policy"
+        },
+        {
+          "label": "Return Policy",
+          "src": "/return-refund"
+        }
+      ]
+    },
+    "needHelp": {
+      "title": "Need Help?",
+      "items": [
+        {
+          "label": "Contact Us",
+          "src": "/contact-us"
+        }
+      ]
+    },
+    "copyright": {
+      "description": "Copyright © 2025 BLINK. All Rights Reserved."
+    },
+    "ConnectWithUs": {
+      "description": "Connect With Us"
+    },
+    "termsConditions": {
+      "description": "Terms and Conditions"
+    },
+    "privacyPolicy": {
+      "description": "Privacy Policy"
+    },
+    "returnRefund": {
+      "description": "Return Policy"
+    }
+  }
+}

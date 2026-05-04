@@ -1,0 +1,45 @@
+{
+    "cart": {
+        "breadcrumb": {
+            "home": "الرئيسية",
+            "cart": "عربة التسوق"
+        },
+        "header": {
+            "all": "الكل",
+            "title": "عربة التسوق",
+            "subtitle": "منتجات في حقيبتك"
+            
+        },
+        "actions": {
+            "emptyAll": "إفراغ العربة",
+            "removing": "جاري الحذف ..."
+        },
+        "summary": {
+            "title": "ملخص الطلب",
+            "subtotal": "المجموع الفرعي",
+            "shippingFee": "رسوم الشحن",
+            "free": "مجاني",
+            "cashOnDeliveryFee": "رسوم الدفع عند الاستلام",
+            "discount": "الخصم",
+            "apply": "تطبيق",
+            "currency": "ج.م",
+            "total": "الإجمالي"
+        },
+        "proceedToCheckout": "المتابعة لإتمام الشراء",
+        "loading": "جاري التحميل...",
+        "dialog": {
+            "title": "إفراغ العربة؟",
+            "description": "هل أنت متأكد أنك تريد إفراغ العربة وحذف جميع المنتجات؟",
+            "cancel": "إلغاء",
+            "delete": "حذف"
+        },
+        "emptyCart": {
+            "altText": "لم يتم العثور على منتجات في العربة",
+            "continueShopping": "متابعة التسوق"
+        },
+        "stockWarning": "يوجد {count} قطعة فقط في المخزن",
+         "card": {
+            "off": "{percentage} % خصم"
+        }
+    }
+}

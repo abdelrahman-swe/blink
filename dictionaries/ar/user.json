@@ -1,0 +1,197 @@
+{
+    "profile": {
+        "sidebar": {
+            "myAccount": "حسابي",
+            "wishlist": "قائمة الأمنيات",
+            "orders": "الطلبات",
+            "returns": "المرتجعات",
+            "securitySettings": "إعدادات الأمان",
+            "logout": "تسجيل الخروج"
+        },
+        "drawer": {
+            "title": "قائمة الملف الشخصي"
+        },
+        "logoutDialog": {
+            "title": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "confirm": "تسجيل الخروج",
+            "cancel": "إلغاء",
+            "loggingOut": "جارٍ تسجيل الخروج..."
+        },
+        "avatar": {
+            "welcome": "مرحباً، {name}"
+        },
+        "wishlist": {
+            "title": "قائمة أمنياتي",
+            "productsCount": "({count} منتجات)",
+            "productCount": "({count} منتج)",
+            "emptyTitle": "لم تقم بحفظ أي عنصر بعد!",
+            "emptyDesc": "هل وجدت شيئاً أعجبك؟ اضغط على أيقونة القلب بجانب العنصر لإضافته إلى قائمة أمنياتك! ستظهر جميع العناصر المحفوظة هنا.",
+            "continueShopping": "مواصلة التسوق"
+        },
+        "orders": {
+            "title": "طلباتي",
+            "failedLoad": "فشل تحميل الطلبات",
+            "emptyTitle": "لم تقم بتقديم أي طلبات بعد!",
+            "emptyDesc": "سيتم حفظ جميع طلباتك هنا لتتمكن من الوصول إلى حالتها في أي وقت.",
+            "continueShopping": "مواصلة التسوق",
+            "orderId": "رقم الطلب",
+            "deliveredAt": "تم التوصيل في :",
+            "orderedOn": "تم الطلب في :",
+            "estimatedArrival": "وقت الوصول المتوقع :",
+            "productUnavailable": "المنتج غير متوفر",
+            "total": "الإجمالي",
+            "discount": "مبلغ الخصم",
+            "returnOrder": "إرجاع الطلب",
+            "cancelOrder": "إلغاء الطلب",
+            "canceling": "جاري الإلغاء...",
+            "confirmCancelOrder": "هل أنت متأكد أنك تريد إلغاء هذا الطلب؟",
+            "yes": "نعم",
+            "no": "لا",
+            "status": {
+                "pending": "قيد الانتظار",
+                "pending_payment": "في انتظار الدفع",
+                "completed": "تم التوصيل",
+                "processing": "قيد التنفيذ",
+                "out_for_delivery": "قيد التوصيل",
+                "cancelled": "تم الإلغاء",
+                "rejected": "تم الرفض"
+            }
+        },
+        "returns": {
+            "title": "مرتجعاتي",
+            "failedLoad": "فشل تحميل المرتجعات",
+            "emptyTitle": "لم تقم بطلب أي مرتجعات بعد!",
+            "continueShopping": "مواصلة التسوق",
+            "returnId": "رقم المرتجع",
+            "discount": "مبلغ الخصم",
+            "refundAmount": "مبلغ الاسترداد",
+            "productUnavailable": "المنتج غير متوفر",
+            "status": {
+                "pending": "قيد الانتظار",
+                "approved": "تمت الموافقة",
+                "completed": "تم الاسترداد",
+                "items_received": "تم استلام العناصر",
+                "cancelled": "تم الإلغاء",
+                "rejected": "تم الرفض"
+            }
+        },
+        "securitySettings": {
+            "passwordSettings": "إعدادات كلمة المرور",
+            "changePassword": "تغيير كلمة المرور",
+            "signOutDevices": "تسجيل الخروج من الأجهزة الأخرى",
+            "signOut": "تسجيل الخروج",
+            "deleteAccount": "حذف الحساب",
+            "deleteAccountDesc": "سيتم إلغاء تنشيط حسابك، وسيتم تسجيل خروجك من جميع الأجهزة.",
+            "currentPassword": "كلمة المرور الحالية",
+            "newPassword": "كلمة المرور الجديدة",
+            "repeatNewPassword": "تكرار كلمة المرور الجديدة",
+            "enterCurrentPassword": "أدخل كلمة المرور الحالية",
+            "enterNewPassword": "أدخل كلمة المرور الجديدة",
+            "repeatNewPasswordPlaceholder": "كرر كلمة المرور الجديدة",
+            "forgotPassword": "هل نسيت كلمة المرور؟",
+            "updating": "جاري التحديث...",
+            "updatePassword": "تحديث كلمة المرور",
+            "cancel": "إلغاء",
+            "deleting": "جاري الحذف...",
+            "confirmDeleteAccount": "هل أنت متأكد أنك تريد حذف حسابك؟",
+            "confirmSignOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "signingOut": "جاري تسجيل الخروج...",
+            "passwordChangedSuccess": "تم تغيير كلمة المرور بنجاح",
+            "failedChangePassword": "فشل تغيير كلمة المرور",
+            "accountDeletedSuccess": "تم حذف الحساب بنجاح",
+            "password": "كلمة المرور",
+            "enterPassword": "أدخل كلمة المرور",
+            "incorrectPassword": "كلمة المرور الحالية غير صحيحة"
+        },
+        "account": {
+            "title": "حسابي",
+            "info": {
+                "editPhoto": "تعديل صورة الحساب",
+                "form": {
+                    "fullName": "الاسم بالكامل",
+                    "fullNamePlaceholder": "أدخل اسمك بالكامل",
+                    "email": "البريد الإلكتروني",
+                    "emailPlaceholder": "example@domain.com",
+                    "phone": "رقم الهاتف",
+                    "phonePlaceholder": "01xxxxxxxxx"
+                }
+            },
+            "verifyPhoneOtp": {
+                "title": "أدخل رمز التحقق",
+                "subtitle": "لقد ارسلنا رمزًا مكونًا من 6 أرقام الى  بريدك الالكتروني",
+                "verifyButton": "تحقق من الحساب",
+                "verifying": "جارِ التحقق...",
+                "ReceiveOtp": "لم تستلم الرمز ؟",
+                "resendIt": " إعادة الإرسال",
+                "resendIn": "إعادة الإرسال خلال {seconds} ثانية",
+                "blocked": "محظور ({time})",
+                "success": "تم التحقق من الحساب بنجاح",
+                "yourCodeIs": "رمز التحقق الخاص بك هو",
+                "tooManyAttempts": "محاولات كثيرة جدا. يرجى المحاولة مرة أخرى في",
+                "failed": "فشل التحقق",
+                "wrongPhoneOrEmail": "رقم الهاتف أو البريد الإلكتروني غير صحيح؟",
+                "edit": "تعديل"
+            },
+            "address": {
+                "title": "العناوين",
+                "edit": "تعديل",
+                "defaultAddress": "العنوان الافتراضي",
+                "setAsDefault": "تعيين كعنوان افتراضي",
+                "removing": "جارٍ الحذف...",
+                "cancel": "إلغاء",
+                "saveAddress": "حفظ العنوان",
+                "updateAddress": "تحديث العنوان",
+                "updating": "جارٍ التحديث...",
+                "saving": "جارٍ الحفظ...",
+                "addNewTitle": "إضافة عنوان جديد",
+                "editTitle": "تعديل العنوان",
+                "emptyTitle": "لم تقم بإضافة أي عنوان بعد!",
+                "emptyDesc": "أضف عناوين الشحن الخاصة بك هنا لتجربة شراء سريعة!",
+                "addNew": "إضافة عنوان جديد",
+                "labels": {
+                    "home": "المنزل",
+                    "work": "العمل",
+                    "office": "المكتب",
+                    "other": "أخرى"
+                },
+                "form": {
+                    "label": "اسم العنوان",
+                    "labelPlaceholder": "اختر اسماً",
+                    "phone": "رقم الهاتف",
+                    "phonePlaceholder": "01xxxxxxxxx",
+                    "governorate": "المحافظة",
+                    "governoratePlaceholder": "اختر المحافظة",
+                    "city": "المدينة",
+                    "cityPlaceholder": "اختر المدينة",
+                    "address": "العنوان",
+                    "addressPlaceholder": "أدخل عنوانك"
+                }
+            },
+            "validation": {
+                "fullNameRequired": "الاسم الكامل مطلوب",
+                "fullNameMin3": "يجب أن يكون الاسم الكامل 3 أحرف على الأقل",
+                "fullNameLetters": "يجب أن يحتوي الاسم الكامل على حروف ومسافات فقط",
+                "emailRequired": "البريد الإلكتروني مطلوب",
+                "invalidEmail": "عنوان البريد الإلكتروني غير صالح",
+                "phoneNumberRequired": "رقم الهاتف مطلوب",
+                "phoneTooLong": "رقم الهاتف أطول من المسموح (الحد الأقصى 11 رقمًا).",
+                "phoneMustStartWithZero": "رقم الهاتف المكون من 11 رقمًا يجب أن يبدأ بـ 0.",
+                "phoneInvalidAfterZero": "بعد الرقم 0 يجب أن يبدأ الرقم بـ 1 ويتكون من أرقام [0–9].",
+                "phoneMustStartWithOne": "رقم الهاتف يجب أن يبدأ بـ 1 أو 01 ويتكون من أرقام [0–9].",
+                "phoneTooShort": "رقم الهاتف قصير جدًا (مطلوب 10 أرقام).",
+                "passwordRequired": "كلمة المرور مطلوبة",
+                "passwordMin8": "يجب أن تكون كلمة المرور 8 أحرف على الأقل وتتضمن حروفاً وأرقاماً ورمزاً خاصاً واحداً على الأقل",
+                "passwordsMismatch": "كلمات المرور غير متطابقة",
+                "avatarType": "يرجى تحميل ملف صورة (jpeg, jpg, png, or gif)",
+                "otpLength": "يجب أن يكون رمز التحقق مكونًا من 6 أرقام بالضبط",
+                "otpNumeric": "يجب أن يكون رمز التحقق رقميًا [0-9]",
+                "governorateRequired": "يرجى اختيار المحافظة",
+                "cityRequired": "يرجى اختيار المدينة",
+                "addressRequired": "يرجى إدخال عنوان الشارع",
+                "addressMin5": "يجب أن يكون العنوان 5 أحرف على الأقل",
+                "addressPhoneRequired": "يرجى إدخال رقم الهاتف",
+                "addressLabelRequired": "يرجى تحديد اسم لهذا العنوان"
+            }
+        }
+    }
+}

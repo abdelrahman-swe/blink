@@ -1,0 +1,197 @@
+{
+    "profile": {
+        "sidebar": {
+            "myAccount": "My Account",
+            "wishlist": "Wishlist",
+            "orders": "Orders",
+            "returns": "Returns",
+            "securitySettings": "Security Settings",
+            "logout": "Logout"
+        },
+        "drawer": {
+            "title": "Profile Menu"
+        },
+        "logoutDialog": {
+            "title": "Are you sure you want to logout?",
+            "confirm": "Logout",
+            "cancel": "Cancel",
+            "loggingOut": "Logging out..."
+        },
+        "avatar": {
+            "welcome": "Welcome, {name}"
+        },
+        "wishlist": {
+            "title": "My Wishlist",
+            "productsCount": "({count} Products)",
+            "productCount": "({count} Product)",
+            "emptyTitle": "You haven’t saved an item yet!",
+            "emptyDesc": "Found something you like? Tap on the heart shaped icon next to the item to add it to your wishlist! All your saved items will appear here.",
+            "continueShopping": "Continue Shopping"
+        },
+        "orders": {
+            "title": "My Orders",
+            "failedLoad": "Failed to load orders",
+            "emptyTitle": "You haven’t placed any orders yet!",
+            "emptyDesc": "All your orders will be saved here for you to access their state anytime.",
+            "continueShopping": "Continue Shopping",
+            "orderId": "Order ID",
+            "deliveredAt": "Delivered at :",
+            "orderedOn": "Ordered on :",
+            "estimatedArrival": "Estimated arrival time :",
+            "productUnavailable": "Product Unavailable",
+            "total": "Total",
+            "discount": "Discount Amount",
+            "returnOrder": "Return order",
+            "cancelOrder": "Cancel order",
+            "canceling": "Canceling...",
+            "confirmCancelOrder": "Are you sure you want to cancel this order?",
+            "yes": "Yes",
+            "no": "No",
+            "status": {
+                "pending": "Pending",
+                "pending_payment": "Pending payment",
+                "completed": "Completed",
+                "processing": "Processing",
+                "out_for_delivery": "Out for delivery",
+                "cancelled": "Cancelled",
+                "rejected": "Rejected"
+            }
+        },
+        "returns": {
+            "title": "My Returns",
+            "failedLoad": "Failed to load returns",
+            "emptyTitle": "You haven’t requested any returns!",
+            "continueShopping": "Continue Shopping",
+            "returnId": "Return ID",
+            "discount": "Discount Amount",
+            "refundAmount": "Refund Amount",
+            "productUnavailable": "Product Unavailable",
+            "status": {
+                "pending": "Pending",
+                "approved": "Approved",
+                "completed": "Refund Completed",
+                "items_received": "Items Received",
+                "cancelled": "Cancelled",
+                "rejected": "Rejected"
+            }
+        },
+        "securitySettings": {
+            "passwordSettings": "Password settings",
+            "changePassword": "Change password",
+            "signOutDevices": "Sign out from all other devices",
+            "signOut": "Sign out",
+            "deleteAccount": "Delete Account",
+            "deleteAccountDesc": "Your account will be deactivated, and you will be logged out of all devices.",
+            "currentPassword": "Current password",
+            "newPassword": "New password",
+            "repeatNewPassword": "Repeat new password",
+            "enterCurrentPassword": "Enter your current password",
+            "enterNewPassword": "Enter your new password",
+            "repeatNewPasswordPlaceholder": "Repeat your new password",
+            "forgotPassword": "Forgot your Password?",
+            "updating": "Updating...",
+            "updatePassword": "Update Password",
+            "cancel": "Cancel",
+            "deleting": "Deleting...",
+            "confirmDeleteAccount": "Are you sure you want to delete your account?",
+            "confirmSignOut": "Are you sure you want to logout ?",
+            "signingOut": "Signing out...",
+            "passwordChangedSuccess": "Password changed successfully",
+            "failedChangePassword": "Failed to change password",
+            "accountDeletedSuccess": "Account deleted successfully",
+            "password": "Password",
+            "enterPassword": "Enter your password",
+            "incorrectPassword": "Current password is incorrect"
+        },
+        "account": {
+            "title": "My Account",
+            "info": {
+                "editPhoto": "Edit account photo",
+                "form": {
+                    "fullName": "Full Name",
+                    "fullNamePlaceholder": "Enter your full name",
+                    "email": "Email Address",
+                    "emailPlaceholder": "Enter your email address",
+                    "phone": "Phone Number",
+                    "phonePlaceholder": "01xxxxxxxxx"
+                }
+            },
+            "verifyPhoneOtp": {
+                "title": "Verify Account",
+                "subtitle": "We’ve sent a 6 digits OTP to your Email Address",
+                "verifyButton": "Verify Account",
+                "verifying": "Verifying...",
+                "ReceiveOtp": "Didn't receive the code?",
+                "resendIt": "Resend it",
+                "resendIn": "Resend in {seconds}s",
+                "blocked": "Blocked ({time})",
+                "success": "Account verified successfully",
+                "yourCodeIs": "Your verification code is",
+                "tooManyAttempts": "Too many attempts. Please try again in",
+                "failed": "Verification failed",
+                "wrongPhoneOrEmail": "Wrong phone number or email address?",
+                "edit": "Edit"
+            },
+            "address": {
+                "title": "Addresses",
+                "edit": "Edit",
+                "defaultAddress": "Default address",
+                "setAsDefault": "Set as default address",
+                "removing": "Removing...",
+                "cancel": "Cancel",
+                "saveAddress": "Save address",
+                "updateAddress": "Update address",
+                "updating": "Updating...",
+                "saving": "Saving...",
+                "addNewTitle": "Add New Address",
+                "editTitle": "Edit Address",
+                "emptyTitle": "You have not added any address yet!",
+                "emptyDesc": "Add your shipping addresses here for a fast purchase experience!",
+                "addNew": "Add new address",
+                "labels": {
+                    "home": "Home",
+                    "work": "Work",
+                    "office": "Office",
+                    "other": "Other"
+                },
+                "form": {
+                    "label": "Address Label",
+                    "labelPlaceholder": "Select Label",
+                    "phone": "Phone Number",
+                    "phonePlaceholder": "01xxxxxxxxx",
+                    "governorate": "Governorate",
+                    "governoratePlaceholder": "Choose governorate",
+                    "city": "City",
+                    "cityPlaceholder": "Choose city",
+                    "address": "Address",
+                    "addressPlaceholder": "Enter your address"
+                }
+            },
+            "validation": {
+                "fullNameRequired": "Full name is required",
+                "fullNameMin3": "Full name must be at least 3 characters long",
+                "fullNameLetters": "Full name can only contain letters and spaces",
+                "emailRequired": "Email is required",
+                "invalidEmail": "Invalid email address",
+                "phoneNumberRequired": "Phone number is required",
+                "phoneTooLong": "Phone number is too long (max 11 digits).",
+                "phoneMustStartWithZero": "11-digit numbers must start with 0.",
+                "phoneInvalidAfterZero": "After 0, the number must start with 1 and be [0–9].",
+                "phoneMustStartWithOne": "Phone number must start with 1 or 01 and use digits [0–9].",
+                "phoneTooShort": "Phone number is too short (10 digits required).",
+                "passwordRequired": "Password is required",
+                "passwordMin8": "Password must be at least 8 characters and include letters, numbers, and at least one special character",
+                "passwordsMismatch": "Passwords do not match",
+                "avatarType": "Please upload an image file (jpeg, jpg, png, or gif)",
+                "otpLength": "OTP must be exactly 6 digits",
+                "otpNumeric": "OTP must be numeric [0-9]",
+                "governorateRequired": "Please select a governorate",
+                "cityRequired": "Please select a city",
+                "addressRequired": "Please enter street address",
+                "addressMin5": "Address must be at least 5 characters long",
+                "addressPhoneRequired": "Please enter a phone number",
+                "addressLabelRequired": "Please provide a label for this address"
+            }
+        }
+    }
+}
