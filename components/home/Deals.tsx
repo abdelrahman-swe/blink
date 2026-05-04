@@ -87,7 +87,7 @@ export default function DealsCard() {
                 {products.map((product) => (
                     <Card
                         key={product.id}
-                        className="bg-red-300 flex gap-3 flex-col h-full ease-in duration-300 transition-all group border border-[#e6e6e6]"
+                        className="flex gap-3 flex-col h-full ease-in duration-300 transition-all group border border-[#e6e6e6]"
                         onMouseEnter={() => {
                             const timer = setTimeout(() => {
                                 prefetchProduct(product.slug);
