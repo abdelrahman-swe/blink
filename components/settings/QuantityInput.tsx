@@ -124,13 +124,13 @@ export function QuantityInput({
         onClick={handleIncrease}
         disabled={!isInteractive || currentValue >= effectiveMax || hasReachedStock}
         className="
-    flex h-9 w-9 items-center justify-center rounded-full
-    bg-white text-black
-    transition
-    hover:bg-gray-100
-    disabled:cursor-not-allowed disabled:opacity-40
-    p-0
-  "
+          flex h-9 w-9 items-center justify-center rounded-full
+          bg-white text-black
+          transition
+          hover:bg-gray-100
+          disabled:cursor-not-allowed disabled:opacity-40
+          p-0
+        "
       >
         <PlusIcon className="h-3 w-3" aria-hidden="true" />
       </Button>

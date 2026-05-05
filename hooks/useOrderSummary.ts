@@ -16,9 +16,12 @@ export const useOrderSummary = ({
   paymentMethod
 }: UseOrderSummaryProps): OrderSummary => {
   return useMemo(() => {
+    // Use item.quantity directly from the API response for accurate totals.
+    // The local `quantities` state tracks totals per product_id (for optimistic UI),
+    // but individual items already have the correct per-entry quantities from the backend.
     const subtotal = items.reduce((sum, item) => {
       const price = parseFloat(item.deal_price || item.sale_price || item.price || "0");
-      const quantity = quantities[(item.product_id || item.id) as number] || item.quantity || 1;
+      const quantity = item.quantity || 1;
       return sum + (price * quantity);
     }, 0);
 

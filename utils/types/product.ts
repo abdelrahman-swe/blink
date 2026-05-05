@@ -194,9 +194,46 @@ export interface ProductSpecifications {
   code: string;
 }
 
+/////////////////// PRODUCT SEO ////////////////////
+
+export interface ProductSeoMeta {
+  title: string;
+  description: string;
+  robots: string;
+  canonical: string;
+}
+
+export interface ProductSeoOg {
+  title: string;
+  description: string;
+  image: string;
+  type: string;
+  url: string;
+  site_name: string;
+  locale: string;
+}
+
+export interface ProductSeoAlternate {
+  lang: string;
+  href: string;
+}
+
+export interface ProductSeo {
+  meta: ProductSeoMeta;
+  og: ProductSeoOg;
+  alternates: ProductSeoAlternate[];
+  content_blocks: unknown[];
+  jsonLd: Record<string, unknown>[];
+}
+
+/////////////////// PRODUCT DETAILS ////////////////////
+
 export interface ProductDetails {
   id?: number;
   product_id?: number;
+  deal_id?: number | null;
+  is_on_deal?: boolean;
+  max_quantity_per_order?: number;
   name: string;
   slug: string;
   sku: string | null;
@@ -212,12 +249,14 @@ export interface ProductDetails {
   images?: ProductImages[];
   similar_products?: Product[];
   image?: Image;
-  total?: number;
+  total?: number | string;
   total_price?: number;
   avg_rating: string | number | null;
   reviews_count: number;
   is_favorite: boolean;
   specifications: ProductSpecifications[];
+  can_review?: boolean;
+  seo?: ProductSeo;
 }
 
 export type ProductsDetailsResponse = ProductDetails[];

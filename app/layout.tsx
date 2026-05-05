@@ -20,7 +20,10 @@ const ibmPlexSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Blink",
+  title: {
+    default: "Blink",
+    template: "%s | Blink",
+  },
   description: "Where everything is blinking",
   icons: {
     icon: "/favicon.ico",
@@ -49,7 +52,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            {/* <Toaster /> */}
+            <Toaster />
             <NetworkStatusHandler />
           </ThemeProvider>
         </QueryProvider>

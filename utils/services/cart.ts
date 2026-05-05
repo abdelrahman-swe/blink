@@ -34,6 +34,9 @@ export const getCartProduct = async (): Promise<ProductDetails[]> => {
 
 export const addToCart = async (body: AddToCartBody): Promise<CartResponse> => {
   const response = await api.post("/cart/items/add", body);
+  if (response.data?.status === "fail" || response.data?.status === "error") {
+    throw new Error(response.data.message || "Failed to add to cart");
+  }
   return response.data;
 };
 
@@ -43,6 +46,9 @@ export const addToCart = async (body: AddToCartBody): Promise<CartResponse> => {
 
 export const changeCartQuantity = async (body: AddToCartBody): Promise<CartResponse> => {
   const response = await api.post("/cart/items", body);
+  if (response.data?.status === "fail" || response.data?.status === "error") {
+    throw new Error(response.data.message || "Failed to change quantity");
+  }
   return response.data;
 };
 

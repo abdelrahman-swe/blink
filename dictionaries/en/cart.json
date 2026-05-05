@@ -38,7 +38,9 @@
         },
          "stockWarning": "Only {count} pieces left in stock",
          "card": {
-            "off": "{percentage}% off"
+            "off": "{percentage}% off",
+            "dealPrice": "Deal Price",
+            "regularPrice": "Regular Price"
         }
     }
 }

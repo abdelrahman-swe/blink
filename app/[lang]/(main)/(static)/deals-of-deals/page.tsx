@@ -15,6 +15,7 @@ import AppLink from '@/components/common/AppLink';
 import { useParams } from 'next/navigation';
 import { useAddToCartQuery } from '@/hooks/queries/useCartQueries';
 import { toast } from 'sonner';
+import { getApiErrorMessage } from '@/utils/getApiErrorMessage';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '@/components/ui/dialog';
 import { useToggleUserFavorites } from '@/hooks/queries/useUserQueries';
 import { Heart } from 'lucide-react';
@@ -222,13 +223,12 @@ const DealsOfDealsPage = () => {
                                             },
                                             {
                                                 onSuccess: () => {
-                                                    toast.success(`${product.name} ${tProd?.card?.addedToCart}`);
                                                     setSelectedProduct(product);
                                                     setShowAddToCartDialog(true);
                                                     setPendingProductId(null);
                                                 },
-                                                onError: () => {
-                                                    toast.error(`${product.name} ${tProd?.stock?.outOfStock}`);
+                                                onError: (error) => {
+                                                    toast.error(getApiErrorMessage(error, `${product.name} ${tProd?.stock?.outOfStock}`));
                                                     setPendingProductId(null);
                                                 },
                                             }

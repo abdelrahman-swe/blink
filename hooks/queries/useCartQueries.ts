@@ -10,6 +10,7 @@ import {
 import { ProductDetails } from "@/utils/types/product";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
+
 export function UseGetCartProductQuery(options: { enabled?: boolean } = {}) {
   return useQuery<ProductDetails[], Error>({
     queryKey: ["cart"],

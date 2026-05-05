@@ -15,7 +15,8 @@ import { Button } from "@/components/ui/button"
 import { UseGetCartProductQuery, useChangeCartQuantityQuery, useRemoveFromCartQuery } from "@/hooks/queries/useCartQueries"
 import { Spinner } from "@/components/ui/spinner"
 import { toast } from "sonner"
-import { useState, useEffect } from "react"
+import { getApiErrorMessage } from "@/utils/getApiErrorMessage"
+import { useState, useEffect, useMemo } from "react"
 import { useParams } from "next/navigation"
 import { CartProductSkeleton, CartSummarySkeleton } from "@/components/skeleton/CartSkeleton"
 import { PaymentSummary } from "@/components/common/PaymentSummary"
@@ -25,6 +26,7 @@ import { useOrderSummary } from "@/hooks/useOrderSummary"
 import { useDictionary } from "@/components/providers/DictionaryProvider"
 import { CartRemoveAllDialog } from "@/app/[lang]/(main)/cart/components/CartRemoveAllDialog"
 import { useLoadingStore } from "@/store/useLoadingStore"
+import { mergeCartItems } from "@/utils/mergeCartItems"
 
 
 export default function Cart() {
@@ -54,19 +56,20 @@ export default function Cart() {
     const { cart } = useDictionary();
     const t = cart?.cart;
 
+    // Merge items with the same product_id (deal + regular entries)
+    const mergedItems = useMemo(() => mergeCartItems(items), [items]);
 
     useEffect(() => {
-        if (items.length > 0) {
+        if (mergedItems.length > 0) {
             setQuantities(prevQuantities => {
                 const initialQuantities: Record<number, number> = {};
-                items.forEach((item: any) => {
-                    const itemId = item.product_id || item.id;
-                    initialQuantities[itemId] = item.quantity || 1;
+                mergedItems.forEach((merged) => {
+                    initialQuantities[merged.product_id] = merged.totalQuantity;
                 });
                 return initialQuantities;
             });
         }
-    }, [items]);
+    }, [mergedItems]);
 
     const handleQuantityChange = (productId: number, newQuantity: number) => {
         setQuantities(prev => ({
@@ -90,13 +93,13 @@ export default function Cart() {
                     });
                     toast.success(`Cart updated with quantity: ${newQuantity}`);
                 },
-                onError: () => {
+                onError: (error) => {
                     setUpdatingQuantityIds(prev => {
                         const updated = new Set(prev);
                         updated.delete(productId);
                         return updated;
                     });
-                    toast.error("Failed to update cart quantity");
+                    toast.error(getApiErrorMessage(error, "Failed to update cart quantity"));
                 }
             }
         );
@@ -107,7 +110,7 @@ export default function Cart() {
             return;
         }
 
-        const productName = items.find(item => (item.product_id || item.id) === productId)?.name || "Product";
+        const productName = mergedItems.find(item => item.product_id === productId)?.name || "Product";
 
         setRemovingProductId(productId);
         removeFromCart(
@@ -166,20 +169,20 @@ export default function Cart() {
 
             <div className="space-y-3 mt-4 ">
                 <h1 className="font-semibold text-xl md:text-2xl">{t.header.title}</h1>
-                <p><span className="font-medium text-sm md:text-lg block md:hidden ">({items.length}) {t.header.subtitle} </span></p>
+                <p><span className="font-medium text-sm md:text-lg block md:hidden ">({mergedItems.length}) {t.header.subtitle} </span></p>
             </div>
 
             <div className="grid grid-cols-12 gap-5 my-5 overflow-hidden ">
 
-                <div className={`col-span-12 ${items.length > 0 || isFetching ? 'lg:col-span-8' : ''} border border-gray-200 rounded-xl px-5 shadow-2xs h-fit max-h-[650px] overflow-y-auto relative custom-scrollbar`}>
+                <div className={`col-span-12 ${mergedItems.length > 0 || isFetching ? 'lg:col-span-8' : ''} border border-gray-200 rounded-xl px-5 shadow-2xs h-fit max-h-[650px] overflow-y-auto relative custom-scrollbar`}>
 
                     {/* EMPTY CART BUTTON */}
-                    {items.length > 0 && (
+                    {mergedItems.length > 0 && (
                         <div className="text-right sticky top-[-5px] z-10 bg-background -mx-5 px-5 pt-5">
                             <div className="flex items-center justify-between">
                                 <p className="flex items-center gap-2">
                                     <span className='font-semibold text-lg'>{t.header.all}</span>
-                                    <span className="text-lg hidden md:block ">({items.length} {t.header.subtitle}) </span>
+                                    <span className="text-lg hidden md:block ">({mergedItems.length} {t.header.subtitle}) </span>
                                 </p>
                                 <Button
                                     variant={isRemoving ? "ghost" : "outline"}
@@ -187,7 +190,7 @@ export default function Cart() {
                                     disabled={isRemoving}
                                     aria-label="Remove all items from cart"
                                     onClick={() => {
-                                        if (items.length > 0) {
+                                        if (mergedItems.length > 0) {
                                             setShowAddToCartDialog(true);
                                         }
                                     }}
@@ -213,27 +216,22 @@ export default function Cart() {
                     {/* START OF CART PRODUCTS */}
                     {isInitialLoading ? (
                         <CartProductSkeleton />
-                    ) : items.length === 0 ? (
+                    ) : mergedItems.length === 0 ? (
                         <EmptyCart />
                     ) : (
-                        items.map((product, index) => {
-                            const productId = product.product_id || product.id;
-                            const isProductRemoving = removingProductId === productId;
+                        mergedItems.map((merged) => {
+                            const isProductRemoving = removingProductId === merged.product_id;
                             return (
                                 <CartProducts
                                     lang={lang}
-                                    key={product.product_id || product.id || index}
-                                    product={product}
-                                    isUpdatingQuantity={updatingQuantityIds.has((product.product_id || product.id) as number)}
-                                    quantity={quantities[(product.product_id || product.id) as number] || 1}
+                                    key={merged.product_id}
+                                    mergedItem={merged}
+                                    isUpdatingQuantity={updatingQuantityIds.has(merged.product_id)}
+                                    quantity={quantities[merged.product_id] || merged.totalQuantity}
                                     isRemoving={isProductRemoving}
-                                    onQuantityChange={(qty) => handleQuantityChange((product.product_id || product.id) as number, qty)}
+                                    onQuantityChange={(qty) => handleQuantityChange(merged.product_id, qty)}
                                     onRemove={() => {
-                                        const productId = product.product_id || product.id;
-                                        if (productId) {
-                                            handleRemoveProduct(productId);
-                                            toast.success(`Product ${product.name} removed from cart!`);
-                                        }
+                                        handleRemoveProduct(merged.product_id);
                                     }}
                                 />
                             );
@@ -245,7 +243,7 @@ export default function Cart() {
                 {/* START OF CART SUMMARY PAYMENT */}
                 {isLoading ? (
                     <CartSummarySkeleton />
-                ) : items.length > 0 ? (
+                ) : mergedItems.length > 0 ? (
                     <div className="col-span-12 h-fit lg:col-span-4 border border-gray-100 rounded-xl p-7 shadow-xs">
                         <PaymentSummary
                             summary={orderSummary}
@@ -275,7 +273,7 @@ export default function Cart() {
                 }}
                 isRemoving={isRemoving}
                 onConfirm={() => {
-                    const allProductIds = items.map((item: any) => item.product_id || item.id).filter(Boolean);
+                    const allProductIds = mergedItems.map(item => item.product_id).filter(Boolean);
                     if (allProductIds.length > 0) {
                         setIsRemoving(true);
                         removeFromCart(

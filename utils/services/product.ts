@@ -8,6 +8,7 @@ import { AddReviewResponse, DeleteReviewResponse, EditReviewResponse, ProductDet
 
 export const getProductDetails = async (slug: string,): Promise<ProductDetails | null> => {
   const queryParams = new URLSearchParams();
+  queryParams.append("include_seo", "true");
   const queryString = queryParams.toString();
   const endpoint = `/products/slug/${slug}${queryString ? `?${queryString}` : ""
     }`;
