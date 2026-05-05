@@ -49,7 +49,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            {/* <Toaster /> */}
+            <Toaster />
             <NetworkStatusHandler />
           </ThemeProvider>
         </QueryProvider>

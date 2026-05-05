@@ -17,6 +17,7 @@ import {
 import { QuantityInput } from "@/components/settings/QuantityInput";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
 import { toast } from "sonner";
+import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import {
   FavouriteIcon,
   Share08Icon,
@@ -84,12 +85,11 @@ export const ProductInfo = ({ product, isLoading, lang, onReviewClick }: Product
       {
         onSuccess: () => {
           stopLoading();
-          toast.success(`${product.name} ${t?.card?.addedToCart || "added to cart"}`);
           setShowDialog(true);
         },
-        onError: () => {
+        onError: (error) => {
           stopLoading();
-          toast.error(`${product.name} ${t?.stock?.outOfStock || "is out of stock"}`);
+          toast.error(getApiErrorMessage(error, `${product.name} ${t?.stock?.outOfStock || "is out of stock"}`));
         },
       }
     );

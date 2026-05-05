@@ -1,3 +1,5 @@
+"use client";
+
 // Client Component Example - components/LanguageSwitcher.tsx
 
 import { useLocale } from "@/hooks/useLocale";

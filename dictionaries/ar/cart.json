@@ -39,7 +39,9 @@
         },
         "stockWarning": "يوجد {count} قطعة فقط في المخزن",
          "card": {
-            "off": "{percentage} % خصم"
+            "off": "{percentage} % خصم",
+            "dealPrice": "سعر العرض",
+            "regularPrice": "السعر العادي"
         }
     }
 }

@@ -139,12 +139,7 @@ export function useResendOtp() {
   return useMutation<ResendOtpResponse, Error, ResendOtpPayload>({
     mutationFn: (data) => getResendOtpUser(data),
     onSuccess: (response) => {
-      console.log("✅ RESEND OTP SUCCESS:", response);
-
       toast.success(response.message || "Otp resend successfully!");
-      if (response.data?.otp) {
-        toast.success(`Your new code is: ${response.data.otp}`);
-      }
     },
     onError: (error: any, variables: ResendOtpPayload) => {
       toast.error(error.response?.data?.message || "Invalid identifier");
@@ -158,11 +153,7 @@ export function useForgetPassword() {
 
   return useMutation<ForgetPasswordResponse, Error, ForgetPasswordPayload>({
     mutationFn: (data) => getForgetPasswordUser(data),
-    onSuccess: (response) => {
-      toast.success(response.message || "Otp resend successfully!");
-      if (response.data?.otp) {
-        toast.success(`Your new code is: ${response.data.otp}`);
-      }
+    onSuccess: () => {
     },
     onError: (error: any, variables: ForgetPasswordPayload) => {
       toast.error(error.response?.data?.message || "Invalid identifier");
@@ -197,12 +188,7 @@ export function useForgetResendOtp() {
   return useMutation<ForgetResendOtpResponse, Error, ForgetResendOtpPayload>({
     mutationFn: (data) => getForgetResendOtpUser(data),
     onSuccess: (response) => {
-      console.log("✅ RESEND OTP SUCCESS:", response);
-
       toast.success(response.message || "Otp resend successfully!");
-      if (response.data?.otp) {
-        toast.success(`Your new code is: ${response.data.otp}`);
-      }
     },
     onError: (error: any, variables: ForgetResendOtpPayload) => {
       toast.error(error.response?.data?.message || "Invalid identifier");

@@ -215,7 +215,7 @@ export default function CheckOut() {
         const initialQuantities: Record<number, number> = {};
         items.forEach((item: any) => {
             const id = item.product_id || item.id;
-            initialQuantities[id] = item.quantity || 1;
+            initialQuantities[id] = (initialQuantities[id] || 0) + (item.quantity || 1);
         });
 
         setQuantities(initialQuantities);

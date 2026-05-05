@@ -10,6 +10,7 @@ import { useParams } from "next/navigation";
 import { useAppRouter } from '@/hooks/useAppRouter';
 import { useAddToCartQuery, useCartPrefetch } from '@/hooks/queries/useCartQueries';
 import { toast } from 'sonner';
+import { getApiErrorMessage } from '@/utils/getApiErrorMessage';
 import { useState, useTransition } from 'react';
 import { useLoadingStore } from '@/store/useLoadingStore';
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -185,14 +186,13 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                                             {
                                                 onSuccess: () => {
                                                     stopLoading();
-                                                    toast.success(`(${product.name}) ${t?.card?.addedToCart || "added to cart"}`);
                                                     setSelectedProduct(product);
                                                     setShowAddToCartDialog(true);
                                                     setPendingProductId(null);
                                                 },
-                                                onError: () => {
+                                                onError: (error) => {
                                                     stopLoading();
-                                                    toast.error(`(${product.name}) ${t?.stock?.outOfStock || "is out of stock"}`);
+                                                    toast.error(getApiErrorMessage(error, `(${product.name}) ${t?.stock?.outOfStock || "is out of stock"}`));
                                                     setPendingProductId(null);
                                                 },
                                             }

@@ -19,6 +19,7 @@ import { useState } from "react";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
 import { toast } from "sonner";
+import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import {
     Dialog,
     DialogContent,
@@ -223,18 +224,13 @@ export default function DealsCard() {
                                         {
                                             onSuccess: () => {
                                                 stopLoading();
-                                                toast.success(
-                                                    `${product.name} ${tProd?.card?.addedToCart}`
-                                                );
                                                 setSelectedProduct(product);
                                                 setShowAddToCartDialog(true);
                                                 setPendingProductId(null);
                                             },
-                                            onError: () => {
+                                            onError: (error) => {
                                                 stopLoading();
-                                                toast.error(
-                                                    `${product.name} ${tProd?.stock?.outOfStock}`
-                                                );
+                                                toast.error(getApiErrorMessage(error, `${product.name} ${tProd?.stock?.outOfStock}`));
                                                 setPendingProductId(null);
                                             },
                                         }
