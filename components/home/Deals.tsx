@@ -135,6 +135,7 @@ export default function DealsCard() {
                                     alt={product.name}
                                     width={300}
                                     height={220}
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                     className="w-full h-[200px] object-cover rounded-t-xl"
                                 />
                             </AppLink>

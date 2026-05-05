@@ -84,6 +84,7 @@ export default function Explore() {
                               src={sub.images?.original || '/placeholder.png'}
                               alt={sub.name ? `${sub.name} category image` : "Subcategory"}
                               fill
+                              sizes="(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
                               className="object-cover rounded-xl object-center"
                               loading="lazy"
                             />

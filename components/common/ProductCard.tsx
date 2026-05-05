@@ -90,6 +90,7 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                                     alt={product.name}
                                     width={300}
                                     height={220}
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                     className="w-full h-[190px] object-cover rounded-t-xl"
                                 />
                             </AppLink>
@@ -214,7 +215,7 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                         <div className="relative">
                             <Image
                                 src={selectedProduct?.image?.original || selectedProduct?.images?.original || '/placeholder.png'}
-                                alt="gallery image"
+                                alt={selectedProduct?.name || "Product"}
                                 width={100}
                                 height={100}
                                 className="object-full p-1 object-center h-[100px] w-[130px] rounded-2xl border border-gray-200"

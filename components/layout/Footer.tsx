@@ -40,7 +40,7 @@ export default function Footer({ locale: lang }: FooterProps) {
                     width={120}
                     height={100}
                     priority
-                    className="md:relative left-[-20px] "
+                    className="mb-4"
                   />
                 </AppLink>
                 <p className="max-w-sm text-center lg:text-left rtl:lg:text-right">

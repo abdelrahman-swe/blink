@@ -84,7 +84,7 @@ export function getDealsOfTheDayProductsQuery(
 
 //////////////////////////////////////////////////////////////////////////////////
 export function getBannerQuery(
-  options: { enabled?: boolean } = {}
+  options: { enabled?: boolean; initialData?: Banner[] } = {}
 ) {
   const pathname = usePathname();
   const locale = pathname.split("/")[1] || "en";
@@ -96,6 +96,7 @@ export function getBannerQuery(
     gcTime: 10 * 60 * 1000,
     retry: false,
     enabled: options.enabled !== false,
+    initialData: options.initialData,
   });
 }
 

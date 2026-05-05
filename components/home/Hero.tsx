@@ -13,8 +13,10 @@ import { Skeleton } from '../ui/skeleton';
 
 import { useParams } from 'next/navigation';
 
-export default function Hero({ sortOrder }: { sortOrder?: number }) {
-  const { data: banners, isLoading ,error} = getBannerQuery();
+import { Banner } from '@/utils/types/home';
+
+export default function Hero({ sortOrder, initialBanners }: { sortOrder?: number; initialBanners?: Banner[] }) {
+  const { data: banners, isLoading ,error} = getBannerQuery({ initialData: initialBanners });
   const params = useParams();
   const lang = params.lang as string;
 
@@ -31,7 +33,11 @@ export default function Hero({ sortOrder }: { sortOrder?: number }) {
     loop: (filteredBanners?.length || 0) > 1,
     navigation: true,
   };
-  if (isLoading) return <Skeleton className="w-full h-[400px]" />;
+  if (isLoading) return (
+    <section>
+      <Skeleton className="w-full aspect-18/8 sm:aspect-21/9 lg:aspect-21/7" />
+    </section>
+  );
   if (!filteredBanners || filteredBanners.length === 0) return null;
  
   return (
@@ -53,9 +59,11 @@ export default function Hero({ sortOrder }: { sortOrder?: number }) {
                   src={banner.images.original}
                   alt={`Banner ${banner.id}`}
                   fill
+                  sizes="100vw"
                   className="w-full h-full object-cover object-center"
                   priority={true}
                   loading="eager"
+                  fetchPriority="high"
                 />
               )}
               </div>
