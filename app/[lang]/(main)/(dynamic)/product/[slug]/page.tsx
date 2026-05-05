@@ -1,208 +1,121 @@
-"use client";
-import React, { useMemo, useState } from "react";
-import AppLink from '@/components/common/AppLink';
-import { notFound, useParams } from "next/navigation";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import ProductsError from "@/components/common/ProductsError";
-import TopHeader from "@/components/layout/TopHeader";
-import ProductCard from "@/components/common/ProductCard";
-import { useProductDetailsQuery } from "@/hooks/queries/useProductQueries";
+import type { Metadata } from "next";
+import { PUBLIC_API } from "@/lib/config";
+import ProductDetailsClient from "./ProductDetailsClient";
 
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { ProductRatingAndReviews } from "./components/common/ProductRatingAndReviews";
-import { useDictionary } from "@/components/providers/DictionaryProvider";
-import { useLoadingStore } from "@/store/useLoadingStore";
-import { ProductGallery } from "./components/details/ProductGallery";
-import { ProductInfo } from "./components/details/ProductInfo";
-import { DetailsSection } from "./components/details/DetailsSection";
-import { SpecificationSection } from "./components/details/SpecificationSection";
+// ---------------------------------------------------------------------------
+// Server-side SEO: fetch product data and return dynamic <head> metadata
+// ---------------------------------------------------------------------------
 
-type TabKey = "details" | "specifications" | "reviews";
+interface ProductPageProps {
+    params: Promise<{ lang: string; slug: string }>;
+}
 
-export default function ProductDetailsPage() {
-    const { product: productDict } = useDictionary();
-    const { startLoading, stopLoading } = useLoadingStore();
-    const t = productDict;
-    const params = useParams();
-    const slug = params.slug as string;
-    const lang = params.lang as string;
-    const [activeTab, setActiveTab] = useState<TabKey>("details");
-
-    const {
-        data: product,
-        isLoading,
-        error,
-    } = useProductDetailsQuery(slug);
-
-    if (!isLoading && !product) {
-        if (error) {
-            if ((error as any).response?.status === 404) {
-                notFound();
+async function getProductSeo(slug: string, lang: string) {
+    try {
+        const res = await fetch(
+            `${PUBLIC_API}/products/slug/${slug}?include_seo=true`,
+            {
+                headers: { "X-Locale": lang },
+                next: { revalidate: 60 }, // ISR: revalidate every 60s
             }
-        } else {
-            notFound();
-        }
+        );
+
+        if (!res.ok) return null;
+
+        const json = await res.json();
+        return json?.data ?? null;
+    } catch {
+        return null;
+    }
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+    const { slug, lang } = await params;
+    const product = await getProductSeo(slug, lang);
+
+    if (!product) {
+        return {
+            title: "Product Not Found | Blink",
+            description: "The requested product could not be found.",
+        };
     }
 
-    const category = product?.category;
-    const similarProducts = product?.similar_products ?? [];
+    const seo = product.seo;
 
-    const pathNames = useMemo(() => {
-        if (!category?.full_path) return [];
-        return category.full_path
-            .split(" > ")
-            .map((p: string) => p.trim())
-            .filter(Boolean);
-    }, [category?.full_path]);
+    // Fallback values from product data when seo block is missing
+    const title = seo?.meta?.title || product.name || "Blink";
+    const description =
+        seo?.meta?.description ||
+        product.description?.slice(0, 160) ||
+        "Shop the best deals on Blink";
+    const ogImage =
+        seo?.og?.image ||
+        product.images?.[0]?.large ||
+        product.images?.[0]?.original ||
+        "";
 
-    const pathSlugs = useMemo(() => {
-        if (!category?.full_path_slugs) return [];
-        return category.full_path_slugs
-            .split(" > ")
-            .map((p: string) => p.trim())
-            .filter(Boolean);
-    }, [category?.full_path_slugs]);
+    const metadata: Metadata = {
+        title,
+        description,
+        robots: seo?.meta?.robots || "index,follow",
+        alternates: {
+            canonical: seo?.meta?.canonical || undefined,
+            languages: seo?.alternates?.reduce(
+                (acc: Record<string, string>, alt: { lang: string; href: string }) => {
+                    acc[alt.lang] = alt.href;
+                    return acc;
+                },
+                {} as Record<string, string>
+            ),
+        },
+        openGraph: {
+            title: seo?.og?.title || title,
+            description: seo?.og?.description || description,
+            url: seo?.og?.url || undefined,
+            siteName: seo?.og?.site_name || "Blink",
+            locale: seo?.og?.locale || (lang === "ar" ? "ar_EG" : "en_US"),
+            type: "website",
+            images: ogImage ? [{ url: ogImage }] : [],
+        },
+    };
+
+    return metadata;
+}
+
+// ---------------------------------------------------------------------------
+// JSON-LD Structured Data (injected as <script> in the server HTML)
+// ---------------------------------------------------------------------------
+
+async function ProductJsonLd({ slug, lang }: { slug: string; lang: string }) {
+    const product = await getProductSeo(slug, lang);
+    const jsonLd = product?.seo?.jsonLd;
+
+    if (!jsonLd || !Array.isArray(jsonLd) || jsonLd.length === 0) return null;
 
     return (
-        <section className="xl:container mx-auto px-5 py-7">
-            {isLoading ? (
-                <div className="mb-5 flex items-center gap-2 animate-pulse">
-                    <div className="h-5 w-20 bg-[#F5F5F5] rounded-xl" />
-                    <div className="h-5 w-28 bg-[#F5F5F5] rounded-xl" />
-                    <div className="h-5 w-32 bg-[#F5F5F5] rounded-xl" />
-                </div>
-            ) : (
-                <Breadcrumb className="mb-5" aria-label="Breadcrumb">
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink asChild>
-                                <AppLink href={`/${lang}/home`} className="hover:text-primary">
-                                    {t?.details?.home}
-                                </AppLink>
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-
-                        {pathNames.map((name: string, index: number) => {
-                            if (index === 0) return null;
-
-                            const isLast = index === pathNames.length - 1;
-                            const slugSegment = pathSlugs[index] ?? slug;
-
-                            return (
-                                <React.Fragment key={`${name}-${index}`}>
-                                    <BreadcrumbSeparator />
-                                    <BreadcrumbItem>
-                                        {isLast ? (
-                                            <BreadcrumbPage>{name}</BreadcrumbPage>
-                                        ) : (
-                                            <BreadcrumbLink asChild>
-                                                <AppLink href={`/${lang}/category/${slugSegment}`}>
-                                                    {name}
-                                                </AppLink>
-                                            </BreadcrumbLink>
-                                        )}
-                                    </BreadcrumbItem>
-                                </React.Fragment>
-                            );
-                        })}
-                    </BreadcrumbList>
-                </Breadcrumb>
-            )}
-
-            {/* Gallery & Info */}
-            <div className="flex flex-col md:grid md:grid-cols-12 md:gap-8 md:my-10">
-                <ProductGallery
-                    images={product?.images}
-                    isLoading={isLoading}
-                    product={product}
+        <>
+            {jsonLd.map((ld: Record<string, unknown>, idx: number) => (
+                <script
+                    key={idx}
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
                 />
+            ))}
+        </>
+    );
+}
 
-                <ProductInfo
-                    product={product}
-                    isLoading={isLoading}
-                    lang={lang}
-                    onReviewClick={() => {
-                        startLoading();
-                        setActiveTab("reviews");
-                        setTimeout(stopLoading, 300);
-                        const tabsEl = document.getElementById("product-tabs");
-                        if (tabsEl) {
-                            const y = tabsEl.getBoundingClientRect().top + window.scrollY - 100; // offset for fixed headers
-                            window.scrollTo({ top: y, behavior: 'smooth' });
-                        }
-                    }}
-                />
-            </div>
+// ---------------------------------------------------------------------------
+// Page Component (Server Component)
+// ---------------------------------------------------------------------------
 
-            {/* Tabs */}
-            <div id="product-tabs" className="w-full mt-8 ">
-                <ul
-                    role="tablist"
-                    className="flex flex-col md:flex-row gap-2 md:gap-5 p-2 rounded-2xl bg-gray-100/80 backdrop-blur"
-                >
-                    {[
-                        { key: "details", label: t?.details?.tabs?.details },
-                        { key: "specifications", label: t?.details?.tabs?.specifications },
-                        { key: "reviews", label: t?.details?.tabs?.reviews },
-                    ].map(tab => (
-                        <li key={tab.key} className="w-full">
-                            <Button
-                                size="icon-lg"
-                                variant="ghost"
-                                type="button"
-                                role="tab"
-                                aria-selected={activeTab === tab.key}
-                                onClick={() => {
-                                    startLoading();
-                                    setActiveTab(tab.key as TabKey);
-                                    setTimeout(stopLoading, 300); 
-                                }}
-                                className={`w-full py-3 text-lg font-medium rounded-xl transition-all
-                                ${activeTab === tab.key
-                                        ? "bg-white text-primary shadow-sm"
-                                        : "text-gray-500 hover:bg-white/50"
-                                    }`}
-                            >
-                                {tab.label}
-                            </Button>
-                        </li>
-                    ))}
-                </ul>
+export default async function ProductDetailsPage({ params }: ProductPageProps) {
+    const { slug, lang } = await params;
 
-                {/* Tab Content */}
-                <div className="mt-8 ">
-                    {activeTab === "details" && (
-                        <DetailsSection product={product} isLoading={isLoading} />
-                    )}
-                    {activeTab === "specifications" && (
-                        <SpecificationSection product={product} />
-                    )}
-                    {activeTab === "reviews" && (
-                        <ProductRatingAndReviews product={product} />
-                    )}
-                </div>
-            </div>
-
-            {/* Similar Products */}
-            <Separator className="my-0" />
-            {
-                error ? (
-                    <ProductsError error={error} />
-                ) : similarProducts.length > 0 ? (
-                    <section className="my-10 min-h-[420px]">
-                        <TopHeader title={t?.details?.youMightLike} />
-                        <ProductCard products={similarProducts} columns={4} />
-                    </section>
-                ) : null
-            }
-        </section >
+    return (
+        <>
+            <ProductJsonLd slug={slug} lang={lang} />
+            <ProductDetailsClient />
+        </>
     );
 }
