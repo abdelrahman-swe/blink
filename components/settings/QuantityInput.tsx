@@ -59,7 +59,7 @@ export function QuantityInput({
   const handleInputBlur = () => {
     updateValue(localValue);
   };
-
+// test
   const isInteractive = !isLoading && !disabled;
 
   return (
