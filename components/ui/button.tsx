@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost:
           "hover:text-accent-foreground dark:hover:bg-accent/50 text-lg",
         link: "text-foreground underline ",
+        animated: "relative overflow-hidden border-2 transition-colors duration-500 z-10 font-medium before:content-[''] before:absolute before:z-[-1] before:bg-primary before:h-[150px] before:w-[200px] before:rounded-full before:top-full before:left-full before:transition-all before:duration-700 hover:text-white hover:before:top-[-30px] hover:before:left-[-30px] active:before:bg-primary/90",
       },
       size: {
         default: "h-10 px-4 py-2 has-[>svg]:px-5",
@@ -27,6 +28,9 @@ const buttonVariants = cva(
         icon: "h-8 w-8 [&_svg:not([class*='size-'])]:!w-auto [&_svg:not([class*='size-'])]:!h-auto mr-[-10px] rtl:me-[-10px]",
         "icon-sm": "h-10 w-10 [&_svg:not([class*='size-'])]:!w-auto [&_svg:not([class*='size-'])]:!h-auto mr-[-10px] rtl:me-[-10px]",
         "icon-lg": "h-14 w-14 [&_svg:not([class*='size-'])]:!w-auto [&_svg:not([class*='size-'])]:!h-auto mr-[-10px] rtl:me-[-10px]",
+        "animated-sm": "w-32 h-10 text-base rounded-lg",
+        "animated-default": "w-40 h-11 text-lg rounded-lg",
+        "animated-lg": "w-48 h-12 text-xl rounded-lg",
       },
     },
     defaultVariants: {

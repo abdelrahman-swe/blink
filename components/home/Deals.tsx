@@ -9,6 +9,8 @@ import {
     CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
+import AnimatedButton from "@/components/ui/AnimatedButton";
+import { Spinner } from "@/components/ui/spinner";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
 import { CountDownTimer } from "../settings/CountDownTimer";
@@ -210,10 +212,9 @@ export default function DealsCard() {
 
                         {/* ADD TO CART */}
                         <CardFooter className="px-2 ">
-                            <Button
+                            <AnimatedButton
                                 className="w-full rounded-3xl"
-                                disabled={!product.in_stock}
-                                loading={pendingProductId === product.id}
+                                disabled={!product.in_stock || pendingProductId === product.id}
                                 onClick={() => {
                                     startLoading();
                                     setPendingProductId(product.id);
@@ -238,8 +239,15 @@ export default function DealsCard() {
                                     );
                                 }}
                             >
-                                {tProd?.card?.addToCart}
-                            </Button>
+                                {pendingProductId === product.id ? (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <Spinner />
+                                        <span>{tProd?.card?.adding}</span>
+                                    </div>
+                                ) : (
+                                    <>{tProd?.card?.addToCart}</>
+                                )}
+                            </AnimatedButton>
                         </CardFooter>
                     </Card>
                 ))}

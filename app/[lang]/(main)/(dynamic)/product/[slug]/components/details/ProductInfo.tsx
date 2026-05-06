@@ -7,6 +7,7 @@ import AppLink from '@/components/common/AppLink';
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import AnimatedButton from "@/components/ui/AnimatedButton";
 import {
   Dialog,
   DialogContent,
@@ -18,13 +19,7 @@ import { QuantityInput } from "@/components/settings/QuantityInput";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
 import { toast } from "sonner";
 import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
-import {
-  FavouriteIcon,
-  Share08Icon,
-  StarIcon,
-  CheckmarkCircle02Icon,
-  ArrowRight01Icon,
-} from "@hugeicons/core-free-icons";
+import { StarIcon, CheckmarkCircle02Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ProductDetails } from "@/utils/types/product";
 import { useToggleUserFavorites } from "@/hooks/queries/useUserQueries";
@@ -222,14 +217,13 @@ export const ProductInfo = ({ product, isLoading, lang, onReviewClick }: Product
 
       {/* Actions */}
       <div className="w-50 flex flex-col sm:flex-row gap-4 mt-6">
-        <Button
-          variant="outline"
-          className="flex-1 rounded-full h-11 "
-          disabled={!inStock || isPending}
+        <AnimatedButton
           onClick={handleAddToCart}
+          disabled={!inStock || isPending}
+          className="flex-1 rounded-full h-11"
         >
           {isPending ? (t?.card?.adding) : (t?.card?.addToCart)}
-        </Button>
+        </AnimatedButton>
 
         {/* <Button disabled className="flex-1 rounded-full h-11">
           {t?.details?.buyItNow}

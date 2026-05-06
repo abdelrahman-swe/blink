@@ -2,6 +2,8 @@
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '../ui/card';
 import { Button } from '../ui/button';
+import AnimatedButton from '@/components/ui/AnimatedButton';
+import { Spinner } from '@/components/ui/spinner';
 import { CheckmarkCircle02Icon, FavouriteIcon, StarIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';
@@ -11,11 +13,10 @@ import { useAppRouter } from '@/hooks/useAppRouter';
 import { useAddToCartQuery, useCartPrefetch } from '@/hooks/queries/useCartQueries';
 import { toast } from 'sonner';
 import { getApiErrorMessage } from '@/utils/getApiErrorMessage';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import { useLoadingStore } from '@/store/useLoadingStore';
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import type { Product } from "@/utils/types/categories";
-import { Heart } from 'lucide-react';
 import { useToggleUserFavorites } from '@/hooks/queries/useUserQueries';
 import { useUserStore } from '@/store/useUserStore';
 import { LoginRequiredDialog } from './LoginRequiredDialog';
@@ -33,7 +34,7 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
     const { isAuthenticated } = useUserStore();
     const [showLoginDialog, setShowLoginDialog] = useState(false);
     const [showAddToCartDialog, setShowAddToCartDialog] = useState(false);
-    const [selectedProduct, setSelectedProduct] = useState<any>(null);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [pendingProductId, setPendingProductId] = useState<number | null>(null);
     const { mutate: toggleFavorite } = useToggleUserFavorites();
     const prefetchProduct = useProductPrefetch();
@@ -70,11 +71,14 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                             const timer = setTimeout(() => {
                                 prefetchProduct(product.slug);
                             }, 50);
-                            (window as any)[`prefetch_${product.id}`] = timer;
+                            const _key = `prefetch_${product.id}`;
+                            (window as unknown as Record<string, ReturnType<typeof setTimeout> | undefined>)[_key] = timer;
                         }}
                         onMouseLeave={() => {
-                            if ((window as any)[`prefetch_${product.id}`]) {
-                                clearTimeout((window as any)[`prefetch_${product.id}`]);
+                            const _key = `prefetch_${product.id}`;
+                            const t = (window as unknown as Record<string, number | undefined>)[_key];
+                            if (t) {
+                                clearTimeout(t);
                             }
                         }}
                     >
@@ -170,10 +174,7 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                             </CardContent>
 
                             <CardFooter className="mt-auto px-1">
-                                <Button
-                                    className="flex-1 rounded-3xl"
-                                    disabled={!product || !product.in_stock}
-                                    loading={pendingProductId === product.id}
+                                <AnimatedButton
                                     onClick={() => {
                                         if (!product) return;
 
@@ -199,9 +200,18 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                                             }
                                         );
                                     }}
+                                    disabled={!product || !product.in_stock || pendingProductId === product.id}
+                                    className="flex-1 rounded-3xl"
                                 >
-                                    {t?.card?.addToCart}
-                                </Button>
+                                    {pendingProductId === product.id ? (
+                                        <div className="flex items-center justify-center gap-2">
+                                            <Spinner />
+                                            <span>{t?.card?.adding}</span>
+                                        </div>
+                                    ) : (
+                                        <>{t?.card?.addToCart}</>
+                                    )}
+                                </AnimatedButton>
                             </CardFooter>
                         </div>
                     </Card>

@@ -7,6 +7,8 @@ import ProductsError from '@/components/common/ProductsError';
 import CategoryPagination from '@/components/common/CategoryPagination';
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import AnimatedButton from '@/components/ui/AnimatedButton';
+import { Spinner } from '@/components/ui/spinner';
 import { CheckmarkCircle02Icon, FavouriteIcon, StarIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import Image from 'next/image';
@@ -211,7 +213,7 @@ const DealsOfDealsPage = () => {
 
                             {/* ADD TO CART */}
                             <CardFooter className="px-2 mt-2">
-                                <Button
+                                <AnimatedButton
                                     className="w-full rounded-3xl"
                                     disabled={pendingProductId === product.id || !product.in_stock}
                                     onClick={() => {
@@ -235,8 +237,15 @@ const DealsOfDealsPage = () => {
                                         );
                                     }}
                                 >
-                                    {pendingProductId === product.id ? tProd?.card?.adding : tProd?.card?.addToCart}
-                                </Button>
+                                    {pendingProductId === product.id ? (
+                                        <div className="flex items-center justify-center gap-2">
+                                            <Spinner />
+                                            <span>{tProd?.card?.adding}</span>
+                                        </div>
+                                    ) : (
+                                        <>{tProd?.card?.addToCart}</>
+                                    )}
+                                </AnimatedButton>
                             </CardFooter>
                         </Card>
                     ))}

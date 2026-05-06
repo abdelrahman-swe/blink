@@ -11,9 +11,10 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/componen
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
+import AnimatedButton from "@/components/ui/AnimatedButton";
+import { Spinner } from "@/components/ui/spinner";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CheckmarkCircle02Icon, FavouriteIcon, StarIcon } from "@hugeicons/core-free-icons";
-import { Heart } from "lucide-react";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
 import { useProductPrefetch } from "@/hooks/queries/useProductQueries";
 import ProductsError from "../common/ProductsError";
@@ -45,8 +46,6 @@ export default function ProductCardCarousel({
   const router = useAppRouter();
   const lang = params.lang as string;
 
-  const id = Number(params.id);
-
   const { mutate: addToCart } = useAddToCartQuery();
   const { mutate: toggleFavorite } = useToggleUserFavorites();
   const prefetchProduct = useProductPrefetch();
@@ -68,7 +67,7 @@ export default function ProductCardCarousel({
 
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [pendingProductId, setPendingProductId] = useState<number | null>(null);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [showAddToCartDialog, setShowAddToCartDialog] = useState(false);
 
   const autoplay = useRef(
@@ -92,7 +91,7 @@ export default function ProductCardCarousel({
             try {
               autoplay.current?.reset?.();
               autoplay.current?.play?.();
-            } catch (e) {
+            } catch {
               // ignore if plugin internals crash when empty
             }
           }
@@ -111,11 +110,14 @@ export default function ProductCardCarousel({
                       const timer = setTimeout(() => {
                         prefetchProduct(product.slug);
                       }, 50);
-                      (window as any)[`prefetch_carousel_${product.id}`] = timer;
+                      const _key = `prefetch_carousel_${product.id}`;
+                      (window as unknown as Record<string, ReturnType<typeof setTimeout> | undefined>)[_key] = timer;
                     }}
                     onMouseLeave={() => {
-                      if ((window as any)[`prefetch_carousel_${product.id}`]) {
-                        clearTimeout((window as any)[`prefetch_carousel_${product.id}`]);
+                      const _key = `prefetch_carousel_${product.id}`;
+                      const t = (window as unknown as Record<string, ReturnType<typeof setTimeout> | undefined>)[_key];
+                      if (t) {
+                        clearTimeout(t);
                       }
                     }}
                   >
@@ -214,10 +216,9 @@ export default function ProductCardCarousel({
 
                       {/* Add to Cart */}
                       <CardFooter className="mt-auto px-3">
-                        <Button
+                        <AnimatedButton
                           className="flex-1 rounded-3xl"
-                          disabled={!product.in_stock}
-                          loading={pendingProductId === product.id}
+                          disabled={!product.in_stock || pendingProductId === product.id}
                           onClick={() => {
                             startLoading();
                             setPendingProductId(product.id);
@@ -239,8 +240,15 @@ export default function ProductCardCarousel({
                             );
                           }}
                         >
-                          {tProd?.card?.addToCart}
-                        </Button>
+                          {pendingProductId === product.id ? (
+                            <div className="flex items-center justify-center gap-2">
+                              <Spinner />
+                              <span>{tProd?.card?.adding}</span>
+                            </div>
+                          ) : (
+                            <>{tProd?.card?.addToCart}</>
+                          )}
+                        </AnimatedButton>
                       </CardFooter>
                     </div>
                   </Card>
