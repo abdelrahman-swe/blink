@@ -16,7 +16,7 @@ import {
     useGetAddresses,
     useGetGovernoratesQuery,
 } from "@/hooks/queries/useUserQueries";
-import { CheckmarkCircle02Icon, Delete02Icon, Home12Icon } from "@hugeicons/core-free-icons";
+import { CheckmarkCircle02Icon, Delete02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from '@hugeicons/react';
 
 import { ProfileAddressSkeleton } from "@/components/skeleton/ProfileInfoSkeleton";
@@ -78,6 +78,14 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
         { id: "Office", name: t?.labels?.office || "Office" },
         { id: "Other", name: t?.labels?.other || "Other" },
     ];
+
+    const getAddressLabelKey = (label?: string) => {
+        if (!label) return "Other";
+
+        const trimmedLabel = label.trim();
+
+        return trimmedLabel.charAt(0).toUpperCase() + trimmedLabel.slice(1).toLowerCase();
+    };
 
     /* ================= Handlers ================= */
     const handleEdit = (address: any) => {
@@ -162,7 +170,11 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
             {/* ================= Address List ================= */}
             {addresses?.data?.addresses && addresses.data.addresses.length > 0 && (
                 <div className="space-y-4">
-                    {addresses.data.addresses.map((address: any) => (
+                    {addresses.data.addresses.map((address: any) => {
+                        const addressLabelKey = getAddressLabelKey(address.label);
+                        const isHomeAddress = addressLabelKey === "Home";
+
+                        return (
                         <div
                             key={address.id}
                             className="rounded-xl border border-neutral-200 p-4 space-y-4 "
@@ -170,15 +182,24 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                             <div className="flex items-start justify-between gap-4 me-2 m-0!">
 
                                 <div className="flex items-start gap-2">
-                                    <HugeiconsIcon
-                                        icon={ADDRESS_ICONS[address.label || "Other"] ?? Home12Icon}
-                                        size={22}
-                                        color="gray"
-                                        strokeWidth={1.5}
-                                    />
+                                    {isHomeAddress ? (
+                                        <Image
+                                            src="/home.svg"
+                                            alt="Home"
+                                            width={22}
+                                            height={22}
+                                        />
+                                    ) : (
+                                        <HugeiconsIcon
+                                            icon={ADDRESS_ICONS[addressLabelKey] ?? ADDRESS_ICONS.Other}
+                                            size={22}
+                                            color="gray"
+                                            strokeWidth={1.5}
+                                        />
+                                    )}
 
                                     <div className="space-y-1">
-                                        <p className="text-sm font-medium">({t?.labels[address.label?.toLowerCase()] || address.label || "Other"})</p>
+                                        {/* <p className="text-sm font-medium">({t?.labels[address.label?.toLowerCase()] || address.label || "Other"})</p> */}
                                         <p className="text-md text-primary break-all xs:break-words">
                                             {address.address}, {address.city || address.city_id}, {address.governorate || address.governorate_id}
                                         </p>
@@ -186,11 +207,11 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                                     </div>
                                 </div>
 
-
+                                {/* Align this with the garbage icon */}
                                 <Button
                                     size="icon-sm"
                                     variant="link"
-                                    className="text-neutral-500"
+                                    className="text-black"
                                     onClick={() => handleEdit(address)}
                                 >
                                     {t?.edit}
@@ -221,7 +242,8 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                                         {t?.setAsDefault}
                                     </Button>
                                 )}
-
+                                
+                                {/* HERE IS TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOO */}
                                 <div className="flex justify-between items-center gap-4 me-2">
                                     <Button
                                         variant="ghost"
@@ -333,7 +355,8 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                             )}
 
                         </div>
-                    ))}
+                        );
+                    })}
                 </div>
             )}
 

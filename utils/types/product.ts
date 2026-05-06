@@ -233,7 +233,7 @@ export interface ProductDetails {
   product_id?: number;
   deal_id?: number | null;
   is_on_deal?: boolean;
-  max_quantity_per_order?: number;
+  max_quantity_per_order?: number | string | null;
   name: string;
   slug: string;
   sku: string | null;

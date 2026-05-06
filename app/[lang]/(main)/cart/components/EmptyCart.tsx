@@ -8,7 +8,7 @@ export function EmptyCart() {
     return (
         <div className="flex flex-col gap-5 justify-center items-center py-10">
             <Image
-                src="/no-cart.png"
+                src="/cart-empty.svg"
                 alt={cart?.cart?.emptyCart?.altText}
                 width={200}
                 height={200}

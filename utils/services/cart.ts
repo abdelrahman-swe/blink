@@ -12,8 +12,13 @@ export interface AddToCartBody {
   quantity: number;
 }
 
+export interface RemoveFromCartItem {
+  product_id: number | string;
+  scope: string;
+}
+
 export interface RemoveFromCartBody {
-  product_ids: number[];
+  items: RemoveFromCartItem[];
 }
 
 export const getCartProduct = async (): Promise<ProductDetails[]> => {

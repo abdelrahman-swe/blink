@@ -8,7 +8,7 @@
       "items": [
         {
           "label": "Deals Of The Day",
-          "src": "/deals-of-deals"
+          "src": "/deals-of-day"
         },
         {
           "label": "Best Selling Products",
@@ -64,7 +64,7 @@
       ]
     },
     "copyright": {
-      "description": "Copyright © 2025 BLINK. All Rights Reserved."
+      "description": "Copyright © 2026 BLINK. All Rights Reserved."
     },
     "ConnectWithUs": {
       "description": "Connect With Us"

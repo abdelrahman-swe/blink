@@ -24,6 +24,9 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [editDialog, setEditDialog] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [optimisticIsHelpful, setOptimisticIsHelpful] = useState(review.is_helpful);
+    const [optimisticHelpfulCount, setOptimisticHelpfulCount] = useState(review.helpful_count);
+    const [isDeleting, setIsDeleting] = useState(false);
     const params = useParams();
     const slug = params.slug as string;
     const lang = params.lang as string;
@@ -31,36 +34,44 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
     const t = productDict;
     const startLoading = useLoadingStore((state) => state.startLoading);
     const stopLoading = useLoadingStore((state) => state.stopLoading);
-    const { mutate: deleteReview, isPending: isDeleting } = useDeleteReviewMutation();
-    const { mutate: toggleHelpful, isPending: isToggling } = toggleHelpfulReviewMutation();
+    const { mutate: deleteReview } = useDeleteReviewMutation();
+    const { mutate: toggleHelpful } = toggleHelpfulReviewMutation();
 
     const handleDelete = () => {
-        startLoading();
+        setIsDeleting(true);
         deleteReview(
             { id: review.id.toString(), product_slug: slug },
             {
                 onSuccess: () => {
-                    stopLoading();
                     toast.success(t?.reviews?.deletedSuccess);
                     setDeleteDialog(false);
                 },
                 onError: (err) => {
-                    stopLoading();
+                    setIsDeleting(false);
                     toast.error(err.message || t?.reviews?.deleteFailed);
                 },
             }
         );
     };
 
-
-
     const handleHelpful = () => {
+        // Optimistic update - update UI immediately
+        const newIsHelpful = !optimisticIsHelpful;
+        const newCount = newIsHelpful ? optimisticHelpfulCount + 1 : optimisticHelpfulCount - 1;
+        
+        setOptimisticIsHelpful(newIsHelpful);
+        setOptimisticHelpfulCount(newCount);
+        
         const guest_id = getOrCreateGuestId();
         toggleHelpful(
             { id: review.id.toString(), product_slug: slug, guest_id },
             {
-                onError: (err) =>
-                    toast.error(err.message || t?.reviews?.voteFailed),
+                onError: (err) => {
+                    // Revert optimistic changes on error
+                    setOptimisticIsHelpful(review.is_helpful);
+                    setOptimisticHelpfulCount(review.helpful_count);
+                    toast.error(err.message || t?.reviews?.voteFailed);
+                },
             }
         );
     };
@@ -136,10 +147,10 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
                                             size={24}
                                             color="currentColor"
                                             strokeWidth={1.5}
-                                            fill={review.is_helpful ? "#000000" : "transparent"}
+                                            fill={optimisticIsHelpful ? "#000000" : "transparent"}
                                         />
                                         <span className="font-normal text-sm md:text-base">
-                                            {t?.reviews?.helpful?.replace("{count}", review.helpful_count.toString()) || `Helpful (${review.helpful_count})`}
+                                            {t?.reviews?.helpful?.replace("{count}", optimisticHelpfulCount.toString()) || `Helpful (${optimisticHelpfulCount})`}
                                         </span>
                                     </Button>
                                 </span>
@@ -154,7 +165,6 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
                             size="lg"
                             type="button"
                             onClick={handleHelpful}
-                            disabled={isToggling}
                             className="rtl:flex rtl:flex-row-reverse text-[#666666] hover:text-neutral-900 hover:bg-transparent p-0! gap-2 transition-colors [&_svg]:size-auto"
                         >
                             <HugeiconsIcon
@@ -162,10 +172,10 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
                                 size={24}
                                 color="currentColor"
                                 strokeWidth={1.5}
-                                fill={review.is_helpful ? "#000000" : "transparent"}
+                                fill={optimisticIsHelpful ? "#000000" : "transparent"}
                             />
                             <span className="font-normal text-sm md:text-base">
-                                {t?.reviews?.helpful?.replace("{count}", review.helpful_count.toString()) || `Helpful (${review.helpful_count})`}
+                                {t?.reviews?.helpful?.replace("{count}", optimisticHelpfulCount.toString()) || `Helpful (${optimisticHelpfulCount})`}
                             </span>
                         </Button>
                     )}

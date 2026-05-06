@@ -114,7 +114,7 @@ export default function Cart() {
 
         setRemovingProductId(productId);
         removeFromCart(
-            { product_ids: [productId] },
+            { items: [{ product_id: productId, scope: "all" }] },
             {
                 onSuccess: () => {
                     setTimeout(() => {
@@ -277,7 +277,7 @@ export default function Cart() {
                     if (allProductIds.length > 0) {
                         setIsRemoving(true);
                         removeFromCart(
-                            { product_ids: allProductIds },
+                            { items: allProductIds.map(id => ({ product_id: id, scope: "all" })) },
                             {
                                 onSuccess: () => {
                                     toast.success("All products removed from cart!");

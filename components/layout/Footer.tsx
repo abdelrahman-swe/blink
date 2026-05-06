@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import AppLink from '@/components/common/AppLink';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { footerImages, socialIcons } from '@/helper';
+import { footerImages, socialIcons, footerSocialIcons } from '@/helper';
 import { Button } from '../ui/button';
 import { useUserStore } from '@/store/useUserStore';
 import { useDictionary } from '../providers/DictionaryProvider';
@@ -23,6 +23,8 @@ export default function Footer({ locale: lang }: FooterProps) {
       e.preventDefault();
     }
   };
+  
+  console.log(footerSocialIcons)
 
   return (
     <footer className="bg-secondary text-foreground pt-8" role="contentinfo">
@@ -82,7 +84,7 @@ export default function Footer({ locale: lang }: FooterProps) {
               <div className="w-fit flex flex-col items-center">
                 <h3 className="font-semibold text-lg mb-2 text-center">{ConnectWithUs.description}</h3>
                 <div className="mt-4 flex flex-wrap justify-center gap-5 rtl:gap-8">
-                {socialIcons.map(({ icon, alt }) => (
+                {footerSocialIcons.map(({ icon, alt }) => (
                   <Button
                     size="icon-sm"
                     variant="ghost"
@@ -91,7 +93,7 @@ export default function Footer({ locale: lang }: FooterProps) {
                     className="h-12 w-12 bg-white rounded-full flex items-center justify-center shadow-xs hover:bg-gray-100"
                     aria-label={`Follow us on ${alt}`}
                   >
-                    <HugeiconsIcon icon={icon} size={26} color="#000000" strokeWidth={1.5} />
+                    <Image src= {icon} alt={alt} width={26} height={26} />
                   </Button>
                 ))}
                 </div>

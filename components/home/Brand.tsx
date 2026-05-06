@@ -72,7 +72,7 @@ export default function Deals() {
                                                         alt={`${item.name}`}
                                                         width={96}
                                                         height={96}
-                                                        className="object-cover p-1 h-full rounded-s-xl border-2 border-gray-200"
+                                                        className="object-cover h-full rounded-s-xl border-2 border-gray-200"
                                                         loading="lazy"
                                                     />
                                                 </div>

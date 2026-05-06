@@ -26,7 +26,7 @@ export interface MergedCartItem {
   slug: string;
   image: ProductDetails["image"];
   totalQuantity: number;
-  max_quantity_per_order: number;
+  max_quantity_per_order: number | null;
   /** The combined stock across all entries (use the max since backend manages distribution) */
   maxStock: number;
   /** Individual price entries — usually 1, but 2 if product is split between deal and regular */
@@ -42,6 +42,16 @@ export interface MergedCartItem {
 export function mergeCartItems(items: ProductDetails[]): MergedCartItem[] {
   const map = new Map<number, MergedCartItem>();
 
+  const normalizeMaxQuantityPerOrder = (value: ProductDetails["max_quantity_per_order"]) => {
+    if (value === null || value === undefined || value === "") {
+      return null;
+    }
+
+    const numericValue = typeof value === "string" ? Number(value) : value;
+
+    return Number.isFinite(numericValue) && numericValue > 0 ? numericValue : null;
+  };
+
   for (const item of items) {
     const productId = (item.product_id || item.id) as number;
 
@@ -52,7 +62,7 @@ export function mergeCartItems(items: ProductDetails[]): MergedCartItem[] {
         slug: item.slug,
         image: item.image,
         totalQuantity: 0,
-        max_quantity_per_order: item.max_quantity_per_order ?? 99,
+        max_quantity_per_order: normalizeMaxQuantityPerOrder(item.max_quantity_per_order),
         maxStock: 0,
         entries: [],
         totalPrice: 0,

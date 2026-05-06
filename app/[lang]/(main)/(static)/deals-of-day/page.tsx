@@ -57,7 +57,7 @@ const DealsOfDealsPage = () => {
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
-        document.getElementById('deals-of-deals')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('deals-of-day')?.scrollIntoView({ behavior: 'smooth' });
     };
 
     const handleToggleFavorite = (e: React.MouseEvent, product: DealProduct) => {
@@ -71,7 +71,7 @@ const DealsOfDealsPage = () => {
     };
 
     return (
-        <section id="deals-of-deals" className="xl:container mx-auto px-5 py-6 scroll-mt-28">
+        <section id="deals-of-day" className="xl:container mx-auto px-5 py-6 scroll-mt-28">
 
             <Breadcrumb>
                 <BreadcrumbList>

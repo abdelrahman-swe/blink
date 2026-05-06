@@ -18,11 +18,24 @@ export const socialIcons = [
   { icon: PinterestIcon, alt: "Pinterest" },
 ];
 
+export const footerSocialIcons = [
+  { icon: "/social/facebook.svg", alt: "Facebook" },
+  { icon: "/social/x.svg", alt: "Twitter" },
+  { icon: "/social/instagram.svg", alt: "Instagram" },
+  { icon: "/social/youtube.svg", alt: "Youtube" },
+  { icon: "/social/tiktok.svg", alt: "Tiktok" },
+  { icon: "/social/pinterest.svg", alt: "Pinterest" },
+];
+
 export const footerImages = [
   { src: "/google-app.svg", alt: "Google Play" },
   { src: "/app-store.svg", alt: "App Store" },
   { src: "/app-gallery.svg", alt: "App Gallery" },
 ];
+
+export const profileIcons =[
+  { src: "./home.svg", alt:"Home" }
+]
 
 
 export const ADDRESS_ICONS: Record<string, any> = {

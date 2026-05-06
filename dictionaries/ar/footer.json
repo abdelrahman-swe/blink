@@ -8,7 +8,7 @@
       "items": [
         {
           "label": "عروض اليوم",
-          "src": "/deals-of-deals"
+          "src": "/deals-of-day"
         },
         {
           "label": "المنتجات الأكثر مبيعاً ",
@@ -64,7 +64,7 @@
       ]
     },
     "copyright": {
-      "description": "حقوق النشر © 2025 BLINK. جميع الحقوق محفوظة."
+      "description": "حقوق النشر © 2026 BLINK. جميع الحقوق محفوظة."
     },
     "ConnectWithUs": {
       "description": "اتصل بنا"
