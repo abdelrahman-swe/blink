@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false  # This is critical!
+          persist-credentials: false
           
       - name: Sync to deploy repository
         run: |
           git remote add deploy https://${{ secrets.DEPLOY_REPO_PAT }}@github.com/abdelrahman-swe/blink.git
-          git push deploy main --force-with-lease
+          git push deploy main --force
