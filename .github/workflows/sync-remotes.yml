@@ -9,27 +9,15 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Source Code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Push to Deploy Remote
+      - name: Push to deploy repo
         env:
-          TARGET_REPO: https://${{ secrets.DEPLOY_REPO_PAT }}@github.com/abdelrahman-swe/blink.git
+          # IMPORTANT: This MUST match the secret name you created
+          TOKEN: ${{ secrets.DEPLOY_REPO_PAT }}
         run: |
-          git remote add deploy $TARGET_REPO
-          
-          # Try to push without force first
-          if git push deploy main; then
-            echo "✅ Successfully synced to deploy remote"
-          else
-            echo "⚠️ Normal push failed, attempting with --force-with-lease"
-            if git push deploy main --force-with-lease; then
-              echo "✅ Synced with force-with-lease"
-            else
-              echo "❌ Failed to sync to deploy remote"
-              # Don't fail the workflow - original push already succeeded
-              exit 0
-            fi
-          fi
+          git remote add deploy https://${TOKEN}@github.com/abdelrahman-swe/blink.git
+          git push deploy main --force-with-lease

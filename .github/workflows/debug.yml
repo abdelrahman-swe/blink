@@ -1,0 +1,20 @@
+name: Debug Secrets
+
+on: 
+  push:
+    branches: [ main ]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if secret exists
+        run: |
+          if [ -n "${{ secrets.DEPLOY_REPO_PAT }}" ]; then
+            echo "✅ DEPLOY_REPO_PAT secret exists!"
+            echo "Token length: ${#TARGET_TOKEN}"
+          else
+            echo "❌ DEPLOY_REPO_PAT secret is MISSING!"
+          fi
+        env:
+          TARGET_TOKEN: ${{ secrets.DEPLOY_REPO_PAT }}
