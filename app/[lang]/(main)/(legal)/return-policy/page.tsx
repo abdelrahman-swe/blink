@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PUBLIC_API } from "@/lib/config";
-import ContactUsClient from "./ContactUsClient";
+import ReturnPolicyClient from "./ReturnPolicyClient";
 import { generateSeoMetadata } from "@/utils/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -10,7 +10,7 @@ interface LegalPageProps {
 
 async function getLegalSeo(lang: string) {
     try {
-        const res = await fetch(`${PUBLIC_API}/legal/contact_us?include_seo=true`, {
+        const res = await fetch(`${PUBLIC_API}/legal/return_policy?include_seo=true`, {
             headers: { "X-Locale": lang },
             next: { revalidate: 60 },
         });
@@ -25,16 +25,16 @@ async function getLegalSeo(lang: string) {
 export async function generateMetadata({ params }: LegalPageProps): Promise<Metadata> {
     const { lang } = await params;
     const seo = await getLegalSeo(lang);
-    return generateSeoMetadata(seo, lang, { title: "Contact Us | Blink", description: "Contact Blink" });
+    return generateSeoMetadata(seo, lang, { title: "Return Policy | Blink", description: "Blink Return Policy" });
 }
 
-export default async function ContactUsPage({ params }: LegalPageProps) {
+export default async function ReturnPolicyPage({ params }: LegalPageProps) {
     const { lang } = await params;
     const seo = await getLegalSeo(lang);
     return (
         <>
             <JsonLd data={seo?.jsonLd} />
-            <ContactUsClient />
+            <ReturnPolicyClient />
         </>
     );
 }

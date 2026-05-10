@@ -1,54 +1,40 @@
-"use client"
-import { Skeleton } from "@/components/ui/skeleton";
-import { getTermsAndConditionsQuery } from "@/hooks/queries/useLegalQueries";
+import type { Metadata } from "next";
+import { PUBLIC_API } from "@/lib/config";
+import TermsClient from "./TermsClient";
+import { generateSeoMetadata } from "@/utils/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
+interface LegalPageProps {
+    params: Promise<{ lang: string }>;
+}
 
-export default function TermsAndConditions() {
-    const { data, isLoading, error } = getTermsAndConditionsQuery();
-
-    if (isLoading) {
-        return (
-            <section>
-                <div className="bg-secondary p-10 text-center">
-                    <Skeleton className="h-8 w-64 mx-auto" />
-                </div>
-                <div className="container mx-auto py-10 space-y-4">
-                    <Skeleton className="h-6 w-full" />
-                    <Skeleton className="h-6 w-full" />
-                    <Skeleton className="h-6 w-3/4" />
-                    <Skeleton className="h-6 w-full" />
-                    <Skeleton className="h-6 w-5/6" />
-                </div>
-            </section>
-        );
+async function getLegalSeo(lang: string) {
+    try {
+        const res = await fetch(`${PUBLIC_API}/legal/terms_conditions?include_seo=true`, {
+            headers: { "X-Locale": lang },
+            next: { revalidate: 60 },
+        });
+        if (!res.ok) return null;
+        const json = await res.json();
+        return json?.seo || json?.data?.seo || null;
+    } catch {
+        return null;
     }
+}
 
-    if (error) {
-        return (
-            <section>
-                <div className="bg-secondary p-10 text-center">
-                    <h1 className="text-2xl font-bold mb-2 text-red-600">Error</h1>
-                </div>
-                <div className="container mx-auto py-10">
-                    <div className="flex items-center justify-center h-32">
-                        <p className="text-red-500 text-lg">Failed to load terms and conditions. Please try again later.</p>
-                    </div>
-                </div>
-            </section>
-        );
-    }
+export async function generateMetadata({ params }: LegalPageProps): Promise<Metadata> {
+    const { lang } = await params;
+    const seo = await getLegalSeo(lang);
+    return generateSeoMetadata(seo, lang, { title: "Terms and Conditions | Blink", description: "Blink Terms and Conditions" });
+}
 
+export default async function TermsPage({ params }: LegalPageProps) {
+    const { lang } = await params;
+    const seo = await getLegalSeo(lang);
     return (
-        <section>
-            <div className="bg-secondary p-10 text-center">
-                <h1 className="text-2xl font-bold mb-2">{data?.data.title}</h1>
-            </div>
-               <div className="container mx-auto py-10 px-6">
-                <div
-                    className="text-lg prose prose-lg max-w-none leading-10"
-                    dangerouslySetInnerHTML={{ __html: data?.data.content || '' }}
-                />
-            </div>
-        </section>
+        <>
+            <JsonLd data={seo?.jsonLd} />
+            <TermsClient />
+        </>
     );
 }

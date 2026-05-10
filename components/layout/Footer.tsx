@@ -129,7 +129,7 @@ export default function Footer({ locale: lang }: FooterProps) {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
             <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/privacy-policy`}>{privacyPolicy.description}</AppLink>
             <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/terms-conditions`}>{termsConditions.description}</AppLink>
-            <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/return-refund`}>{returnRefund.description}</AppLink>
+            <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/return-policy`}>{returnRefund.description}</AppLink>
           </div>
         </div>
       </div>
