@@ -9,15 +9,13 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Push to deploy repo
-        env:
-          # IMPORTANT: This MUST match the secret name you created
-          TOKEN: ${{ secrets.DEPLOY_REPO_PAT }}
+          persist-credentials: false  # This is critical!
+          
+      - name: Sync to deploy repository
         run: |
-          git remote add deploy https://${TOKEN}@github.com/abdelrahman-swe/blink.git
+          git remote add deploy https://${{ secrets.DEPLOY_REPO_PAT }}@github.com/abdelrahman-swe/blink.git
           git push deploy main --force-with-lease

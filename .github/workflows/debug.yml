@@ -1,20 +1,33 @@
-name: Debug Secrets
+name: Sync to Deploy Remote
 
-on: 
+on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  debug:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if secret exists
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Debug - Check token
         run: |
-          if [ -n "${{ secrets.DEPLOY_REPO_PAT }}" ]; then
-            echo "✅ DEPLOY_REPO_PAT secret exists!"
-            echo "Token length: ${#TARGET_TOKEN}"
-          else
-            echo "❌ DEPLOY_REPO_PAT secret is MISSING!"
-          fi
+          echo "Token exists: ${{ secrets.DEPLOY_REPO_PAT != '' }}"
+          echo "Token length: ${{ secrets.DEPLOY_REPO_PAT }} has length ${#TOKEN}"
         env:
-          TARGET_TOKEN: ${{ secrets.DEPLOY_REPO_PAT }}
+          TOKEN: ${{ secrets.DEPLOY_REPO_PAT }}
+          
+      - name: Push to deploy repo
+        run: |
+          # Build URL with token
+          TOKEN="${{ secrets.DEPLOY_REPO_PAT }}"
+          REPO_URL="https://${TOKEN}@github.com/abdelrahman-swe/blink.git"
+          
+          echo "Adding remote (URL hidden)..."
+          git remote add deploy "${REPO_URL}"
+          
+          echo "Pushing to deploy..."
+          git push deploy main --force-with-lease
