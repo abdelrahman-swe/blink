@@ -16,11 +16,17 @@ function getLocale(request: NextRequest): string {
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-
   try {
-    return match(languages, locales as unknown as string[], defaultLocale);
-  } catch {
+    const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+    // Filter out '*' because @formatjs/intl-localematcher crashes on it
+    const filteredLanguages = languages.filter(lang => lang !== '*');
+    
+    if (filteredLanguages.length === 0) {
+      return defaultLocale;
+    }
+
+    return match(filteredLanguages, locales as unknown as string[], defaultLocale);
+  } catch (e) {
     return defaultLocale;
   }
 }
