@@ -16,7 +16,7 @@ async function getCategorySeo(slug: string, lang: string) {
         });
         if (!res.ok) return null;
         const json = await res.json();
-        return json?.data?.category || json?.data || null;
+        return json;
     } catch {
         return null;
     }
@@ -24,21 +24,25 @@ async function getCategorySeo(slug: string, lang: string) {
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
     const { slug, lang } = await params;
-    const data = await getCategorySeo(slug, lang);
+    const json = await getCategorySeo(slug, lang);
+    
+    const category = json?.data?.category || json?.data;
+    const seo = json?.data?.seo || json?.seo || null;
 
-    const title = data?.name || "Category | Blink";
-    const description = data?.description || "Shop our categories on Blink";
+    const title = category?.name || "Category | Blink";
+    const description = category?.description || "Shop our categories on Blink bruh you've got to";
 
-    return generateSeoMetadata(data?.seo, lang, { title, description });
+    return generateSeoMetadata(seo, lang, { title, description });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
     const { slug, lang } = await params;
-    const data = await getCategorySeo(slug, lang);
+    const json = await getCategorySeo(slug, lang);
+    const seo = json?.data?.seo || json?.seo || null;
 
     return (
         <>
-            <JsonLd data={data?.seo?.jsonLd} />
+            <JsonLd data={seo?.jsonLd} />
             <CategoryClient />
         </>
     );

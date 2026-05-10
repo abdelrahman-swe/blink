@@ -31,7 +31,10 @@ export function generateSeoMetadata(
     return {
         title,
         description,
-        robots: seoData?.meta?.robots || "index,follow",
+        robots: {
+            index: (seoData?.meta?.robots || "index,follow").includes("index") && !(seoData?.meta?.robots || "").includes("noindex"),
+            follow: (seoData?.meta?.robots || "index,follow").includes("follow") && !(seoData?.meta?.robots || "").includes("nofollow"),
+        },
         alternates: {
             canonical: seoData?.meta?.canonical || undefined,
             languages: seoData?.alternates?.reduce(

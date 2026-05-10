@@ -56,7 +56,7 @@ export default function AnimatedButton({
           onClick={onClick}
           className={`relative z-1 inline-block border-none bg-transparent px-11.5 py-5 text-base font-bold uppercase no-underline outline-none text-[#312460] rounded-[30px] ${className}`}
         >
-          <span className="pointer-events-none absolute inset-0 z-1 border-2 border-black rounded-[30px]" />
+          <span className="pointer-events-none absolute inset-0 z-1 border border-black rounded-[30px]" />
 
           <motion.span
             className="pointer-events-none absolute -z-2 rounded-[30px]"
@@ -67,7 +67,7 @@ export default function AnimatedButton({
                 top: 0,
                 width: "100%",
                 height: "100%",
-                transition: { duration: 0.3 },
+                transition: { duration: 0.1 },
               },
             }}
           />
@@ -76,7 +76,7 @@ export default function AnimatedButton({
             className="relative z-10"
             variants={{
               idle: { color: BLOB_COLOR },
-              hover: { color: "#ffffff", transition: { duration: 0.5 } },
+              hover: { color: "#ffffff", transition: { duration: 0.2 } },
             }}
           >
             {children}
@@ -97,12 +97,12 @@ export default function AnimatedButton({
                     idle: {
                       y: "150%",
                       scale: 1.4,
-                      transition: { delay: i * 0.08, duration: 0.45 },
+                      transition: { delay: i * 0.08, duration: 0.1 },
                     },
                     hover: {
                       y: 0,
                       scale: 1.4,
-                      transition: { delay: i * 0.08, duration: 0.45 },
+                      transition: { delay: i * 0.08, duration: 0.1 },
                     },
                   }}
                 />
@@ -117,9 +117,9 @@ export default function AnimatedButton({
           onClick={onClick}
           initial="idle"
           whileHover={disabled ? "idle" : "hover"}
-          className={`relative z-1 inline-block border-none bg-transparent px-4 py-2 text-base font-bold uppercase no-underline outline-none text-black rounded-full ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+          className={`relative z-1 inline-block border-none bg-transparent px-4 py-2 text-base font-medium uppercase no-underline outline-none text-black rounded-full ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
-          <span className="pointer-events-none absolute inset-0 z-1 border-2 border-black rounded-full" />
+          <span className="pointer-events-none absolute inset-0 z-1 border border-black rounded-full" />
 
           <motion.span
             className="pointer-events-none absolute -z-2 rounded-full"
@@ -130,7 +130,7 @@ export default function AnimatedButton({
                 top: 0,
                 width: "100%",
                 height: "100%",
-                transition: { duration: 0.3 },
+                transition: { duration: 0.1 },
               },
             }}
           />
@@ -139,7 +139,7 @@ export default function AnimatedButton({
             className="relative z-10"
             variants={{
               idle: { color: BLOB_COLOR },
-              hover: { color: "#ffffff", transition: { duration: 0.5 } },
+              hover: { color: "#ffffff", transition: { duration: 0.2 } },
             }}
           >
             {children}
@@ -160,12 +160,12 @@ export default function AnimatedButton({
                     idle: {
                       y: "150%",
                       scale: 1.4,
-                      transition: { delay: i * 0.08, duration: 0.45 },
+                      transition: { delay: i * 0.08, duration: 0.2 },
                     },
                     hover: {
                       y: 0,
                       scale: 1.4,
-                      transition: { delay: i * 0.08, duration: 0.45 },
+                      transition: { delay: i * 0.08, duration: 0.2 },
                     },
                   }}
                 />
