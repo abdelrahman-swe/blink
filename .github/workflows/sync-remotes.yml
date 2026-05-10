@@ -9,12 +9,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: Sync to deploy repository
+      - shell: bash
+        env:
+          TOKEN: ${{ secrets.DEPLOY_REPO_PAT }}
         run: |
-          git remote add deploy https://${{ secrets.DEPLOY_REPO_PAT }}@github.com/abdelrahman-swe/blink.git
-          git push deploy main --force-with-lease
+          git remote add deploy "https://${TOKEN}@github.com/abdelrahman-swe/blink.git"
+          git push --force-with-lease deploy main
