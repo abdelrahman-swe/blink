@@ -27,7 +27,7 @@ export interface CategoryProductsResponse {
 ////////////////////////////////////////////////////////////////
 
 export const getCategory = async (slug: string): Promise<Category> => {
-  const endpoint = `/categories/${slug}`;
+  const endpoint = `/categories/${slug}?include_seo=true`;
   const response = await api.get(endpoint);
 
   const categoryData = response.data?.data?.category;

@@ -12,7 +12,7 @@ export interface LegalResponse {
 ////////////////////////////////////////////////////////////////
 
 export const getPrivacyPolicy = async (): Promise<LegalResponse> => {
-  const response = await api.get("/legal/privacy_policy");
+  const response = await api.get("/legal/privacy_policy?include_seo=true");
   return response.data;
 };
 
@@ -21,7 +21,7 @@ export const getPrivacyPolicy = async (): Promise<LegalResponse> => {
 ////////////////////////////////////////////////////////////////
 
 export const getTermsAndConditions = async (): Promise<LegalResponse> => {
-  const response = await api.get("/legal/terms_conditions");
+  const response = await api.get("/legal/terms_conditions?include_seo=true");
   return response.data;
 };
 
@@ -30,7 +30,7 @@ export const getTermsAndConditions = async (): Promise<LegalResponse> => {
 ////////////////////////////////////////////////////////////////
 
 export const getReturnPolicy = async (): Promise<LegalResponse> => {
-  const response = await api.get("/legal/return_policy");
+  const response = await api.get("/legal/return_policy?include_seo=true");
   return response.data;
 };
 
@@ -40,6 +40,6 @@ export const getReturnPolicy = async (): Promise<LegalResponse> => {
 ////////////////////////////////////////////////////////////////
 
 export const getContactUs = async (): Promise<LegalResponse> => {
-  const response = await api.get("/legal/contact_us");
+  const response = await api.get("/legal/contact_us?include_seo=true");
   return response.data;
 };

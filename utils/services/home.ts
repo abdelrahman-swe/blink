@@ -50,6 +50,7 @@ export const getBestSellingProducts = async (
   page?: number
 ): Promise<{ items: HomeProduct[]; pagination: Pagination }> => {
   const queryParams = new URLSearchParams();
+  queryParams.append("include_seo", "true");
   if (limit) queryParams.append("limit", limit.toString());
   if (pagination_type) queryParams.append("pagination_type", pagination_type);
   if (page) queryParams.append("page", page.toString());
@@ -86,6 +87,7 @@ export const getNewArrivalProducts = async (
   page?: number
 ): Promise<{ items: HomeProduct[]; pagination: Pagination }> => {
   const queryParams = new URLSearchParams();
+  queryParams.append("include_seo", "true");
   if (limit) queryParams.append("limit", limit.toString());
   if (pagination_type) queryParams.append("pagination_type", pagination_type);
   if (page) queryParams.append("page", page.toString());
@@ -122,6 +124,7 @@ export const getDealsOfTheDayProducts = async (
   page?: number
 ): Promise<{ items: DealProduct[]; pagination: Pagination }> => {
   const queryParams = new URLSearchParams();
+  queryParams.append("include_seo", "true");
   if (limit) queryParams.append("limit", limit.toString());
   if (pagination_type) queryParams.append("pagination_type", pagination_type);
   if (page) queryParams.append("page", page.toString());

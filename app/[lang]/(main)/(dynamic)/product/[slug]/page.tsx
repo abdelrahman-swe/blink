@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PUBLIC_API } from "@/lib/config";
 import ProductDetailsClient from "./ProductDetailsClient";
+import { generateSeoMetadata } from "@/utils/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 // ---------------------------------------------------------------------------
 // Server-side SEO: fetch product data and return dynamic <head> metadata
@@ -40,69 +42,11 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
         };
     }
 
-    const seo = product.seo;
+    const title = product.name || "Blink";
+    const description = product.description?.slice(0, 160) || "Shop the best deals on Blink";
+    const image = product.images?.[0]?.large || product.images?.[0]?.original || "";
 
-    // Fallback values from product data when seo block is missing
-    const title = seo?.meta?.title || product.name || "Blink";
-    const description =
-        seo?.meta?.description ||
-        product.description?.slice(0, 160) ||
-        "Shop the best deals on Blink";
-    const ogImage =
-        seo?.og?.image ||
-        product.images?.[0]?.large ||
-        product.images?.[0]?.original ||
-        "";
-
-    const metadata: Metadata = {
-        title,
-        description,
-        robots: seo?.meta?.robots || "index,follow",
-        alternates: {
-            canonical: seo?.meta?.canonical || undefined,
-            languages: seo?.alternates?.reduce(
-                (acc: Record<string, string>, alt: { lang: string; href: string }) => {
-                    acc[alt.lang] = alt.href;
-                    return acc;
-                },
-                {} as Record<string, string>
-            ),
-        },
-        openGraph: {
-            title: seo?.og?.title || title,
-            description: seo?.og?.description || description,
-            url: seo?.og?.url || undefined,
-            siteName: seo?.og?.site_name || "Blink",
-            locale: seo?.og?.locale || (lang === "ar" ? "ar_EG" : "en_US"),
-            type: "website",
-            images: ogImage ? [{ url: ogImage }] : [],
-        },
-    };
-
-    return metadata;
-}
-
-// ---------------------------------------------------------------------------
-// JSON-LD Structured Data (injected as <script> in the server HTML)
-// ---------------------------------------------------------------------------
-
-async function ProductJsonLd({ slug, lang }: { slug: string; lang: string }) {
-    const product = await getProductSeo(slug, lang);
-    const jsonLd = product?.seo?.jsonLd;
-
-    if (!jsonLd || !Array.isArray(jsonLd) || jsonLd.length === 0) return null;
-
-    return (
-        <>
-            {jsonLd.map((ld: Record<string, unknown>, idx: number) => (
-                <script
-                    key={idx}
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
-                />
-            ))}
-        </>
-    );
+    return generateSeoMetadata(product.seo, lang, { title, description, image });
 }
 
 // ---------------------------------------------------------------------------
@@ -111,10 +55,11 @@ async function ProductJsonLd({ slug, lang }: { slug: string; lang: string }) {
 
 export default async function ProductDetailsPage({ params }: ProductPageProps) {
     const { slug, lang } = await params;
+    const product = await getProductSeo(slug, lang);
 
     return (
         <>
-            <ProductJsonLd slug={slug} lang={lang} />
+            <JsonLd data={product?.seo?.jsonLd} />
             <ProductDetailsClient />
         </>
     );

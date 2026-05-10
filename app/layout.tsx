@@ -22,7 +22,7 @@ const ibmPlexSans = localFont({
 export const metadata: Metadata = {
   title: {
     default: "Blink",
-    template: "%s | Blink",
+    template: "%s",
   },
   description: "Where everything is blinking",
   icons: {

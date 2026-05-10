@@ -25,6 +25,30 @@ const iconMap = {
 } as const;
 
 import { useDictionary } from '../providers/DictionaryProvider';
+import { motion, Variants } from 'framer-motion';
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      type: "spring", 
+      stiffness: 120, 
+      damping: 15,
+    } 
+  },
+};
 
 interface ProsProps { }
 
@@ -33,12 +57,22 @@ export default function Pros({ }: ProsProps) {
   const pros = home?.pros || [];
   return (
     <section className="xl:container mx-auto mt-3 px-5 py-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+      >
         {pros.map((pro: ProItem) => {
           const IconComponent = iconMap[pro.icon];
 
           return (
-            <article className="flex items-start gap-6" key={pro.title}>
+            <motion.article 
+              className="flex items-start gap-6" 
+              key={pro.title}
+              variants={itemVariants}
+            >
               <div className="relative w-16 h-16 flex items-center justify-center">
                 <span
                   className="absolute top-6 left-5 w-12 h-12 bg-secondary rounded-full z-0"
@@ -61,10 +95,10 @@ export default function Pros({ }: ProsProps) {
                 </h3>
                 <p className="text-md text-muted-foreground font-medium">{pro.desc}</p>
               </div>
-            </article>
+            </motion.article>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 }

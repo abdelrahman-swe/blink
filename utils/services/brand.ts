@@ -37,9 +37,11 @@ export interface BrandCategoriesResponse {
 ////////////////////////////////////////////////////////////////
 
 export const getBrandCategories = async (slug: string): Promise<BrandCategory[]> => {
-  const endpoint = `/brands/${slug}/categories`;
+  const endpoint = `/brands/${slug}/categories?include_seo=true`;
   const response = await api.get(endpoint);
-  return response.data?.data ?? [];
+  const data = response.data?.data;
+  if (Array.isArray(data)) return data;
+  return data?.categories ?? response.data?.categories ?? [];
 };
 
 
