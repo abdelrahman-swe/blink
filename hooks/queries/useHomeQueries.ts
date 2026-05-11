@@ -75,8 +75,10 @@ export function getDealsOfTheDayProductsQuery(
     queryKey: ["deals-of-the-day-products", locale, options.limit, options.pagination_type || "offset", options.page],
 
     queryFn: () => getDealsOfTheDayProducts(options.limit, options.pagination_type || "offset", options.page),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    staleTime: 30 * 1000, // 30 seconds – deals should feel near real-time
+    gcTime: 5 * 60 * 1000,
+    refetchInterval: 60 * 1000, // re-fetch every 60 seconds
+    refetchOnWindowFocus: true,
     retry: false,
     enabled: options.enabled !== false,
   });

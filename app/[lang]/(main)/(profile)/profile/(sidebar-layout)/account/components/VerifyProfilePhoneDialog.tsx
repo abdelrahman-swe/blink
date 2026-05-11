@@ -144,8 +144,6 @@ const VerifyProfilePhoneDialog = ({
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent
                 className="sm:max-w-lg py-15"
-                onPointerDownOutside={(e) => e.preventDefault()}
-                onEscapeKeyDown={(e) => e.preventDefault()}
             >
                 <DialogTitle className="sr-only">
                     Verify Phone/Email

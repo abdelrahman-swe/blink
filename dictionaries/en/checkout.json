@@ -75,10 +75,11 @@
             "removeProduct": "Remove product",
             "stockWarning": "There are only {{stock}} products in stock",
             "removing": "Removing...",
-            "productRemoved": "\"{{name}}\" removed from cart",
+            "productRemoved": "{{productName}} removed from cart",
             "cartUpdated": "Cart updated with quantity: {{quantity}}",
             "failedToUpdate": "Failed to update cart quantity",
-            "failedToRemove": "Failed to remove product from cart"
+            "failedToRemove": "Failed to remove product from cart",
+            "maxQuantityPerOrder": "Max {{count}} per order"
         },
         "emptyCart": {
             "title": "Your cart is empty",
@@ -90,6 +91,9 @@
         "orderSuccess": "Your order has been placed successfully.",
         "confirmingPayment": "Confirming your payment",
         "paymentFailed": "Payment failed. Please try again.",
+        "emptyCartError": "Your cart is empty. Please add items before checkout.",
+        "invalidPaymentResponse": "Invalid payment response. Please try again.",
+        "fillRequiredFields": "Please fill in all required fields",
         "paymentStatus": {
             "paidTitle": "Payment Successful",
             "paidMessage": "Thank you for purchasing. Your payment was successful.",

@@ -35,7 +35,7 @@ export function useUpdateProfile() {
         },
         onSuccess: (data: any) => {
             queryClient.invalidateQueries({ queryKey: ["profile-account"] });
-            toast.success(data.message || "Profile updated successfully!");
+            toast.success(data.message);
 
             const currentUser = useUserStore.getState().user;
             if (currentUser && data.data) {
@@ -55,7 +55,7 @@ export function useUpdateProfile() {
             }
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to update profile");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -69,10 +69,10 @@ export function useVerifyProfileInfo() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["profile-account"] });
-            toast.success(data.message || "Profile updated successfully!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to update profile");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -86,10 +86,10 @@ export function useResendProfileOtp() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["profile-account"] });
-            toast.success(data.message || "Resend Profile Otp Successfully!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to resend otp");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -141,10 +141,10 @@ export function useAddAddress() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["profile-addresses"] });
-            toast.success(data.message || "Address added successfully!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to add address");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -158,10 +158,10 @@ export function useDeleteAddress() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["profile-addresses"] });
-            toast.success(data.message || "Address deleted successfully!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to delete address");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -175,10 +175,10 @@ export function useEditAddress() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["profile-addresses"] });
-            toast.success(data.message || "Address updated successfully!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to update address");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -192,10 +192,10 @@ export function useDefaultAddress() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["profile-addresses"] });
-            toast.success(data.message || "Default address updated!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message || "Failed to set default address");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -236,7 +236,7 @@ export function useLogout() {
             return getLogoutUser({ token });
         },
         onSuccess: (response) => {
-            toast.success(response.message || "Logout successfully!");
+            toast.success(response.message);
 
             // Clear all React Query cache before logging out
             queryClient.clear();
@@ -249,7 +249,7 @@ export function useLogout() {
             queryClient.clear();
 
             useUserStore.getState().logout();
-            toast.error(error.response?.data?.message || "Logout failed");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -400,7 +400,7 @@ export function useToggleUserFavorites() {
             return { previousData };
         },
         onSuccess: (response) => {
-            toast.success(response.message || "Product favorites updated!");
+            toast.success(response.message);
 
             // Invalidate to ensure data is fresh from server
             queryClient.invalidateQueries({ queryKey: ["user-favorites"] });
@@ -430,7 +430,7 @@ export function useToggleUserFavorites() {
                 router.push(`/${lang}/login`);
                 return;
             }
-            toast.error(error.response?.data?.message || "Failed to update favorites");
+            toast.error(error.response?.data?.message);
         },
     });
 }
@@ -474,7 +474,7 @@ export function useUserCancelOrder() {
         mutationFn: (id: string | number) => getUserCancelOrder(id),
         onSuccess: (data: any) => {
             queryClient.invalidateQueries({ queryKey: ["user-orders"] });
-            toast.success(data?.message || "Order cancelled successfully!");
+            toast.success(data?.message);
         },
         onError: (error: any) => {
             const serverData = error.response?.data;
@@ -482,9 +482,9 @@ export function useUserCancelOrder() {
             
             if (validationErrors && typeof validationErrors === 'object') {
                 const firstError = Object.values(validationErrors).flat()[0];
-                toast.error(String(firstError) || serverData?.message || "Failed to cancel order");
+                toast.error(String(firstError) || serverData?.message);
             } else {
-                toast.error(serverData?.message || "Failed to cancel order");
+                toast.error(serverData?.message);
             }
         },
     });
@@ -548,7 +548,7 @@ export function useCreateReturn() {
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["user-returns"] });
             queryClient.invalidateQueries({ queryKey: ["user-orders"] });
-            toast.success(data.message || "Return request submitted successfully!");
+            toast.success(data.message);
         },
         onError: (error: any) => {
             const serverData = error.response?.data;
@@ -557,9 +557,9 @@ export function useCreateReturn() {
 
             if (validationErrors && typeof validationErrors === 'object') {
                 const firstError = Object.values(validationErrors).flat()[0];
-                toast.error(String(firstError) || serverMessage || "Validation failed");
+                toast.error(String(firstError) || serverMessage);
             } else {
-                toast.error(serverMessage || "Failed to submit return request");
+                toast.error(serverMessage);
             }
         },
     });

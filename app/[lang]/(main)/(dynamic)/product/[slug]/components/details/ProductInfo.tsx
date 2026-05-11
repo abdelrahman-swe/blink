@@ -202,6 +202,7 @@ export const ProductInfo = ({ product, isLoading, lang, onReviewClick }: Product
           max={product?.stock ?? 1}
           value={quantity}
           onChange={setQuantity}
+          disabled={!inStock}
         />
 
         {isLoading ? (

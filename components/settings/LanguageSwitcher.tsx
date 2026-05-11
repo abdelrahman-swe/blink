@@ -12,7 +12,7 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface LanguageSwitcherProps {
   currentLocale: Locale;
@@ -23,6 +23,23 @@ export default function LanguageSwitcher({
 }: LanguageSwitcherProps) {
   const { switchLocale } = useLocale(currentLocale);
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Return a placeholder with the same dimensions to avoid layout shift
+    return (
+      <div className="w-[80px] h-[40px] flex items-center justify-center">
+        <Image priority src="/global.svg" alt="language icon" width={20} height={20} />
+        <span className="text-md font-medium capitalize ms-2">
+          {currentLocale === "ar" ? "Ar" : "En"}
+        </span>
+      </div>
+    );
+  }
 
   return (
     <Select value={currentLocale.toLowerCase()} onValueChange={(val) => switchLocale(val as Locale)} onOpenChange={setIsOpen}>

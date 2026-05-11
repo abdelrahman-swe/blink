@@ -33,16 +33,18 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useUserStore } from "@/store/useUserStore";
 import { useEffect } from "react";
+import { useDictionary } from "@/components/providers/DictionaryProvider";
 
 // LOGIN
 export function useLogin() {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const { t } = useDictionary();
 
   return useMutation<LoginResponse, Error, LoginPayload>({
     mutationFn: (data) => getLoginUser(data),
     onSuccess: (data) => {
-      toast.success("Logged in successfully");
+      toast.success(t?.auth?.login?.title);
       if (data.data?.token) {
         useUserStore.getState().setUser({
           token: data.data.token,

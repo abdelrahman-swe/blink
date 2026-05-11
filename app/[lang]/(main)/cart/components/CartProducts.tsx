@@ -138,6 +138,7 @@ export function CartProducts({
                             onChange={onQuantityChange}
                             isLoading={isUpdatingQuantity}
                             max={effectiveMax}
+                            disabled={mergedItem.maxStock === 0}
                         />
                     </div>
                 </div>

@@ -24,7 +24,7 @@ export default function Footer({ locale: lang }: FooterProps) {
     }
   };
   
-  console.log(footerSocialIcons)
+  // console.log(footerSocialIcons)
 
   return (
     <footer className="bg-secondary text-foreground pt-8" role="contentinfo">

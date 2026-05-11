@@ -12,7 +12,14 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   reactStrictMode: false,
-  // No additional config needed for proxy.ts
+  async rewrites() {
+    return [
+      {
+        source: "/api/sitemap/:path*",
+        destination: "https://blink.appclouders.com/api/sitemap/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

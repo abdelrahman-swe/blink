@@ -76,10 +76,11 @@
             "removeProduct": "إزالة المنتج",
             "stockWarning": "يوجد فقط {{stock}} منتجات في المخزون",
             "removing": "جاري الإزالة...",
-            "productRemoved": "تمت إزالة \"{{name}}\" من السلة",
+            "productRemoved": "تمت إزالة {{productName}} من السلة",
             "cartUpdated": "تم تحديث السلة بالكمية: {{quantity}}",
             "failedToUpdate": "فشل تحديث كمية السلة",
-            "failedToRemove": "فشل إزالة المنتج من السلة"
+            "failedToRemove": "فشل إزالة المنتج من السلة",
+            "maxQuantityPerOrder": "الحد الأقصى {{count}} لكل طلب"
         },
         "emptyCart": {
             "title": "سلتك فارغة",
@@ -91,6 +92,9 @@
         "orderSuccess": "تم تأكيد طلبك بنجاح.",
         "confirmingPayment": "جاري تأكيد دفعك",
         "paymentFailed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
+        "emptyCartError": "سلتك فارغة. يرجى إضافة منتجات قبل الدفع.",
+        "invalidPaymentResponse": "استجابة دفع غير صالحة. يرجى المحاولة مرة أخرى.",
+        "fillRequiredFields": "يرجى ملء جميع الحقول المطلوبة",
         "paymentStatus": {
             "paidTitle": "عملية الدفع ناجحة",
             "paidMessage": "شكراً لك على شرائك. تمت عملية الدفع بنجاح.",

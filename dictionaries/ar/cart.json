@@ -12,7 +12,9 @@
         },
         "actions": {
             "emptyAll": "إفراغ العربة",
-            "removing": "جاري الحذف ..."
+            "removing": "جاري الحذف ...",
+            "allProductsRemoved": "تم حذف جميع المنتجات من العربة!",
+            "failedToRemove": "فشل في حذف المنتج من العربة"
         },
         "summary": {
             "title": "ملخص الطلب",

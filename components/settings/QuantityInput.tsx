@@ -88,7 +88,7 @@ export function QuantityInput({
         <MinusIcon className="h-3 w-3" aria-hidden="true" />
       </Button>
       {/* Input Value */}
-      <div className="w-8 flex items-center justify-center">
+      <div className="flex items-center justify-center">
         {isLoading ? (
           <Spinner className="h-5 w-5" aria-label="Loading quantity" />
         ) : (
@@ -104,8 +104,9 @@ export function QuantityInput({
             aria-valuemin={min}
             aria-valuemax={effectiveMax}
             aria-valuenow={currentValue}
+            style={{ width: `${Math.max(1, localValue.toString().length)}ch` }}
             className="
-              w-5 bg-transparent p-0 text-center text-lg font-semibold
+              bg-transparent p-0 text-center text-lg font-semibold
               focus:outline-none
               disabled:cursor-not-allowed
               [appearance:textfield]

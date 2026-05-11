@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     const seo = json?.data?.seo || json?.seo || null;
 
     const title = category?.name || "Category | Blink";
-    const description = category?.description || "Shop our categories on Blink bruh you've got to";
+    const description = category?.description || "Shop our categories on Blink bruh you've got to buy things i mean ? we blink can you imagine !!!";
 
     return generateSeoMetadata(seo, lang, { title, description });
 }

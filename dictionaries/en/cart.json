@@ -11,7 +11,9 @@
         },
         "actions": {
             "emptyAll": "Empty Cart",
-            "removing": "Removing..."
+            "removing": "Removing...",
+            "allProductsRemoved": "All products removed from cart!",
+            "failedToRemove": "Failed to remove product from cart"
         },
         "summary": {
             "title": "Order Summary",
