@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next';
-import { PUBLIC_API_BASE } from '@/lib/config';
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://blink-sigma-mocha.vercel.app';
 
 export default function robots(): MetadataRoute.Robots {
     return {
@@ -7,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: `${PUBLIC_API_BASE}/api/sitemap-static.xml`,
+        sitemap: `${BASE_URL}/sitemap.xml`,
     };
 }
