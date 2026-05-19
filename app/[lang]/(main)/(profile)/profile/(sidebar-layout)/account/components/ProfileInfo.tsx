@@ -183,7 +183,7 @@ const ProfileInfo = ({ authDict, userDict }: ProfileInfoProps) => {
                     if (isSaving) return;
                     isEditing ? handleSave(field) : setEditingField(field);
                 }}
-                className="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2"
+                className="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 rounded-full"
             >
                 <span className="transition-all duration-200 scale-100">
                     {isSaving ? (
@@ -251,6 +251,9 @@ const ProfileInfo = ({ authDict, userDict }: ProfileInfoProps) => {
 
     return (
         <div className="space-y-6">
+            <div>
+                {userDict?.profile?.account?.personalInfo}
+            </div>
             <Form {...form}>
                 <form className="space-y-6">
                     {/* Avatar */}

@@ -34,6 +34,8 @@ const OrdersClient = () => {
     const [cancelOrderDialog, setCancelOrderDialog] = useState(false);
     const [selectedOrderId, setSelectedOrderId] = useState<number | null>(null);
 
+    // console.log("cancelOrder", cancelOrder);
+
     return (
         <section className="xl:container mx-auto space-y-6 ">
             <h2 className="text-xl font-semibold">{t?.title}</h2>

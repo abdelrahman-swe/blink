@@ -474,6 +474,7 @@ export function useUserCancelOrder() {
         mutationFn: (id: string | number) => getUserCancelOrder(id),
         onSuccess: (data: any) => {
             queryClient.invalidateQueries({ queryKey: ["user-orders"] });
+            console.log("cancel order successxxxxxxxxxxxxxx", data);
             toast.success(data?.message);
         },
         onError: (error: any) => {

@@ -335,7 +335,7 @@ export default function RegisterForm({ lang }: RegisterFormProps) {
                                             onCheckedChange={field.onChange}
                                         />
                                     </FormControl>
-                                    <FormLabel className="text-md text-primary">
+                                    <FormLabel className="text-md text-primary data-[error=true]:text-primary">
                                         {t.register.agree}<AppLink className="underline" href={`/${lang}/terms-conditions`} target="_blank" rel="noopener noreferrer">{t.register.termsAndConditions}</AppLink>
                                     </FormLabel>
                                 </div>

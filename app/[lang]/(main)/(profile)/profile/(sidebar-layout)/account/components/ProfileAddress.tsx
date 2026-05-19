@@ -250,7 +250,7 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                                         size="icon"
                                         disabled={deletingId === address.id}
                                         onClick={() => handleDelete(address.id)}
-                                        className="hover:bg-red-50 flex items-center gap-2 text-sm "
+                                        className="hover:bg-red-50 flex items-center gap-2 text-sm"
                                     >
                                         {deletingId === address.id ? (
                                             <span className="flex items-center gap-2 text-red-500 me-15">
@@ -339,12 +339,14 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                                                 type="button"
                                                 variant="outline"
                                                 onClick={handleCancelEdit}
+                                                className="rounded-full"
                                             >
                                                 {t?.cancel}
                                             </Button>
                                             <Button
                                                 type="submit"
                                                 disabled={isUpdatingPending}
+                                                className="rounded-full"
                                             >
                                                 {isUpdatingPending ? t?.updating : t?.updateAddress}
                                             </Button>
@@ -466,13 +468,14 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                                     type="button"
                                     variant="outline"
                                     onClick={handleCancelAdd}
+                                    className="rounded-full"
                                 >
                                     {t?.cancel}
                                 </Button>
                                 <Button
                                     type="submit"
                                     disabled={isAddingPending}
-                                    className="min-w-[160px]"
+                                    className="min-w-[160px] rounded-full"
                                 >
                                     {isAddingPending ? t?.saving : t?.saveAddress}
                                 </Button>

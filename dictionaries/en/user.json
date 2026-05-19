@@ -105,6 +105,7 @@
         },
         "account": {
             "title": "My Account",
+            "personalInfo": "Personal Information",
             "info": {
                 "editPhoto": "Edit account photo",
                 "form": {

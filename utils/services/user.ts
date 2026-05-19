@@ -206,7 +206,8 @@ export const getUserOrders = async (): Promise<Order[]> => {
 
 export const getUserCancelOrder = async (id: string | number): Promise<UserCancelOrderResponse> => {
   const response = await api.post(`/orders/${id}/cancel`);
-  return response.data.data;
+  console.log("cancel order", response);
+  return response.data;
 };
 
 
