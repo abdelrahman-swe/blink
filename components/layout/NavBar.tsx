@@ -30,6 +30,7 @@ import { Button } from '../ui/button';
 import LanguageSwitcher from '../settings/LanguageSwitcher';
 import { ButtonGroup } from '../ui/button-group';
 import { getSearchSuggestionQuery } from '@/hooks/queries/useSearchQueries';
+import { toast } from '@/utils/toast';
 import { UseGetCartProductQuery } from '@/hooks/queries/useCartQueries';
 import { useLogout } from '@/hooks/queries/useUserQueries';
 import { useTokenRefresh } from '@/hooks/queries/useAuthQueries';
@@ -158,6 +159,10 @@ export const NavBar = ({ locale, initialIsAuthenticated = false }: NavBarProps) 
     };
 
     const handleSearch = () => {
+      if (!query.trim()) {
+        toast.error(navbar.searchRequired || 'Please enter a search query');
+        return;
+      }
       setShowDropdown(false);
       if (isMobile) setOpen(false);
       router.push(

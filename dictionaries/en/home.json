@@ -13,7 +13,8 @@
     "returns": "Returns",
     "settings": "Settings",
     "signUpText": "Sign Up",
-    "homeText": "Home"
+    "homeText": "Home",
+    "searchRequired": "Please enter a search query"
   },
   "pros": [
     {

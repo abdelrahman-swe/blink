@@ -119,17 +119,11 @@ export default function Footer({ locale: lang }: FooterProps) {
 
 
       </div>
-      <div className="bg-black text-white mt-12 border-t border-black/10 px-5 flex justify-between gap-8 items-center py-2">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4 text-xs md:text-sm container mx-auto">
+      <div className="bg-black text-white mt-6 border-t border-black/10 px-5 py-1">
+        <div className="flex items-center justify-center gap-4 py-2 text-xs md:text-sm container mx-auto">
           <div className="flex flex-wrap justify-center items-center gap-2">
-            <p className="text-center font-medium md:text-left text-base">{copyright.description}</p>
-            <span className='text-gray-500 font-medium mt-1 '>v 1.0.6</span>
-          </div>
-
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/privacy-policy`}>{privacyPolicy.description}</AppLink>
-            <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/terms-conditions`}>{termsConditions.description}</AppLink>
-            <AppLink className='uppercase font-normal md:font-medium text-sm md:text-md' href={`/${lang}/return-policy`}>{returnRefund.description}</AppLink>
+            <p className="text-center font-medium text-sm">{copyright.description}</p>
+            <span className='text-gray-500 font-medium'>v 1.0.6</span>
           </div>
         </div>
       </div>

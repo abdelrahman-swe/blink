@@ -13,7 +13,8 @@
     "returns": "المرتجعات",
     "settings": "الإعدادات",
     "signUpText": "تسجيل جديد",
-    "homeText": "الرئيسية"
+    "homeText": "الرئيسية",
+    "searchRequired": "يرجى إدخال كلمة للبحث عنها"
   },
   "pros": [
     {
