@@ -20,7 +20,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import {
     Dialog,
@@ -232,7 +232,7 @@ export default function DealsCard() {
                                             },
                                             onError: (error) => {
                                                 stopLoading();
-                                                toast.error(getApiErrorMessage(error, `${product.name} ${tProd?.stock?.outOfStock}`));
+                                                toast.error(error, `${product.name} ${tProd?.stock?.outOfStock}`);
                                                 setPendingProductId(null);
                                             },
                                         }

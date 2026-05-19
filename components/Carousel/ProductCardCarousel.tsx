@@ -5,7 +5,7 @@ import { useLoadingStore } from "@/store/useLoadingStore";
 import Image from "next/image";
 import AppLink from '@/components/common/AppLink';
 import { useParams } from "next/navigation";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
@@ -233,7 +233,7 @@ export default function ProductCardCarousel({
                                 },
                                 onError: (error) => {
                                   stopLoading();
-                                  toast.error(getApiErrorMessage(error, `(${product.name}) ${tProd?.stock?.outOfStock}`));
+                                  toast.error(error, `(${product.name}) ${tProd?.stock?.outOfStock}`);
                                   setPendingProductId(null);
                                 },
                               }

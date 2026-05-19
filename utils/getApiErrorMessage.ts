@@ -7,7 +7,12 @@ export function getApiErrorMessage(error: unknown, fallback: string): string {
   // Handle Axios-like errors (works even if instanceof AxiosError fails due to bundler)
   if (error && typeof error === "object") {
     const axiosErr = error as any;
-    const apiMessage = axiosErr?.response?.data?.message;
+    const apiMessage =
+      axiosErr?.response?.data?.message ??
+      axiosErr?.response?.data?.error ??
+      axiosErr?.response?.data?.data?.error ??
+      axiosErr?.response?.data?.data?.message;
+
     if (typeof apiMessage === "string" && apiMessage.length > 0) {
       return apiMessage;
     }

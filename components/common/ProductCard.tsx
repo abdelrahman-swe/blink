@@ -11,7 +11,7 @@ import AppLink from '@/components/common/AppLink';
 import { useParams } from "next/navigation";
 import { useAppRouter } from '@/hooks/useAppRouter';
 import { useAddToCartQuery, useCartPrefetch } from '@/hooks/queries/useCartQueries';
-import { toast } from 'sonner';
+import { toast } from '@/utils/toast';
 import { getApiErrorMessage } from '@/utils/getApiErrorMessage';
 import { useState } from 'react';
 import { useLoadingStore } from '@/store/useLoadingStore';
@@ -194,7 +194,7 @@ export default function ProductCard({ products, columns = 3 }: ProductCardProps)
                                                 },
                                                 onError: (error) => {
                                                     stopLoading();
-                                                    toast.error(getApiErrorMessage(error, `(${product.name}) ${t?.stock?.outOfStock || "is out of stock"}`));
+                                                    toast.error(error, `(${product.name}) ${t?.stock?.outOfStock || "is out of stock"}`);
                                                     setPendingProductId(null);
                                                 },
                                             }

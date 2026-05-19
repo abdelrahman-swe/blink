@@ -20,7 +20,7 @@ import { UseGetCartProductQuery } from "@/hooks/queries/useCartQueries";
 import { usePlaceOrderQuery, useValidateCouponMutation } from "@/hooks/queries/useCheckoutQueries";
 import { useOrderSummary } from "@/hooks/useOrderSummary";
 import { PaymentSummary } from "@/components/common/PaymentSummary";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { CouponValidateResponse, PaymentMethod, CheckoutFormData } from "@/utils/types/checkout";
 import { createCheckoutSchema } from "@/utils/schema/checkoutSchema";
 import { useDictionary } from "@/components/providers/DictionaryProvider";
@@ -302,8 +302,7 @@ export default function CheckoutClient() {
                 window.location.href = url.toString();
             },
             onError: (err: any) => {
-                const apiError = err.response?.data?.message || err.response?.data?.error || err.message;
-                toast.error(`Order Failed: ${apiError}`);
+                toast.error(err);
             },
         });
     };
@@ -325,9 +324,7 @@ export default function CheckoutClient() {
                 order_total: orderSummary.total,
             });
             setCouponData(response.data);
-            if (response.data.description) {
-                toast.success(response.data.description);
-            }
+            toast.success(response);
             return true;
         } catch (err: any) {
             setCouponData(null);

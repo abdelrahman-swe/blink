@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Review } from "@/utils/types/product";
 import { useParams } from "next/navigation";
 import { useDeleteReviewMutation, toggleHelpfulReviewMutation } from "@/hooks/queries/useProductQueries";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { Dialog, DialogContent, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -42,13 +42,13 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
         deleteReview(
             { id: review.id.toString(), product_slug: slug },
             {
-                onSuccess: () => {
-                    toast.success(t?.reviews?.deletedSuccess);
+                onSuccess: (response) => {
+                    toast.success(response, t?.reviews?.deletedSuccess);
                     setDeleteDialog(false);
                 },
                 onError: (err) => {
                     setIsDeleting(false);
-                    toast.error(err.message || t?.reviews?.deleteFailed);
+                    toast.error(err, t?.reviews?.deleteFailed);
                 },
             }
         );
@@ -70,7 +70,7 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
                     // Revert optimistic changes on error
                     setOptimisticIsHelpful(review.is_helpful);
                     setOptimisticHelpfulCount(review.helpful_count);
-                    toast.error(err.message || t?.reviews?.voteFailed);
+                    toast.error(err, t?.reviews?.voteFailed);
                 },
             }
         );

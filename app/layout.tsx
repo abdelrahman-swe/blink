@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   description: "Where everything is blinking",
   robots: {
-    index: true,
-    follow: true,
+    // index: true,
+    // follow: true,
     googleBot: {
       index: true,
       follow: true,
@@ -54,7 +54,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body suppressHydrationWarning>
-        <NextTopLoader color="#0D0D0D" showSpinner={false} height={5} />
+        <NextTopLoader color="#8a1d43" showSpinner={false} height={5} />
         <GlobalLoadingOverlay />
         <QueryProvider>
           <ThemeProvider

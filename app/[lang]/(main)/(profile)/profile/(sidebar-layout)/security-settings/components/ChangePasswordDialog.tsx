@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import {
   Dialog,
   DialogContent,
@@ -68,7 +68,7 @@ const ChangePasswordDialog = ({
 
     changePasswordMutation.mutate(payload, {
       onSuccess: (response) => {
-        toast.success(response.message || t?.passwordChangedSuccess);
+        toast.success(response, t?.passwordChangedSuccess);
         setChangePasswordDialog(false);
         setLoginPending(false);
         form.reset();

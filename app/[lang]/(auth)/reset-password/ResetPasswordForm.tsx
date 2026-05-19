@@ -11,7 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Cookies from 'js-cookie';
 
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
+import { toast } from '@/utils/toast';
 import z from 'zod';
 import { ViewIcon, ViewOffSlashIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";

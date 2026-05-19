@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRegister } from "@/hooks/queries/useAuthQueries";
 import Cookies from "js-cookie";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { RegisterPayload } from "@/utils/types/auth";
 import { Locale } from "@/lib/dictionaries";
 import { useDictionary } from "@/components/providers/DictionaryProvider";
@@ -84,7 +84,7 @@ export default function RegisterForm({ lang }: RegisterFormProps) {
                 if (response.data?.user?.otp) {
                     Cookies.set("otp", response.data.user.otp.toString());
                 }
-                toast.success(t.register.success || "Registration successful");
+                toast.success(response, t.register.success || "Registration successful");
                 const verifyUrl = `/${lang}/verify-register-account${callbackUrl ? `?callbackUrl=${encodeURIComponent(callbackUrl)}` : ""}`;
                 window.location.replace(verifyUrl);
 

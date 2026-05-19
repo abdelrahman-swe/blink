@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 
 import {
     Dialog,
@@ -99,7 +99,7 @@ const VerifyProfilePhoneDialog = ({
             {
                 onSuccess: (data) => {
                     onResendSuccess();
-                    toast.success(userDict.profile.account.verifyPhoneOtp.success || "OTP sent successfully");
+                    toast.success(data, userDict.profile.account.verifyPhoneOtp.success || "OTP sent successfully");
                 },
                 onError: (error: any) => {
                     if (error.response?.status === 429) {
@@ -119,8 +119,9 @@ const VerifyProfilePhoneDialog = ({
                 otp: data.otp,
             },
             {
-                onSuccess: () => {
+                onSuccess: (response) => {
                     toast.success(
+                        response,
                         userDict.profile.account.verifyPhoneOtp.success ||
                         "Phone/Email verified successfully"
                     );

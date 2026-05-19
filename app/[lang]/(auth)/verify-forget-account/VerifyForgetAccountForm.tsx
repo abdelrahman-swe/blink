@@ -13,7 +13,7 @@ import AppLink from '@/components/common/AppLink';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
+import { toast } from '@/utils/toast';
 import z from 'zod';
 import { useDictionary } from "@/components/providers/DictionaryProvider";
 

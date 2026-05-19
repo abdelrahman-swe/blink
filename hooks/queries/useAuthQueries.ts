@@ -28,7 +28,7 @@ import {
   ForgetResendOtpResponse,
 } from "@/utils/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useUserStore } from "@/store/useUserStore";
@@ -39,12 +39,12 @@ import { useDictionary } from "@/components/providers/DictionaryProvider";
 export function useLogin() {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { t } = useDictionary();
+  const { auth: t } = useDictionary();
 
   return useMutation<LoginResponse, Error, LoginPayload>({
     mutationFn: (data) => getLoginUser(data),
     onSuccess: (data) => {
-      toast.success(t?.auth?.login?.title);
+      toast.success(data, t?.login?.title || "Logged in successfully!");
       if (data.data?.token) {
         useUserStore.getState().setUser({
           token: data.data.token,
@@ -77,7 +77,7 @@ export function useLogin() {
       }
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.message || "Login failed");
+      toast.error(error, "Login failed");
     },
   });
 }
@@ -91,7 +91,7 @@ export function useRegister() {
     onSuccess: (response) => {
     },
     onError: (error: any, variables: RegisterPayload) => {
-      toast.error(error.response?.data?.message || "Registration failed");
+      toast.error(error, "Registration failed");
     },
   });
 }
@@ -103,7 +103,7 @@ export function useVerifyAccount() {
   return useMutation<VerifyAccountResponse, Error, VerifyAccountPayload>({
     mutationFn: (data) => getVerifyUser(data),
     onSuccess: (response) => {
-      toast.success(`Welcome, "${response.data.user.full_name}" Account verified successfully!`);
+      toast.success(response, `Welcome, "${response.data.user.full_name}" Account verified successfully!`);
       if (response.data?.token) {
         useUserStore.getState().setUser({
           token: response.data.token,
@@ -129,7 +129,7 @@ export function useVerifyAccount() {
       window.location.href = callbackUrl ?? "/home"; // Bypass Next.js router cache
     },
     onError: (error: any, variables: VerifyAccountPayload) => {
-      toast.error(error.response?.data?.message || "Invalid verification code");
+      toast.error(error, "Invalid verification code");
     },
   });
 }
@@ -141,10 +141,10 @@ export function useResendOtp() {
   return useMutation<ResendOtpResponse, Error, ResendOtpPayload>({
     mutationFn: (data) => getResendOtpUser(data),
     onSuccess: (response) => {
-      toast.success(response.message || "Otp resend successfully!");
+      toast.success(response, "Otp resend successfully!");
     },
     onError: (error: any, variables: ResendOtpPayload) => {
-      toast.error(error.response?.data?.message || "Invalid identifier");
+      toast.error(error, "Invalid identifier");
     },
   });
 }
@@ -158,7 +158,7 @@ export function useForgetPassword() {
     onSuccess: () => {
     },
     onError: (error: any, variables: ForgetPasswordPayload) => {
-      toast.error(error.response?.data?.message || "Invalid identifier");
+      toast.error(error, "Invalid identifier");
     },
   });
 }
@@ -174,10 +174,10 @@ export function useVerifyForgetPassword() {
   >({
     mutationFn: (data) => getVerifyForgetPasswordUser(data),
     onSuccess: (response) => {
-      toast.success(response.message || "Account verified successfully!");
+      toast.success(response, "Account verified successfully!");
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.message || "Invalid verification code");
+      toast.error(error, "Invalid verification code");
     },
   });
 }
@@ -190,10 +190,10 @@ export function useForgetResendOtp() {
   return useMutation<ForgetResendOtpResponse, Error, ForgetResendOtpPayload>({
     mutationFn: (data) => getForgetResendOtpUser(data),
     onSuccess: (response) => {
-      toast.success(response.message || "Otp resend successfully!");
+      toast.success(response, "Otp resend successfully!");
     },
     onError: (error: any, variables: ForgetResendOtpPayload) => {
-      toast.error(error.response?.data?.message || "Invalid identifier");
+      toast.error(error, "Invalid identifier");
     },
   });
 }
@@ -206,11 +206,11 @@ export function useResetPassword() {
   return useMutation<ResetPasswordResponse, Error, ResetPasswordPayload>({
     mutationFn: (data: ResetPasswordPayload) => getResetPasswordUser(data),
     onSuccess: (response) => {
-      toast.success(response.message || "Password reset successfully!");
+      toast.success(response, "Password reset successfully!");
       sessionStorage.removeItem("forget-password-identifier");
     },
     onError: (error: any) => {
-      toast.error(error.response?.data?.message || "Password reset failed");
+      toast.error(error, "Password reset failed");
     },
   });
 }

@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { UseGetCartProductQuery, useChangeCartQuantityQuery, useRemoveFromCartQuery } from "@/hooks/queries/useCartQueries"
 import { Spinner } from "@/components/ui/spinner"
-import { toast } from "sonner"
+import { toast } from "@/utils/toast"
 import { getApiErrorMessage } from "@/utils/getApiErrorMessage"
 import { useState, useEffect, useMemo } from "react"
 import { useParams } from "next/navigation"
@@ -88,13 +88,13 @@ export default function CartClient() {
                 quantity: newQuantity,
             },
             {
-                onSuccess: () => {
+                onSuccess: (response) => {
                     setUpdatingQuantityIds(prev => {
                         const updated = new Set(prev);
                         updated.delete(productId);
                         return updated;
                     });
-                    toast.success(ct?.cart?.cartUpdated?.replace("{{quantity}}", newQuantity.toString()));
+                    toast.success(response, ct?.cart?.cartUpdated?.replace("{{quantity}}", newQuantity.toString()));
                 },
                 onError: (error) => {
                     setUpdatingQuantityIds(prev => {
@@ -102,7 +102,7 @@ export default function CartClient() {
                         updated.delete(productId);
                         return updated;
                     });
-                    toast.error(getApiErrorMessage(error, "Failed to update cart quantity"));
+                    toast.error(error, "Failed to update cart quantity");
                 }
             }
         );
@@ -119,7 +119,7 @@ export default function CartClient() {
         removeFromCart(
             [ productId ],
             {
-                onSuccess: () => {
+                onSuccess: (response) => {
                     setTimeout(() => {
                         setQuantities(prev => {
                             const updated = { ...prev };
@@ -127,12 +127,12 @@ export default function CartClient() {
                             return updated;
                         });
                         setRemovingProductId(null);
-                        toast.success(ct?.cart?.productRemoved?.replace("{{productName}}", productName));
+                        toast.success(response, ct?.cart?.productRemoved?.replace("{{productName}}", productName));
                     }, 300);
                 },
-                onError: () => {
+                onError: (error) => {
                     setRemovingProductId(null);
-                    toast.error(t.actions.failedToRemove);
+                    toast.error(error, t.actions.failedToRemove);
                 }
             }
         );
@@ -282,15 +282,16 @@ export default function CartClient() {
                         removeFromCart(
                             allProductIds,
                             {
-                                onSuccess: () => {
-                                    toast.success(t.actions.allProductsRemoved);
+                                onSuccess: (response) => {
+                                    toast.success(response, t.actions.allProductsRemoved);
                                     setQuantities({});
                                     setIsRemoving(false);
                                     setShowAddToCartDialog(false);
                                 },
-                                onError: () => {
+                                onError: (error) => {
                                     setIsRemoving(false);
                                     setShowAddToCartDialog(false);
+                                    toast.error(error);
                                 }
                             }
                         );

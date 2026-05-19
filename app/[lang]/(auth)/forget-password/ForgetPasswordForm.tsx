@@ -13,7 +13,7 @@ import Cookies from 'js-cookie';
 import Image from 'next/image';
 
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
+import { toast } from '@/utils/toast';
 import z from 'zod';
 import { useDictionary } from "@/components/providers/DictionaryProvider";
 
@@ -62,7 +62,7 @@ export default function ForgetPasswordForm({ lang }: ForgetPasswordProps) {
                 if (response.data?.otp) {
                     Cookies.set("forget-password-otp", response.data.otp.toString());
                 }
-                toast.success(t.forgotPassword.success);
+                toast.success(response, t.forgotPassword.success);
                 router.push(`/${lang}/verify-forget-account`);
             },
             onError: (error: any) => {

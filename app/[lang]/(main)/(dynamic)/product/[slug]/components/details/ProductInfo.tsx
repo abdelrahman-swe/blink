@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { QuantityInput } from "@/components/settings/QuantityInput";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import { StarIcon, CheckmarkCircle02Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -84,7 +84,7 @@ export const ProductInfo = ({ product, isLoading, lang, onReviewClick }: Product
         },
         onError: (error) => {
           stopLoading();
-          toast.error(getApiErrorMessage(error, `${product.name} ${t?.stock?.outOfStock || "is out of stock"}`));
+          toast.error(error, `${product.name} ${t?.stock?.outOfStock || "is out of stock"}`);
         },
       }
     );

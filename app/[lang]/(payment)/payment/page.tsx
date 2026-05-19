@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { PaymentStatusDialog } from "../../(main)/checkout/components/PaymentStatusDialog";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import Cookies from "js-cookie";
 import { useDictionary } from "@/components/providers/DictionaryProvider";
 import { useUserStore } from "@/store/useUserStore";
@@ -62,7 +62,7 @@ export default function Payment() {
     } else if (status === "failed") {
       isRedirectingRef.current = true;
       setShowPaymentFailed(true);
-      toast.error(checkout?.checkout?.paymentFailed || "Payment failed. Please try again.");
+      toast.error(orderStatus, checkout?.checkout?.paymentFailed || "Payment failed. Please try again.");
 
       redirectTimeoutRef.current = setTimeout(() => {
         router.replace(`/${lang}/checkout`);

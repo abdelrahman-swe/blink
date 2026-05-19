@@ -16,7 +16,7 @@ import { CountDownTimer } from '@/components/settings/CountDownTimer';
 import AppLink from '@/components/common/AppLink';
 import { useParams } from 'next/navigation';
 import { useAddToCartQuery } from '@/hooks/queries/useCartQueries';
-import { toast } from 'sonner';
+import { toast } from '@/utils/toast';
 import { getApiErrorMessage } from '@/utils/getApiErrorMessage';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '@/components/ui/dialog';
 import { useToggleUserFavorites } from '@/hooks/queries/useUserQueries';
@@ -230,7 +230,7 @@ const DealsOfDealsPage = () => {
                                                     setPendingProductId(null);
                                                 },
                                                 onError: (error) => {
-                                                    toast.error(getApiErrorMessage(error, `${product.name} ${tProd?.stock?.outOfStock}`));
+                                                    toast.error(error, `${product.name} ${tProd?.stock?.outOfStock}`);
                                                     setPendingProductId(null);
                                                 },
                                             }

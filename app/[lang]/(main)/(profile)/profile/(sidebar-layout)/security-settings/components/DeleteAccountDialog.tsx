@@ -1,6 +1,6 @@
 import z from "zod";
 import { useMemo, useState } from "react";
-import { toast } from "sonner";
+import { toast } from "@/utils/toast";
 import {
     Dialog,
     DialogContent,
@@ -58,7 +58,7 @@ const DeleteAccountDialog = ({
         setIsPending(true);
         deleteAccountMutation.mutate(data, {
             onSuccess: (response: any) => {
-                toast.success(response?.message || t?.accountDeletedSuccess);
+                toast.success(response, t?.accountDeletedSuccess);
                 setTimeout(() => {
                     setIsPending(false);
                     setDeleteAccountDialog(false);
@@ -68,7 +68,7 @@ const DeleteAccountDialog = ({
             onError: (error: any) => {
                 const errorMessage = error?.response?.data?.message;
 
-                toast.error(errorMessage || t?.failedChangePassword);
+                toast.error(error, t?.failedChangePassword);
 
                 // Map backend errors to form fields
                 if (errorMessage) {
