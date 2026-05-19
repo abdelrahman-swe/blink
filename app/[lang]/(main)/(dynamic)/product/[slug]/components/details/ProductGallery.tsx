@@ -75,10 +75,10 @@ export const ProductGallery = ({
     }, []);
 
     return (
-        <div className="order-2 md:order-0 col-span-12 md:col-span-6 grid grid-cols-6 gap-4 h-fit">
+        <div className="order-2 md:order-0 col-span-12 md:col-span-6 grid grid-cols-1 lg:grid-cols-[100px_1fr] gap-4 h-fit">
             {/* Thumbnails */}
             <div
-                className="col-span-6 lg:col-span-1 flex flex-row lg:flex-col items-center gap-2 rtl:gap-5 rtl:md:gap-2 order-2 lg:order-1
+                className="flex flex-row lg:flex-col items-center gap-2 rtl:gap-5 rtl:md:gap-2 order-2 lg:order-1
                    overflow-x-auto lg:overflow-y-auto no-scrollbar snap-x snap-mandatory w-full mb-8 md:mb-0 px-1"
                 role="list"
                 aria-label="Product image thumbnails"
@@ -127,7 +127,7 @@ export const ProductGallery = ({
             </div>
 
             {/* Main Image */}
-            <div className="col-span-6 lg:col-span-5 order-1 lg:order-2">
+            <div className="order-1 lg:order-2">
                 <div
                     className={`relative w-full aspect-10/7 lg:aspect-4/3 bg-white rounded-2xl
                      border border-gray-100 p-2 overflow-hidden group ${safeImages.length > 0 ? "cursor-pointer" : ""}`}
