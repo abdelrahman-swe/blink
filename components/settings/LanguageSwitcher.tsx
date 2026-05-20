@@ -50,10 +50,10 @@ export default function LanguageSwitcher({
         </span>
         <Image priority src="/dropdown.svg" alt="dropdown icon" width={20} height={20} className={`ms-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </SelectTrigger>
-      <SelectContent className="w-[130px]">
+      <SelectContent align="end" className="w-[130px] min-w-[130px] max-w-[130px]">
         <SelectGroup>
-          <SelectItem className="text-md" value="ar">العربية</SelectItem>
-          <SelectItem className="text-md" value="en">English</SelectItem>
+          <SelectItem className="text-md [&>span.absolute]:hidden" value="ar">العربية</SelectItem>
+          <SelectItem className="text-md [&>span.absolute]:hidden" value="en">English</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
