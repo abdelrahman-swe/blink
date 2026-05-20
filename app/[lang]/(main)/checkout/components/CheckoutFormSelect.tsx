@@ -77,8 +77,8 @@ export function CheckoutFormSelect({
               <SelectTrigger
                 className={
                   error
-                    ? "w-full border-destructive/50 focus-visible:ring-destructive/20"
-                    : "w-full border-[#E6E6E6] shadow-2xs rtl:flex-row-reverse"
+                    ? "w-full border-destructive/50 focus-visible:ring-destructive/20 h-auto whitespace-normal break-words py-2.5"
+                    : "w-full border-[#E6E6E6] shadow-2xs rtl:flex-row-reverse h-auto whitespace-normal break-words py-2.5"
                 }
               >
                 <div className="flex items-center gap-2">

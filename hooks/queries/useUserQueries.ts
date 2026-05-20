@@ -144,7 +144,22 @@ export function useAddAddress() {
             toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message);
+            const serverData = error.response?.data;
+            const validationErrors = serverData?.data || serverData?.errors;
+            
+            if (validationErrors && typeof validationErrors === 'object') {
+                Object.values(validationErrors).forEach((messages: any) => {
+                    if (Array.isArray(messages)) {
+                        messages.forEach((msg: string) => {
+                            toast.error(msg);
+                        });
+                    } else if (typeof messages === 'string') {
+                        toast.error(messages);
+                    }
+                });
+            } else {
+                toast.error(serverData?.message || error.message);
+            }
         },
     });
 }
@@ -178,7 +193,22 @@ export function useEditAddress() {
             toast.success(data.message);
         },
         onError: (error: any) => {
-            toast.error(error.response?.data?.message);
+            const serverData = error.response?.data;
+            const validationErrors = serverData?.data || serverData?.errors;
+            
+            if (validationErrors && typeof validationErrors === 'object') {
+                Object.values(validationErrors).forEach((messages: any) => {
+                    if (Array.isArray(messages)) {
+                        messages.forEach((msg: string) => {
+                            toast.error(msg);
+                        });
+                    } else if (typeof messages === 'string') {
+                        toast.error(messages);
+                    }
+                });
+            } else {
+                toast.error(serverData?.message || error.message);
+            }
         },
     });
 }

@@ -302,7 +302,22 @@ export default function CheckoutClient() {
                 window.location.href = url.toString();
             },
             onError: (err: any) => {
-                toast.error(err);
+                const serverData = err.response?.data;
+                const validationErrors = serverData?.data || serverData?.errors;
+                
+                if (validationErrors && typeof validationErrors === 'object') {
+                    Object.values(validationErrors).forEach((messages) => {
+                        if (Array.isArray(messages)) {
+                            messages.forEach((msg) => {
+                                toast.error(msg);
+                            });
+                        } else if (typeof messages === 'string') {
+                            toast.error(messages);
+                        }
+                    });
+                } else {
+                    toast.error(err);
+                }
             },
         });
     };

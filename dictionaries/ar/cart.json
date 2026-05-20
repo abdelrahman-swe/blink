@@ -40,6 +40,7 @@
             "continueShopping": "متابعة التسوق"
         },
         "stockWarning": "يوجد {count} قطعة فقط في المخزن",
+        "maxQuantityPerOrder": "يوجد حد أقصى {count} قطعة فقط لكل طلب",
          "card": {
             "off": "{percentage} % خصم",
             "dealPrice": "سعر العرض",

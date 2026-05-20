@@ -179,28 +179,30 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                             key={address.id}
                             className="rounded-xl border border-neutral-200 p-4 space-y-4 "
                         >
-                            <div className="flex items-start justify-between gap-4 me-2 m-0!">
+                            <div className="flex items-start justify-between gap-4 me-2 m-0! min-w-0">
 
-                                <div className="flex items-start gap-2">
-                                    {isHomeAddress ? (
-                                        <Image
-                                            src="/home.svg"
-                                            alt="Home"
-                                            width={22}
-                                            height={22}
-                                        />
-                                    ) : (
-                                        <HugeiconsIcon
-                                            icon={ADDRESS_ICONS[addressLabelKey] ?? ADDRESS_ICONS.Other}
-                                            size={22}
-                                            color="gray"
-                                            strokeWidth={1.5}
-                                        />
-                                    )}
+                                <div className="flex items-start gap-2 min-w-0 flex-1">
+                                    <div className="shrink-0 mt-0.5">
+                                        {isHomeAddress ? (
+                                            <Image
+                                                src="/home.svg"
+                                                alt="Home"
+                                                width={22}
+                                                height={22}
+                                            />
+                                        ) : (
+                                            <HugeiconsIcon
+                                                icon={ADDRESS_ICONS[addressLabelKey] ?? ADDRESS_ICONS.Other}
+                                                size={22}
+                                                color="gray"
+                                                strokeWidth={1.5}
+                                            />
+                                        )}
+                                    </div>
 
-                                    <div className="space-y-1">
+                                    <div className="space-y-1 min-w-0 flex-1">
                                         {/* <p className="text-sm font-medium">({t?.labels[address.label?.toLowerCase()] || address.label || "Other"})</p> */}
-                                        <p className="text-md text-primary break-all xs:break-words">
+                                        <p className="text-md text-primary break-words whitespace-normal min-w-0">
                                             {address.address}, {address.city || address.city_id}, {address.governorate || address.governorate_id}
                                         </p>
                                         {/* <p className="text-sm text-neutral-400 mt-2">{address.phone}</p> */}

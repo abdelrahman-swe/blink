@@ -51,15 +51,17 @@ export function CheckoutForm({ form, translations: t }: CheckoutFormProps) {
             ...sortedAddresses.map((addr: any) => ({
                 id: addr.id,
                 name: (
-                    <div className="flex rtl:flex-row-reverse items-center gap-1">
+                    <div className="flex rtl:flex-row-reverse items-start gap-1 w-full min-w-0">
                         <HugeiconsIcon
                             icon={Location10Icon}
                             size={24}
                             color="#000000"
-                            className="text-black"
+                            className="text-black shrink-0 mt-0.5"
                             strokeWidth={1.5}
                         />
-                        <span>{`${addr.is_default ? `(${t.form.default}) ` : ""}${addr.address}, ${addr.city || addr.city_id}, ${addr.governorate || addr.governorate_id}`}</span>
+                        <span className="break-words whitespace-normal text-start flex-1 min-w-0">
+                            {`${addr.is_default ? `(${t.form.default}) ` : ""}${addr.address}, ${addr.city || addr.city_id}, ${addr.governorate || addr.governorate_id}`}
+                        </span>
                     </div>
                 ),
             })),

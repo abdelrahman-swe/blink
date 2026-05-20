@@ -39,6 +39,7 @@
             "continueShopping": "Continue Shopping"
         },
          "stockWarning": "Only {count} pieces left in stock",
+         "maxQuantityPerOrder": "Max {count} per order",
          "card": {
             "off": "{percentage}% off",
             "dealPrice": "Deal Price",

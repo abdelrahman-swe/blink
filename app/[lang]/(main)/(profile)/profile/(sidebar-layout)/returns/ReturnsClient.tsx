@@ -84,16 +84,18 @@ const ReturnsClient = () => {
               </div>
 
               {/* Address */}
-              <div className="flex justify-between items-center mb-5">
-                <p className="flex items-center gap-2 text-sm font-medium bg-neutral-200 py-1.5 px-4 rounded-lg">
+              <div className="flex justify-between items-center mb-5 w-full">
+                <div className="flex items-start gap-2 text-sm font-medium bg-neutral-200 py-1.5 px-4 rounded-lg w-full max-w-full min-w-0">
                   <HugeiconsIcon
                     icon={Location01Icon}
                     size={20}
                     strokeWidth={1.5}
+                    className="shrink-0 mt-0.5"
                   />
-                  {order.shipping_address?.address}
-                </p>
-
+                  <span className="break-words whitespace-normal text-start min-w-0">
+                    {order.shipping_address?.address}
+                  </span>
+                </div>
               </div>
 
               {/* Items */}
