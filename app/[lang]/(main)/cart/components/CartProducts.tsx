@@ -151,7 +151,11 @@ export function CartProducts({
                             color="#E80000"
                             strokeWidth={1.5}
                         />
-                            {(cart.maxQuantityPerOrder || "Max {count} per order").replace('{count}', effectiveMax.toString())}
+                        <span className="mt-1">
+                            {mergedItem.max_quantity_per_order !== null && quantity >= mergedItem.max_quantity_per_order && mergedItem.max_quantity_per_order <= mergedItem.maxStock
+                                ? (cart.maxQuantityPerOrder || "Max {count} per order").replace('{count}', mergedItem.max_quantity_per_order.toString())
+                                : cart.stockWarning.replace('{count}', effectiveMax.toString())}
+                        </span>
                     </p>
                 )}
             </div>

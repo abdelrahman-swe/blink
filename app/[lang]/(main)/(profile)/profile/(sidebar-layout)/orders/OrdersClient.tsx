@@ -112,7 +112,7 @@ const OrdersClient = () => {
 
                             {/* Address */}
                             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-5 w-full">
-                                <div className="flex items-start gap-2 text-sm font-medium bg-neutral-200 py-2 px-4 rounded-lg w-full max-w-full min-w-0">
+                                <div className="flex items-start gap-2 text-sm font-medium bg-neutral-200 py-2 px-4 rounded-lg w-fit max-w-full min-w-0">
                                     <HugeiconsIcon
                                         icon={Location01Icon}
                                         size={20}

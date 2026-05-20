@@ -85,7 +85,7 @@ const ReturnsClient = () => {
 
               {/* Address */}
               <div className="flex justify-between items-center mb-5 w-full">
-                <div className="flex items-start gap-2 text-sm font-medium bg-neutral-200 py-1.5 px-4 rounded-lg w-full max-w-full min-w-0">
+                <div className="flex items-start gap-2 text-sm font-medium bg-neutral-200 py-1.5 px-4 rounded-lg w-fit max-w-full min-w-0">
                   <HugeiconsIcon
                     icon={Location01Icon}
                     size={20}
