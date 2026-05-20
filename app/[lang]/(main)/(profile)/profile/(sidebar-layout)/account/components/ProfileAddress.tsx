@@ -91,8 +91,8 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
     const handleEdit = (address: any) => {
         setEditingId(address.id);
         form.reset({
-            governorate_id: address.governorate_id,
-            city_id: address.city_id,
+            governorate_id: address.governorate_id ? Number(address.governorate_id) : 0,
+            city_id: address.city_id ? Number(address.city_id) : 0,
             address: address.address,
             // phone: address.phone,
             label: address.label || "Other",
