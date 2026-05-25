@@ -43,6 +43,16 @@ export function CheckoutForm({ form, translations: t }: CheckoutFormProps) {
     const governorates = governoratesResponse?.data?.governorates || [];
     const cities = citiesResponse?.data?.cities || [];
 
+    const truncateAddressPreview = (value: string, maxLength = 85) => {
+        const normalized = value.replace(/\s+/g, " ").trim();
+
+        if (normalized.length <= maxLength) {
+            return normalized;
+        }
+
+        return `${normalized.slice(0, maxLength).trimEnd()}...`;
+    };
+
     const addressOptions = useMemo(() => {
         // Sort: Default address first
         const sortedAddresses = [...addresses].sort((a, b) => (b.is_default ? 1 : 0) - (a.is_default ? 1 : 0));
@@ -51,7 +61,10 @@ export function CheckoutForm({ form, translations: t }: CheckoutFormProps) {
             ...sortedAddresses.map((addr: any) => ({
                 id: addr.id,
                 name: (
-                    <div className="flex rtl:flex-row-reverse items-start gap-1 w-full min-w-0">
+                    <div
+                        className="flex rtl:flex-row-reverse items-start gap-1 w-full min-w-0"
+                        title={`${addr.is_default ? `(${t.form.default}) ` : ""}${addr.address}, ${addr.city || addr.city_id}, ${addr.governorate || addr.governorate_id}`}
+                    >
                         <HugeiconsIcon
                             icon={Location10Icon}
                             size={24}
@@ -60,7 +73,7 @@ export function CheckoutForm({ form, translations: t }: CheckoutFormProps) {
                             strokeWidth={1.5}
                         />
                         <span className="break-words whitespace-normal text-start flex-1 min-w-0">
-                            {`${addr.is_default ? `(${t.form.default}) ` : ""}${addr.address}, ${addr.city || addr.city_id}, ${addr.governorate || addr.governorate_id}`}
+                            {truncateAddressPreview(`${addr.is_default ? `(${t.form.default}) ` : ""}${addr.address}, ${addr.city || addr.city_id}, ${addr.governorate || addr.governorate_id}`)}
                         </span>
                     </div>
                 ),

@@ -46,6 +46,9 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
     const [editingId, setEditingId] = useState<number | null>(null);
     const [deletingId, setDeletingId] = useState<number | null>(null);
     const [mounted, setMounted] = useState(false);
+    const [targetGovernorateName, setTargetGovernorateName] = useState<string | null>(null);
+    const [targetCityName, setTargetCityName] = useState<string | null>(null);
+    const [pendingCityId, setPendingCityId] = useState<number | null>(null);
 
     useEffect(() => {
         setMounted(true);
@@ -87,16 +90,74 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
         return trimmedLabel.charAt(0).toUpperCase() + trimmedLabel.slice(1).toLowerCase();
     };
 
+    useEffect(() => {
+        if (!targetGovernorateName || governorateOptions.length === 0) return;
+
+        const foundGovernorate = governorateOptions.find(
+            (governorate: any) => governorate.name.toLowerCase() === targetGovernorateName.toLowerCase()
+        );
+
+        if (!foundGovernorate) return;
+
+        const governorateId = Number(foundGovernorate.id);
+        form.setValue("governorate_id", governorateId, { shouldValidate: true, shouldDirty: true });
+        setTargetGovernorateName(null);
+
+        if (pendingCityId && pendingCityId > 0) {
+            form.setValue("city_id", pendingCityId, { shouldValidate: true, shouldDirty: true });
+            setPendingCityId(null);
+        } else if (targetCityName) {
+            setPendingCityId(null);
+        }
+    }, [form, governorateOptions, pendingCityId, targetCityName, targetGovernorateName]);
+
+    useEffect(() => {
+        if (!targetCityName || cityOptions.length === 0) return;
+
+        const foundCity = cityOptions.find(
+            (city: any) => city.name.toLowerCase() === targetCityName.toLowerCase()
+        );
+
+        if (!foundCity) return;
+
+        form.setValue("city_id", Number(foundCity.id), { shouldValidate: true, shouldDirty: true });
+        setTargetCityName(null);
+    }, [cityOptions, form, targetCityName]);
+
     /* ================= Handlers ================= */
     const handleEdit = (address: any) => {
         setEditingId(address.id);
+        const governorateId = Number(address.governorate_id || 0);
+        const cityId = Number(address.city_id || 0);
+        const governorateName = address.governorate || address.government || null;
+        const cityName = address.city || null;
+
+        setTargetGovernorateName(null);
+        setTargetCityName(null);
+        setPendingCityId(null);
+
         form.reset({
-            governorate_id: address.governorate_id ? Number(address.governorate_id) : 0,
-            city_id: address.city_id ? Number(address.city_id) : 0,
+            governorate_id: governorateId,
+            city_id: cityId,
             address: address.address,
             // phone: address.phone,
             label: address.label || "Other",
         });
+
+        if (governorateId === 0 && governorateName) {
+            setTargetGovernorateName(governorateName);
+            if (cityId > 0) {
+                setPendingCityId(cityId);
+            } else if (cityName) {
+                setTargetCityName(cityName);
+            }
+        } else if (governorateId > 0) {
+            if (cityId > 0) {
+                form.setValue("city_id", cityId, { shouldValidate: true, shouldDirty: true });
+            } else if (cityName) {
+                setTargetCityName(cityName);
+            }
+        }
     };
 
     const handleAddNew = () => {
@@ -113,11 +174,17 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
 
     const handleCancelEdit = () => {
         setEditingId(null);
+        setTargetGovernorateName(null);
+        setTargetCityName(null);
+        setPendingCityId(null);
         form.reset();
     };
 
     const handleCancelAdd = () => {
         setShowAddForm(false);
+        setTargetGovernorateName(null);
+        setTargetCityName(null);
+        setPendingCityId(null);
         form.reset();
     };
 
@@ -148,6 +215,9 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
             form.reset();
             setShowAddForm(false);
             setEditingId(null);
+            setTargetGovernorateName(null);
+            setTargetCityName(null);
+            setPendingCityId(null);
         } catch (error) {
         }
     };

@@ -322,7 +322,7 @@ export const NavBar = ({ locale, initialIsAuthenticated = false }: NavBarProps) 
 
       {/* Mobile Drawer */}
       <Drawer open={open} onOpenChange={setOpen} direction="right">
-        <DrawerContent className="overflow-y-auto h-full" aria-describedby={undefined}>
+        <DrawerContent className="overflow-y-auto overflow-x-hidden h-full" aria-describedby={undefined}>
           <DrawerHeader className="flex flex-row justify-between items-center border-b pb-4">
             <DrawerTitle>
               <Image
@@ -432,7 +432,7 @@ export const NavBar = ({ locale, initialIsAuthenticated = false }: NavBarProps) 
             </div>
 
             <Separator />
-            <div className="">
+            <div className="flex w-full justify-start">
               <LanguageSwitcher currentLocale={locale} />
             </div>
           </div>

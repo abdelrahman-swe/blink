@@ -1,4 +1,5 @@
-"use client";import { useAppRouter } from '@/hooks/useAppRouter';
+"use client";
+import { useAppRouter } from '@/hooks/useAppRouter';
 
 
 import { useState } from "react";
@@ -26,6 +27,7 @@ import { useToggleUserFavorites } from "@/hooks/queries/useUserQueries";
 
 import { useUserStore } from "@/store/useUserStore";
 import { Heart } from "lucide-react";
+import { Share08Icon } from "@hugeicons/core-free-icons";
 import { LoginRequiredDialog } from "@/components/common/LoginRequiredDialog";
 import { useDictionary } from "@/components/providers/DictionaryProvider";
 import { useLoadingStore } from "@/store/useLoadingStore";
@@ -65,6 +67,22 @@ export const ProductInfo = ({ product, isLoading, lang, onReviewClick }: Product
     const id = product.id ?? product.product_id;
     if (id) {
       toggleFavorite(id);
+    }
+  };
+
+  const handleShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!product) return;
+
+    const shareUrl = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success(lang === "ar" ? "يمكنك مشاركة المنتج الآن" : "You can share it now!");
+    } catch {
+      toast.error(lang === "ar" ? "غير قادر على نسخ رابط المنتج!" : "Unable to copy URL");
     }
   };
 
@@ -112,17 +130,22 @@ export const ProductInfo = ({ product, isLoading, lang, onReviewClick }: Product
             />
           </AppLink>
         )}
-        <div className="flex gap-8">
-          {/* <Button size="icon-sm"
+        <div className="flex items-center gap-4">
+          <Button
+            size="icon-sm"
             variant="ghost"
-            type="button" aria-label="Share" className=" rounded-full hover:bg-gray-100">
-            <HugeiconsIcon icon={Share08Icon} size={25} color="#666" />
-          </Button> */}
-
+            type="button"
+            aria-label="Share product"
+            onClick={handleShare}
+            className="rounded-full hover:bg-gray-100"
+          >
+            <HugeiconsIcon icon={Share08Icon} size={25} color="#000000" />
+          </Button>
           <Button
             variant="ghost"
             size="icon-sm"
             onClick={handleToggleFavorite}
+            aria-label="Toggle favorite"
           >
             <Heart
               size={28}
