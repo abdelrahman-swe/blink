@@ -13,7 +13,7 @@ interface BlobButtonProps {
 }
 
 const BLOBS = [0, 1, 2, 3];
-const BLOB_COLOR = "black";
+const BLOB_COLOR = "#000000";
 
 const MotionLink = motion.create(Link);
 
@@ -53,8 +53,9 @@ export default function AnimatedButton({
           target={target}
           initial="idle"
           whileHover="hover"
+          whileTap={{ scale: 0.98 }}
           onClick={onClick}
-          className={`relative z-1 inline-block border-none bg-transparent px-11.5 py-5 text-base font-bold uppercase no-underline outline-none text-[#312460] rounded-[30px] ${className}`}
+          className={`relative z-1 inline-block select-none border-none bg-transparent px-11.5 py-5 text-base font-bold uppercase no-underline outline-none text-[#312460] rounded-[30px] transition-transform focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 ${className}`}
         >
           <span className="pointer-events-none absolute inset-0 z-1 border border-black rounded-[30px]" />
 
@@ -117,7 +118,8 @@ export default function AnimatedButton({
           onClick={onClick}
           initial="idle"
           whileHover={disabled ? "idle" : "hover"}
-          className={`relative z-1 inline-block border-none bg-transparent px-4 py-2 text-base font-medium uppercase no-underline outline-none text-black rounded-full ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+          whileTap={disabled ? undefined : { scale: 0.98 }}
+          className={`relative z-1 inline-block select-none border-none bg-transparent px-4 py-2 text-base font-medium uppercase no-underline outline-none text-black rounded-full transition-transform focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           <span className="pointer-events-none absolute inset-0 z-1 border border-black rounded-full" />
 

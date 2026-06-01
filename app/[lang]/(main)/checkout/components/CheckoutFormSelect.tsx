@@ -94,7 +94,11 @@ export function CheckoutFormSelect({
                   </div>
                 ) : options && options.length > 0 ? (
                   options.map((option) => (
-                    <SelectItem key={option.id} value={String(option.id)}>
+                    <SelectItem
+                      key={option.id}
+                      value={String(option.id)}
+                      className="[&>span.absolute]:hidden"
+                    >
                       {option.name}
                     </SelectItem>
                   ))

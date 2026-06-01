@@ -50,9 +50,7 @@ const itemVariants: Variants = {
   },
 };
 
-interface ProsProps { }
-
-export default function Pros({ }: ProsProps) {
+export default function Pros() {
   const { home } = useDictionary();
   const pros = home?.pros || [];
   return (
@@ -69,13 +67,13 @@ export default function Pros({ }: ProsProps) {
 
           return (
             <motion.article 
-              className="flex items-start gap-6" 
+              className="group flex items-start gap-6 rounded-lg transition-transform duration-300 ease-out hover:-translate-y-0.5" 
               key={pro.title}
               variants={itemVariants}
             >
               <div className="relative w-16 h-16 flex items-center justify-center">
                 <span
-                  className="absolute top-6 left-5 w-12 h-12 bg-secondary rounded-full z-0"
+                  className="absolute top-6 left-5 w-12 h-12 bg-secondary rounded-full z-0 transition-transform duration-300 group-hover:scale-110"
                   aria-hidden="true"
                 ></span>
 
@@ -84,7 +82,7 @@ export default function Pros({ }: ProsProps) {
                   size={60}
                   color="#000000"
                   strokeWidth={1}
-                  className="relative z-10"
+                  className="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5"
                   aria-hidden="true"
                 />
               </div>

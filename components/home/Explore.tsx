@@ -52,7 +52,7 @@ export default function Explore() {
                 try {
                   autoplay.current?.reset?.();
                   autoplay.current?.play?.();
-                } catch (e) {
+                } catch {
                   // ignore if plugin internals crash when empty
                 }
               }
@@ -75,23 +75,23 @@ export default function Explore() {
                     >
                       <AppLink
                         href={`/${lang}/category/${sub.slug}`}
-                        className="flex flex-col items-center w-full"
+                        className="group flex w-full flex-col items-center transition-transform duration-300 ease-out hover:-translate-y-1 focus-visible:outline-none"
                       >
                         {/* Subcategory Image */}
 
-                        <div className="relative w-full max-w-[220px] sm:max-w-[220px] md:max-w-[220px] aspect-square rounded-full border border-gray-300 overflow-hidden flex items-center justify-center">
+                        <div className="relative w-full max-w-[220px] sm:max-w-[220px] md:max-w-[220px] aspect-square rounded-full border border-gray-300 overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:border-neutral-400 group-hover:shadow-md group-focus-visible:ring-2 group-focus-visible:ring-primary/20">
                             <Image
                               src={sub.images?.original || '/placeholder.png'}
                               alt={sub.name ? `${sub.name} category image` : "Subcategory"}
                               fill
                               sizes="(max-width: 576px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                              className="object-cover rounded-xl object-center"
+                              className="object-cover rounded-xl object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                               loading="lazy"
                             />
                         </div>
 
                         {/* Subcategory Name */}
-                        <h3 className="font-medium text-lg mt-5 text-center line-clamp-2">
+                        <h3 className="font-medium text-lg mt-5 text-center line-clamp-2 transition-colors duration-300 group-hover:text-primary">
                           {sub.name}
                         </h3>
                       </AppLink>

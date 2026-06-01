@@ -12,7 +12,7 @@ export default function TopHeader({ title, link, showLink = true }: { title: str
             <h2 className="text-xl lg:text-3xl font-medium ">{title}</h2>
 
             {link && showLink && (
-                <Button asChild className="underline text-md font-medium m-0 p-0 hover:bg-transparent" variant="ghost">
+                <Button asChild className="underline underline-offset-4 text-md font-medium m-0 p-0 hover:bg-transparent hover:translate-x-0.5 rtl:hover:-translate-x-0.5" variant="ghost">
                     <AppLink href={link}>{t?.viewAll}</AppLink>
                 </Button>
             )}

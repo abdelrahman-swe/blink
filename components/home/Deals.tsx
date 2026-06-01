@@ -21,7 +21,6 @@ import { useState } from "react";
 import { useLoadingStore } from "@/store/useLoadingStore";
 import { useAddToCartQuery, useCartPrefetch } from "@/hooks/queries/useCartQueries";
 import { toast } from "@/utils/toast";
-import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import {
     Dialog,
     DialogContent,
@@ -31,9 +30,9 @@ import {
 } from "../ui/dialog";
 import { useToggleUserFavorites } from "@/hooks/queries/useUserQueries";
 import { Product } from "@/utils/types/home";
-import { Heart } from "lucide-react";
 import { useUserStore } from "@/store/useUserStore";
 import { LoginRequiredDialog } from "../common/LoginRequiredDialog";
+import ProductsError from "../common/ProductsError";
 import {
     CheckmarkCircle02Icon,
     FavouriteIcon,
@@ -81,6 +80,7 @@ export default function DealsCard() {
     };
 
     if (isLoading) return <Skeleton className="h-[400px] w-full" />
+    if (error) return <ProductsError error={error} />
     if (products.length === 0) return null
 
     return (
@@ -90,16 +90,19 @@ export default function DealsCard() {
                 {products.map((product) => (
                     <Card
                         key={product.id}
-                        className="flex gap-3 flex-col h-full ease-in duration-300 transition-all group border border-[#e6e6e6]"
+                        className="flex gap-3 flex-col h-full overflow-hidden transition-all duration-300 ease-out group border border-[#e6e6e6] hover:-translate-y-1 hover:border-neutral-300 hover:shadow-md focus-within:shadow-md"
                         onMouseEnter={() => {
                             const timer = setTimeout(() => {
                                 prefetchProduct(product.slug);
                             }, 50);
-                            (window as any)[`prefetch_deal_${product.id}`] = timer;
+                            const _key = `prefetch_deal_${product.id}`;
+                            (window as unknown as Record<string, ReturnType<typeof setTimeout> | undefined>)[_key] = timer;
                         }}
                         onMouseLeave={() => {
-                            if ((window as any)[`prefetch_deal_${product.id}`]) {
-                                clearTimeout((window as any)[`prefetch_deal_${product.id}`]);
+                            const _key = `prefetch_deal_${product.id}`;
+                            const timer = (window as unknown as Record<string, ReturnType<typeof setTimeout> | undefined>)[_key];
+                            if (timer) {
+                                clearTimeout(timer);
                             }
                         }}
                     >
@@ -113,7 +116,7 @@ export default function DealsCard() {
                             <Button
                                 variant="outline"
                                 size="icon"
-                                className={`absolute top-2 right-5 z-10 px-4 border-none transition-all duration-300 ${!!product.is_favorite ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                                className={`absolute top-2 right-5 z-10 px-4 border-none bg-white/95 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-white active:scale-95 ${!!product.is_favorite ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
                                     }`}
                                 onClick={(e) => handleToggleFavorite(e, product)}
                             >
@@ -127,7 +130,7 @@ export default function DealsCard() {
                             </Button>
                             <AppLink
                                 href={`/${lang}/product/${product.slug}`}
-                                className="block"
+                                className="block overflow-hidden rounded-t-xl"
                             >
                                 <Image
                                     src={
@@ -138,7 +141,7 @@ export default function DealsCard() {
                                     width={300}
                                     height={220}
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                                    className="w-full h-[200px] object-cover rounded-t-xl"
+                                    className="w-full h-[200px] object-cover rounded-t-xl transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                                 />
                             </AppLink>
                         </div>

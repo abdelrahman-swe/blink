@@ -5,7 +5,6 @@ import Image from "next/image";
 import AppLink from '@/components/common/AppLink';
 import { usePathname } from "next/navigation";
 import Autoplay from "embla-carousel-autoplay";
-import { Button } from "../ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import {
@@ -64,15 +63,18 @@ export default function Deals() {
                                             key={item.id}
                                             className="ps-5 basis-full min-[576px]:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
                                         >
-                                            <article className="flex w-full h-24 transition-shadow duration-300">
+                                            <AppLink
+                                                href={`/${lang}/brand/${item.slug}`}
+                                                className="group flex w-full h-24 overflow-hidden rounded-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20"
+                                            >
                                                 {/* Brand Image */}
-                                                <div className="relative w-24 h-24 shrink-0">
+                                                <div className="relative w-24 h-24 shrink-0 overflow-hidden rounded-s-xl border-2 border-gray-200">
                                                     <Image
                                                         src={item.images?.original || "/placeholder.png"}
                                                         alt={`${item.name}`}
                                                         width={96}
                                                         height={96}
-                                                        className="object-cover h-full rounded-s-xl border-2 border-gray-200"
+                                                        className="h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                                                         loading="lazy"
                                                     />
                                                 </div>
@@ -82,24 +84,19 @@ export default function Deals() {
                                                     <h3 className="font-semibold text-lg text-neutral-700">
                                                         {item.name}
                                                     </h3>
-                                                    <Button variant="ghost" className="p-0">
-                                                        <AppLink
-                                                            href={`/${lang}/brand/${item.slug}`}
-                                                            className="flex items-center gap-1 text-primary "
-                                                        >
-                                                            <span className="text-md font-medium text-primary">{t?.visitStore}</span>
-                                                            <HugeiconsIcon
-                                                                icon={ArrowRight01Icon}
-                                                                size={20}
-                                                                color="#000000"
-                                                                strokeWidth={1.5}
-                                                                aria-hidden="true"
-                                                                className="rtl:rotate-180 mt-1"
-                                                            />
-                                                        </AppLink>
-                                                    </Button>
+                                                    <span className="flex items-center gap-1 text-md font-medium text-primary">
+                                                        {t?.visitStore}
+                                                        <HugeiconsIcon
+                                                            icon={ArrowRight01Icon}
+                                                            size={20}
+                                                            color="#000000"
+                                                            strokeWidth={1.5}
+                                                            aria-hidden="true"
+                                                            className="mt-1 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
+                                                        />
+                                                    </span>
                                                 </div>
-                                            </article>
+                                            </AppLink>
                                         </CarouselItem>
                                     ))
                                 )}

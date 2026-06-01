@@ -16,7 +16,7 @@ import { useParams } from 'next/navigation';
 import { Banner } from '@/utils/types/home';
 
 export default function Hero({ sortOrder, initialBanners }: { sortOrder?: number; initialBanners?: Banner[] }) {
-  const { data: banners, isLoading ,error} = getBannerQuery({ initialData: initialBanners });
+  const { data: banners, isLoading } = getBannerQuery({ initialData: initialBanners });
   const params = useParams();
   const lang = params.lang as string;
 
@@ -52,7 +52,7 @@ export default function Hero({ sortOrder, initialBanners }: { sortOrder?: number
       >
         {filteredBanners.map((banner) => (
           <SwiperSlide key={banner.id} className={`relative w-full ${(filteredBanners?.length || 0) > 1 ? "mb-8 md:mb-10!" : ""}`}>
-            <AppLink href={`/${lang}/${banner.section}/${banner.slug}`} className="block w-full">
+            <AppLink href={`/${lang}/${banner.section}/${banner.slug}`} className="group block w-full overflow-hidden">
               <div className="relative w-full aspect-18/8 sm:aspect-21/9 lg:aspect-21/7">
               {banner.images?.original && (
                 <Image
@@ -60,7 +60,7 @@ export default function Hero({ sortOrder, initialBanners }: { sortOrder?: number
                   alt={`Banner ${banner.id}`}
                   fill
                   sizes="100vw"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.015]"
                   priority={true}
                   loading="eager"
                   fetchPriority="high"

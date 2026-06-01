@@ -6,7 +6,6 @@ import Image from "next/image";
 import AppLink from '@/components/common/AppLink';
 import { useParams } from "next/navigation";
 import { toast } from "@/utils/toast";
-import { getApiErrorMessage } from "@/utils/getApiErrorMessage";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "../ui/card";
@@ -105,7 +104,7 @@ export default function ProductCardCarousel({
               return (
                 <CarouselItem key={product.id} className={`${slideWidths } flex`}>
                   <Card
-                    className="w-full sm:w-[300px] flex flex-col gap-3 cursor-pointer shadow-2xs ease-in duration-300 transition-all group border border-[#e6e6e6]"
+                    className="w-full sm:w-[300px] flex flex-col gap-3 cursor-pointer overflow-hidden shadow-2xs transition-all duration-300 ease-out group border border-[#e6e6e6] hover:-translate-y-1 hover:border-neutral-300 hover:shadow-md focus-within:shadow-md"
                     onMouseEnter={() => {
                       const timer = setTimeout(() => {
                         prefetchProduct(product.slug);
@@ -127,7 +126,7 @@ export default function ProductCardCarousel({
 
 
                       <AppLink href={`/${lang}/product/${product.slug}`}
-                        className="block no-underline "
+                        className="block no-underline overflow-hidden rounded-t-2xl"
                       >
                         <Image
                           src={
@@ -138,7 +137,7 @@ export default function ProductCardCarousel({
                           width={300}
                           height={220}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="w-full h-[200px] object-cover rounded-t-2xl "
+                          className="w-full h-[200px] object-cover rounded-t-2xl transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                         />
                       </AppLink>
 
@@ -152,7 +151,7 @@ export default function ProductCardCarousel({
                       <Button
                         variant="outline"
                         size="icon"
-                        className={`absolute top-2 right-5 z-10 px-4 border-none transition-all duration-300 ${!!product.is_favorite ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                        className={`absolute top-2 right-5 z-10 px-4 border-none bg-white/95 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-white active:scale-95 ${!!product.is_favorite ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
                           }`}
                         onClick={(e) => handleToggleFavorite(e, product)}
                       >
