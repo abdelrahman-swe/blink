@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loader2 } from "lucide-react";
+import { useParams } from "next/navigation";
 
 interface FormSelectProps {
   control: any;
@@ -37,6 +38,10 @@ export function CheckoutFormSelect({
   onChangeOverride,
   value: externalValue,
 }: FormSelectProps) {
+  const params = useParams();
+  const lang = params?.lang as string;
+  const isRtl = lang === "ar";
+
   return (
     <Controller
       control={control}
@@ -57,6 +62,7 @@ export function CheckoutFormSelect({
             </Label>
 
             <Select
+              dir={isRtl ? "rtl" : "ltr"}
               disabled={disabled || isLoading}
               onValueChange={(value) => {
                 const numValue = Number(value);
@@ -77,8 +83,8 @@ export function CheckoutFormSelect({
               <SelectTrigger
                 className={
                   error
-                    ? "w-full border-destructive/50 focus-visible:ring-destructive/20 h-auto whitespace-normal break-words py-2.5 px-3"
-                    : "w-full border-[#E6E6E6] shadow-2xs rtl:flex-row-reverse h-auto whitespace-normal break-words py-2.5 px-3"
+                    ? "w-full border-destructive/50 focus-visible:ring-destructive/20 h-auto whitespace-normal break-words py-2.5 px-3 !flex-row"
+                    : "w-full border-[#E6E6E6] shadow-2xs h-auto whitespace-normal break-words py-2.5 px-3 !flex-row"
                 }
               >
                 <div className="flex items-center gap-2">
@@ -86,7 +92,7 @@ export function CheckoutFormSelect({
                   <SelectValue placeholder={isLoading ? "Loading..." : placeholder} />
                 </div>
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="min-w-fit! w-fit!">
                 {isLoading ? (
                   <div className="p-2 text-sm text-muted-foreground flex items-center gap-2">
                     Loading...
@@ -97,7 +103,7 @@ export function CheckoutFormSelect({
                     <SelectItem
                       key={option.id}
                       value={String(option.id)}
-                      className="[&>span.absolute]:hidden"
+                      className="[&>span.absolute]:hidden !flex-row"
                     >
                       {option.name}
                     </SelectItem>

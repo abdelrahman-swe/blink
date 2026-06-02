@@ -397,13 +397,15 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
                                             />
 
                                             {/* Address */}
-                                            <CheckoutFormInput
-                                                control={form.control}
-                                                name="address"
-                                                label={t?.form?.address}
-                                                placeholder={t?.form?.addressPlaceholder}
-                                                errorDict={userDict.profile.account.validation}
-                                            />
+                                            <div className="md:col-span-2">
+                                                <CheckoutFormInput
+                                                    control={form.control}
+                                                    name="address"
+                                                    label={t?.form?.address}
+                                                    placeholder={t?.form?.addressPlaceholder}
+                                                    errorDict={userDict.profile.account.validation}
+                                                />
+                                            </div>
 
                                         </div>
                                         <div className="flex justify-end gap-3">
@@ -526,14 +528,15 @@ const ProfileAddress = ({ authDict, userDict }: ProfileAddressProps) => {
 
 
                                 {/* Address */}
-                                <CheckoutFormInput
-                                    control={form.control}
-                                    name="address"
-                                    label={t?.form?.address}
-                                    placeholder={t?.form?.addressPlaceholder}
-                                    errorDict={userDict.profile.account.validation}
-
-                                />
+                                <div className="md:col-span-2">
+                                    <CheckoutFormInput
+                                        control={form.control}
+                                        name="address"
+                                        label={t?.form?.address}
+                                        placeholder={t?.form?.addressPlaceholder}
+                                        errorDict={userDict.profile.account.validation}
+                                    />
+                                </div>
                             </div>
                             <div className="flex justify-end gap-3">
                                 <Button
