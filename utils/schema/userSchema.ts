@@ -9,7 +9,7 @@ import { normalizePhoneNumber, validateEgyptianPhone } from "@/helper/auth";
 
 
 const strongPasswordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,100}$/;
 const passwordSchema = z
     .string()
     .min(1, { message: "passwordRequired" })

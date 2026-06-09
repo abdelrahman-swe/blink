@@ -6,7 +6,7 @@ import { z } from "zod";
 /* At least 8 chars, 1 letter, 1 number, 1 special character                   */
 /* -------------------------------------------------------------------------- */
 const strongPasswordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,30}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,100}$/;
 const passwordSchema = z
   .string()
   .min(1, { message: "passwordRequired" })
